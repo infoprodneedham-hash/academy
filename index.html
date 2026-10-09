@@ -1707,5 +1707,268 @@ ${state.editorValues.js}
       setTrack('unified');
     });
   </script>
+  <!-- ========================================================================= -->
+<!-- CODE ACADEMY ADD-ON: WELCOME MODAL, SOCIAL DRAWER & AFFILIATE BANNER      -->
+<!-- ========================================================================= -->
+<style>
+  /* Scoped Animations & Reset for Add-on Elements */
+  #ca-welcome-modal {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  #ca-welcome-modal.hidden-modal {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  #ca-social-drawer {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(calc(100% - 44px));
+  }
+  #ca-social-drawer.is-open,
+  #ca-social-drawer:hover {
+    transform: translateX(0);
+  }
+  #ca-affiliate-banner {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #ca-affiliate-banner.banner-minimized {
+    transform: translateY(calc(100% - 28px));
+  }
+</style>
+
+<!-- 1. WELCOME, AUDIENCE & DISCLAIMER POP-UP MODAL -->
+<div id="ca-welcome-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+  <div class="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-indigo-500/30 bg-slate-900/95 p-6 md:p-8 shadow-2xl text-slate-100 shadow-indigo-950/50">
+    
+    <!-- Decorative Gradient Glow -->
+    <div class="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-indigo-500/20 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-cyan-500/20 blur-3xl"></div>
+
+    <!-- Modal Header -->
+    <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+      <div class="flex items-center gap-3">
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 text-2xl shadow-lg shadow-indigo-500/30">
+          🚀
+        </div>
+        <div>
+          <span class="inline-block rounded-full bg-indigo-500/10 px-2.5 py-0.5 text-xs font-semibold text-indigo-400 border border-indigo-500/20 mb-1">
+            Learn Front-End Web Development
+          </span>
+          <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white">
+            Hi and welcome to Code Academy!
+          </h2>
+        </div>
+      </div>
+      <button onclick="caCloseModal()" class="text-slate-400 hover:text-white transition-colors p-1 text-xl font-bold" aria-label="Close">
+        ✕
+      </button>
+    </div>
+
+    <!-- Modal Body -->
+    <div class="mt-4 space-y-4 text-sm leading-relaxed text-slate-300 max-h-[60vh] overflow-y-auto pr-2">
+      <p class="text-base text-slate-200 font-medium">
+        Here you will learn the basic fundamentals of building your own web apps. Have fun along the way!
+      </p>
+
+      <div class="rounded-xl border border-slate-800 bg-slate-950/50 p-4">
+        <h3 class="font-semibold text-cyan-400 flex items-center gap-2 mb-1.5">
+          <span>🎯</span> Who is this for?
+        </h3>
+        <p class="text-xs text-slate-300">
+          This platform is tailored primarily for <strong>introductory to intermediate learners</strong> eager to master HTML5 structure, modern CSS3 styling & responsive layouts, and interactive JavaScript without dealing with tedious local setup environments.
+        </p>
+      </div>
+
+      <div class="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-amber-200/90 text-xs">
+        <div class="flex items-center gap-2 font-semibold text-amber-400 mb-1">
+          <span>⚠️</span> Important Disclaimer & Terms of Use
+        </div>
+        <p class="leading-relaxed">
+          While the developer has done their best to provide you with the most accurate, current, and relevant front-end information, instructional materials, and code playgrounds, it is strictly <strong>user beware</strong>. 
+          You are entirely responsible for the code you write, execute, test, and deploy using this application. The developer assumes no liability for loss of data, browser crashes, or external deployment risks.
+        </p>
+      </div>
+    </div>
+
+    <!-- Modal Footer Actions -->
+    <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-800 pt-4">
+      <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
+        <input type="checkbox" id="ca-dont-show-again" class="rounded border-slate-700 bg-slate-800 text-indigo-500 focus:ring-0">
+        Don't show this welcome message again
+      </label>
+      <button onclick="caCloseModal()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white shadow-lg shadow-indigo-600/30 transition-all hover:scale-[1.02] active:scale-95">
+        Got it, Let's Code! →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 2. SOCIAL SHARE SLIDE-OUT DRAWER (Right Edge) -->
+<div id="ca-social-drawer" class="fixed right-0 top-1/3 z-[9990] flex items-stretch shadow-2xl drop-shadow-2xl">
+  <!-- Trigger Handle / Tab -->
+  <button onclick="caToggleSocialDrawer()" class="flex flex-col items-center justify-center gap-2 bg-gradient-to-b from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white px-2.5 py-4 rounded-l-xl shadow-lg border-y border-l border-indigo-400/30 cursor-pointer">
+    <span class="text-base">📢</span>
+    <span class="text-[11px] font-bold tracking-widest uppercase [writing-mode:vertical-rl] rotate-180">
+      Share App
+    </span>
+  </button>
+
+  <!-- Expanded Drawer Content -->
+  <div class="w-64 bg-slate-900 border-y border-l border-slate-700/80 p-4 rounded-bl-xl shadow-2xl flex flex-col gap-3">
+    <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+      <span class="text-xs font-bold text-white uppercase tracking-wider">Share Code Academy</span>
+      <span class="text-xs text-slate-400">✨ Tell peers</span>
+    </div>
+    
+    <div class="grid grid-cols-1 gap-2 text-xs">
+      <!-- Twitter / X -->
+      <a href="https://twitter.com/intent/tweet?text=Master%20front-end%20web%20development%20with%20Code%20Academy%20Playground!&url=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+        <span class="font-bold">𝕏</span> Share on X / Twitter
+      </a>
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+        <span class="font-bold text-sky-400">in</span> Share on LinkedIn
+      </a>
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+        <span class="font-bold text-blue-500">f</span> Share on Facebook
+      </a>
+      <!-- Copy Link Button -->
+      <button onclick="caCopyShareUrl(this)" class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-indigo-600/30 border border-indigo-500/40 hover:bg-indigo-600/50 text-indigo-300 font-semibold transition-colors mt-1">
+        🔗 <span id="ca-copy-label">Copy App Link</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 3. SLIDE-OUT AFFILIATE / SPONSOR BANNER (Bottom Screen) -->
+<div id="ca-affiliate-banner" class="fixed bottom-0 left-1/2 -translate-x-1/2 z-[9980] w-[94%] max-w-4xl">
+  <div class="relative bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-t-2xl shadow-2xl p-3 md:p-4 text-slate-200 flex flex-col md:flex-row items-center justify-between gap-3">
+    
+    <!-- Toggle Minimize Handle -->
+    <div onclick="caToggleAffiliateBanner()" class="absolute -top-6 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-t-lg bg-slate-800 border-t border-x border-slate-700 text-[10px] font-bold text-slate-300 cursor-pointer hover:bg-slate-700 tracking-wider uppercase select-none">
+      <span id="ca-banner-toggle-icon">▼</span> Sponsor & Recommended Tools
+    </div>
+
+    <!-- Affiliate Message -->
+    <div class="flex items-center gap-3 text-left">
+      <div class="h-9 w-9 shrink-0 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-lg shadow-md">
+        ⚡
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-white">Recommended Hosting & Dev Stack</span>
+          <span class="rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1.5 py-0.2 text-[10px] uppercase font-bold">Affiliate</span>
+        </div>
+        <p class="text-[11px] text-slate-400">
+          Ready to launch your projects live? Check out our partner deals on modern web hosting & domains.
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA & Dismiss -->
+    <div class="flex items-center gap-2 shrink-0 w-full md:w-auto justify-end">
+      <!-- Replace href with your actual affiliate redirect URL -->
+      <a href="https://example.com/affiliate-partner-placeholder" target="_blank" rel="noopener sponsored" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition-colors shadow-md text-center">
+        Claim 60% Dev Discount ↗
+      </a>
+      <button onclick="caDismissAffiliateBanner()" class="text-slate-400 hover:text-white p-1 text-sm font-bold ml-1" title="Dismiss Banner">
+        ✕
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SCOPED INTERACTION SCRIPTS -->
+<script>
+  // 1. Modal Logic (with LocalStorage memory)
+  function caInitWelcomeModal() {
+    try {
+      const dismissed = localStorage.getItem('ca_welcome_dismissed');
+      if (dismissed === 'true') {
+        const modal = document.getElementById('ca-welcome-modal');
+        if (modal) modal.classList.add('hidden-modal');
+      }
+    } catch(e) {}
+  }
+
+  function caCloseModal() {
+    const modal = document.getElementById('ca-welcome-modal');
+    if (!modal) return;
+    modal.classList.add('hidden-modal');
+    
+    const checkbox = document.getElementById('ca-dont-show-again');
+    if (checkbox && checkbox.checked) {
+      try {
+        localStorage.setItem('ca_welcome_dismissed', 'true');
+      } catch(e) {}
+    }
+  }
+
+  // 2. Social Drawer Logic
+  function caToggleSocialDrawer() {
+    const drawer = document.getElementById('ca-social-drawer');
+    if (drawer) drawer.classList.toggle('is-open');
+  }
+
+  function caCopyShareUrl(btn) {
+    const currentUrl = window.location.href;
+    const label = document.getElementById('ca-copy-label');
+    
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(currentUrl).then(() => {
+        if (label) label.innerText = 'Copied to Clipboard! ✓';
+        setTimeout(() => { if (label) label.innerText = 'Copy App Link'; }, 2500);
+      }).catch(() => caFallbackCopy(currentUrl, label));
+    } else {
+      caFallbackCopy(currentUrl, label);
+    }
+  }
+
+  function caFallbackCopy(text, label) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-9999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      if (label) label.innerText = 'Copied to Clipboard! ✓';
+      setTimeout(() => { if (label) label.innerText = 'Copy App Link'; }, 2500);
+    } catch (err) {
+      if (label) label.innerText = 'Failed to copy';
+    }
+    document.body.removeChild(textArea);
+  }
+
+  // 3. Affiliate Banner Slide-Out / Toggle Logic
+  function caToggleAffiliateBanner() {
+    const banner = document.getElementById('ca-affiliate-banner');
+    const icon = document.getElementById('ca-banner-toggle-icon');
+    if (!banner) return;
+    
+    banner.classList.toggle('banner-minimized');
+    if (icon) {
+      icon.innerText = banner.classList.contains('banner-minimized') ? '▲' : '▼';
+    }
+  }
+
+  function caDismissAffiliateBanner() {
+    const banner = document.getElementById('ca-affiliate-banner');
+    if (banner) banner.style.display = 'none';
+  }
+
+  // Initialize on DOM load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', caInitWelcomeModal);
+  } else {
+    caInitWelcomeModal();
+  }
+</script>
+<!-- ========================================================================= -->
+<!-- END CODE ACADEMY ADD-ON                                                   -->
+<!-- ========================================================================= -->
 </body>
 </html>
