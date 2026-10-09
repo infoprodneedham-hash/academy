@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>HTML5 Interactive Academy & Live Playground</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Strict viewport and scrollbar settings */
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #020617;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Editor styling */
+    .editor-container {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .line-number-row {
+      counter-increment: line;
+      height: 1.5rem;
+      line-height: 1.5rem;
+    }
+    .line-number-row::before {
+      content: counter(line);
+      display: block;
+      text-align: right;
+      padding-right: 10px;
+      color: #475569;
+      font-size: 0.75rem;
+    }
+
+    .tag-chip {
+      transition: all 0.12s ease-in-out;
+    }
+    .tag-chip:active {
+      transform: scale(0.95);
+    }
+
+    /* Device frame sizing */
+    .frame-desktop {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+    .frame-tablet {
+      width: min(768px, 100%);
+      height: 100%;
+      margin: 0 auto;
+      border: 8px solid #334155;
+      border-radius: 16px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+    }
+    .frame-mobile {
+      width: min(375px, 100%);
+      height: 100%;
+      margin: 0 auto;
+      border: 8px solid #1e293b;
+      border-radius: 20px;
+      box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.6);
+      transition: all 0.2s ease;
+    }
+
+    #toast {
+      transform: translateY(120%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #toast.show {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="bg-slate-950 text-slate-100 font-sans flex flex-col h-full w-full select-none">
+
+  <!-- Header: 48px height, pinned to top -->
+  <header class="h-12 bg-slate-900 border-b border-slate-800 px-3 sm:px-4 flex items-center justify-between shrink-0 z-30">
+    <div class="flex items-center space-x-2.5">
+      <div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow shadow-blue-500/30 text-white font-bold text-sm tracking-tight">
+        &lt;/&gt;
+      </div>
+      <div>
+        <div class="flex items-center space-x-1.5">
+          <span class="font-bold text-white text-sm tracking-tight">HTML5 Academy</span>
+          <span class="hidden sm:inline-block text-[10px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-400 font-medium border border-blue-500/30">Sandbox</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Central Template Selector -->
+    <div class="flex items-center space-x-2">
+      <div class="flex items-center space-x-1 bg-slate-800 px-2 py-1 rounded-md border border-slate-700 text-xs">
+        <label for="templateSelect" class="text-slate-400 text-[11px] hidden md:inline">Template:</label>
+        <select id="templateSelect" class="bg-transparent text-slate-200 text-xs outline-none cursor-pointer font-medium hover:text-white">
+          <option value="profile" class="bg-slate-900">Student Profile</option>
+          <option value="article" class="bg-slate-900">Article Post</option>
+          <option value="contact" class="bg-slate-900">Contact Form</option>
+          <option value="recipe" class="bg-slate-900">Recipe Card</option>
+          <option value="blank" class="bg-slate-900">Blank Starter</option>
+        </select>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <button id="btnFormat" title="Format HTML Code" class="px-2 py-1 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-md flex items-center space-x-1">
+        <i data-lucide="wand-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+        <span class="hidden lg:inline text-[11px]">Format</span>
+      </button>
+
+      <button id="btnCopy" title="Copy HTML" class="px-2 py-1 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-md flex items-center space-x-1">
+        <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-400"></i>
+        <span class="hidden lg:inline text-[11px]">Copy</span>
+      </button>
+
+      <button id="btnDownload" title="Export HTML" class="px-2 py-1 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-md flex items-center space-x-1">
+        <i data-lucide="download" class="w-3.5 h-3.5 text-amber-400"></i>
+        <span class="hidden lg:inline text-[11px]">Export</span>
+      </button>
+
+      <button id="btnToggleRef" class="px-2.5 py-1 text-xs font-medium bg-indigo-600/30 hover:bg-indigo-600/40 text-indigo-300 border border-indigo-500/40 rounded-md flex items-center space-x-1">
+        <i data-lucide="book-open" class="w-3.5 h-3.5 text-indigo-400"></i>
+        <span class="text-[11px]">Guide</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Split Main Workspace: Occupies exactly 100% of remaining viewport -->
+  <main class="flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden relative">
+
+    <!-- LEFT PANEL: Tag Palette & Code Editor -->
+    <div class="w-full md:w-1/2 flex flex-col min-h-0 border-r border-slate-800 bg-slate-950 overflow-hidden">
+      
+      <!-- Category Tabs (Horizontal Scrollable) -->
+      <div class="bg-slate-900 border-b border-slate-800 px-2 py-1.5 flex items-center space-x-1 overflow-x-auto shrink-0">
+        <span class="text-[10px] uppercase font-bold tracking-wider text-slate-500 px-1 shrink-0">Tags:</span>
+        <button data-cat="all" class="cat-pill active px-2 py-0.5 rounded text-[11px] font-medium bg-blue-600 text-white shrink-0">All</button>
+        <button data-cat="headings" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Headings</button>
+        <button data-cat="text" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Text</button>
+        <button data-cat="lists" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Lists</button>
+        <button data-cat="media" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Links & Media</button>
+        <button data-cat="forms" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Forms & Tables</button>
+        <button data-cat="structure" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Layout</button>
+      </div>
+
+      <!-- Quick Snippet Insertion Chips -->
+      <div class="bg-slate-950 border-b border-slate-800/80 px-2 py-1.5 flex items-center space-x-1.5 overflow-x-auto shrink-0">
+        <div id="tagChipsContainer" class="flex items-center space-x-1.5">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Editor Subheader Toolbar -->
+      <div class="h-8 bg-slate-900/90 border-b border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
+        <div class="flex items-center space-x-2">
+          <span class="flex items-center space-x-1.5 text-slate-200 font-mono">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>editor.html</span>
+          </span>
+          <span id="charCount" class="text-slate-500 pl-1">0 chars</span>
+        </div>
+
+        <div class="flex items-center space-x-1.5">
+          <button id="btnUndo" title="Undo (Ctrl+Z)" class="p-1 hover:text-white rounded hover:bg-slate-800">
+            <i data-lucide="undo" class="w-3 h-3"></i>
+          </button>
+          <button id="btnRedo" title="Redo (Ctrl+Y)" class="p-1 hover:text-white rounded hover:bg-slate-800">
+            <i data-lucide="redo" class="w-3 h-3"></i>
+          </button>
+          <div class="h-3 w-[1px] bg-slate-700 mx-0.5"></div>
+          <button id="btnClear" title="Clear Code" class="px-1.5 py-0.5 text-slate-400 hover:text-red-400 rounded hover:bg-slate-800">Clear</button>
+          <button id="btnReset" title="Reset to Starter" class="px-1.5 py-0.5 text-slate-400 hover:text-blue-400 rounded hover:bg-slate-800">Reset</button>
+        </div>
+      </div>
+
+      <!-- Code Area: Line numbers + Textarea -->
+      <div class="flex-1 min-h-0 flex bg-slate-950 font-mono text-[13px] relative overflow-hidden">
+        <!-- Line Numbers Column -->
+        <div id="lineNumbers" class="w-11 py-2.5 bg-slate-950 text-slate-600 border-r border-slate-800 select-none overflow-hidden shrink-0 flex flex-col" style="counter-reset: line;">
+          <div class="line-number-row"></div>
+        </div>
+
+        <!-- Textarea with direct input binding -->
+        <textarea id="codeEditor" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
+          class="flex-1 h-full min-h-0 p-2.5 bg-transparent text-slate-200 resize-none outline-none leading-6 font-mono whitespace-pre overflow-auto focus:ring-0 border-0"
+          placeholder="Type or click snippet tags above..."></textarea>
+      </div>
+
+      <!-- Editor Footer Notice: Kept within strict bounds -->
+      <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
+        <div class="flex items-center space-x-1.5 truncate">
+          <i data-lucide="mouse-pointer-click" class="w-3 h-3 text-blue-400 shrink-0"></i>
+          <span id="quickTip" class="truncate">Click any tag above to insert code at cursor.</span>
+        </div>
+        <span class="text-slate-500 font-mono text-[10px] shrink-0 ml-2">Live Sync On</span>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: Live Output & Viewport Controls -->
+    <div class="w-full md:w-1/2 flex flex-col min-h-0 bg-slate-900/50 overflow-hidden">
+      <!-- Preview Header Controls -->
+      <div class="h-10 bg-slate-900 border-b border-slate-800 px-3 flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-2">
+          <!-- Device Sizing Toggles -->
+          <div class="flex space-x-0.5 items-center bg-slate-800 p-0.5 rounded-md border border-slate-700">
+            <button id="viewDesktop" title="Desktop Mode" class="p-1 rounded bg-slate-700 text-white hover:text-white">
+              <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
+            </button>
+            <button id="viewTablet" title="Tablet Mode" class="p-1 rounded text-slate-400 hover:text-white">
+              <i data-lucide="tablet" class="w-3.5 h-3.5"></i>
+            </button>
+            <button id="viewMobile" title="Mobile Phone Mode" class="p-1 rounded text-slate-400 hover:text-white">
+              <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+          <span class="text-xs text-slate-400 font-medium">Preview</span>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <!-- View Modes (Browser vs DOM) -->
+          <div class="flex items-center bg-slate-800 p-0.5 rounded-md border border-slate-700 text-xs">
+            <button id="tabPreview" class="px-2 py-0.5 rounded bg-blue-600 text-white font-medium text-[11px]">Browser</button>
+            <button id="tabDom" class="px-2 py-0.5 rounded text-slate-400 hover:text-slate-200 text-[11px]">DOM Tree</button>
+          </div>
+
+          <!-- Run / Force Refresh button -->
+          <button id="btnRun" title="Re-render HTML" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-md text-xs font-semibold flex items-center space-x-1 shadow transition">
+            <i data-lucide="play" class="w-3 h-3 fill-current"></i>
+            <span>Run</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Preview Container: Strictly flex-1 min-h-0 to avoid overflow -->
+      <div id="previewContainer" class="flex-1 min-h-0 bg-slate-950 p-2 sm:p-3 flex items-center justify-center overflow-hidden relative">
+        <!-- Live iframe sandbox with full fallback -->
+        <iframe id="liveFrame" sandbox="allow-scripts allow-modals" class="frame-desktop bg-white shadow-lg" title="Live Preview"></iframe>
+
+        <!-- DOM Tree Inspector Container -->
+        <div id="domTreeWrapper" class="hidden absolute inset-2 bg-slate-900 border border-slate-800 rounded-lg p-3 font-mono text-xs overflow-auto text-slate-300">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-800 mb-2">
+            <span class="font-bold text-slate-200 flex items-center space-x-1.5 text-xs">
+              <i data-lucide="binary" class="w-3.5 h-3.5 text-blue-400"></i>
+              <span>Parsed Elements & Structure</span>
+            </span>
+            <span class="text-[10px] text-slate-500">Auto-generated</span>
+          </div>
+          <div id="domTreeContent" class="space-y-1"></div>
+        </div>
+      </div>
+
+      <!-- Preview Footer Status Bar (Fully pinned and always visible) -->
+      <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
+        <div class="flex items-center space-x-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span id="previewStatus">Rendered successfully</span>
+        </div>
+        <div class="flex items-center space-x-2 font-mono text-[10px] text-slate-500">
+          <span id="deviceSizeLabel">100% responsive</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tag Cheatsheet Reference Drawer -->
+    <div id="refDrawer" class="hidden fixed inset-y-0 right-0 w-full sm:w-96 bg-slate-900 border-l border-slate-800 shadow-2xl z-50 flex flex-col">
+      <div class="p-3 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+        <div class="flex items-center space-x-2">
+          <i data-lucide="book-open" class="w-4 h-4 text-indigo-400"></i>
+          <h2 class="text-xs font-bold text-white uppercase tracking-wider">HTML5 Cheatsheet</h2>
+        </div>
+        <button id="btnCloseRef" class="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-2 border-b border-slate-800 bg-slate-900">
+        <input type="text" id="refSearch" placeholder="Search HTML tags..." 
+          class="w-full px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-md text-xs text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500">
+      </div>
+
+      <div id="refList" class="flex-1 overflow-y-auto p-3 space-y-2.5">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-3 right-3 bg-blue-600 text-white text-xs px-3 py-1.5 rounded-lg shadow-xl flex items-center space-x-2 z-50 pointer-events-none">
+    <i data-lucide="check" class="w-3.5 h-3.5"></i>
+    <span id="toastMsg">Snippet Inserted</span>
+  </div>
+
+  <script>
+    // Snippet library with quick insert codes & categories
+    const TAG_LIBRARY = [
+      // Headings
+      { tag: '<h1>', name: 'h1', cat: 'headings', snippet: '<h1>Main Heading</h1>\n', desc: 'Primary level 1 page headline.' },
+      { tag: '<h2>', name: 'h2', cat: 'headings', snippet: '<h2>Sub Heading</h2>\n', desc: 'Level 2 section header.' },
+      { tag: '<h3>', name: 'h3', cat: 'headings', snippet: '<h3>Topic Header</h3>\n', desc: 'Level 3 topic header.' },
+
+      // Text
+      { tag: '<p>', name: 'p', cat: 'text', snippet: '<p>This is a paragraph of informative text for students.</p>\n', desc: 'Standard paragraph block.' },
+      { tag: '<strong>', name: 'strong', cat: 'text', snippet: '<strong>important text</strong>', desc: 'Bold text with strong semantic importance.' },
+      { tag: '<em>', name: 'em', cat: 'text', snippet: '<em>emphasized text</em>', desc: 'Italicized emphasized text.' },
+      { tag: '<mark>', name: 'mark', cat: 'text', snippet: '<mark>highlighted text</mark>', desc: 'Highlighted background text.' },
+      { tag: '<blockquote>', name: 'quote', cat: 'text', snippet: '<blockquote style="border-left: 3px solid #3b82f6; padding-left: 12px; margin: 10px 0; color: #475569; font-style: italic;">\n  "Learning by doing is the key to mastery."\n</blockquote>\n', desc: 'Quotation block.' },
+      { tag: '<hr>', name: 'hr', cat: 'text', snippet: '<hr style="border:0; border-top:1px solid #cbd5e1; margin:16px 0;">\n', desc: 'Horizontal rule line break.', selfClosing: true },
+      { tag: '<br>', name: 'br', cat: 'text', snippet: '<br>\n', desc: 'Single line break.', selfClosing: true },
+
+      // Lists
+      { tag: '<ul>', name: 'ul (bullets)', cat: 'lists', snippet: '<ul>\n  <li>First list item</li>\n  <li>Second list item</li>\n  <li>Third list item</li>\n</ul>\n', desc: 'Unordered bulleted list.' },
+      { tag: '<ol>', name: 'ol (numbers)', cat: 'lists', snippet: '<ol>\n  <li>First step</li>\n  <li>Second step</li>\n  <li>Third step</li>\n</ol>\n', desc: 'Numbered sequential list.' },
+      { tag: '<li>', name: 'li item', cat: 'lists', snippet: '<li>New list item</li>\n', desc: 'Individual item inside a list.' },
+
+      // Links & Media
+      { tag: '<a>', name: 'link <a>', cat: 'media', snippet: '<a href="https://wikipedia.org" target="_blank" style="color: #2563eb; text-decoration: underline;">Click Here to Learn More</a>', desc: 'Hyperlink to a web page or file.' },
+      { tag: '<img>', name: 'img', cat: 'media', snippet: '<img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600" alt="Laptop on desk" style="max-width: 100%; height: auto; border-radius: 8px;">\n', desc: 'Displays an image.', selfClosing: true },
+      { tag: '<figure>', name: 'figure', cat: 'media', snippet: '<figure style="margin: 0;">\n  <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=600" alt="Art" style="max-width: 100%; border-radius: 8px;">\n  <figcaption style="font-size: 0.85em; color: #64748b; margin-top: 4px;">Figure description goes here.</figcaption>\n</figure>\n', desc: 'Image or media with caption.' },
+      { tag: '<video>', name: 'video', cat: 'media', snippet: '<video controls width="100%" style="border-radius: 8px;">\n  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">\n  Your browser does not support the video tag.\n</video>\n', desc: 'Interactive HTML5 video player.' },
+
+      // Forms & Tables
+      { tag: '<button>', name: 'button', cat: 'forms', snippet: '<button style="background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500;">Click Me</button>\n', desc: 'Clickable button element.' },
+      { tag: '<input>', name: 'input (text)', cat: 'forms', snippet: '<input type="text" placeholder="Type your text..." style="padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%; box-sizing: border-box; margin: 6px 0;">\n', desc: 'Text input field.', selfClosing: true },
+      { tag: '<form>', name: 'form', cat: 'forms', snippet: '<form action="#" method="GET" style="display: flex; flex-direction: column; gap: 8px; max-width: 320px;">\n  <label>Your Name: <input type="text" placeholder="John Doe" style="padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; width: 100%;"></label>\n  <button type="submit" style="background: #059669; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer;">Submit</button>\n</form>\n', desc: 'Form container for collecting inputs.' },
+      { tag: '<table>', name: 'table', cat: 'forms', snippet: '<table style="width: 100%; border-collapse: collapse; margin: 12px 0;">\n  <thead>\n    <tr style="background: #f1f5f9; text-align: left;">\n      <th style="padding: 8px; border: 1px solid #cbd5e1;">Subject</th>\n      <th style="padding: 8px; border: 1px solid #cbd5e1;">Grade</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style="padding: 8px; border: 1px solid #cbd5e1;">HTML5</td>\n      <td style="padding: 8px; border: 1px solid #cbd5e1;">A+</td>\n    </tr>\n    <tr>\n      <td style="padding: 8px; border: 1px solid #cbd5e1;">CSS3</td>\n      <td style="padding: 8px; border: 1px solid #cbd5e1;">A</td>\n    </tr>\n  </tbody>\n</table>\n', desc: 'Tabular data display.' },
+
+      // Structure
+      { tag: '<header>', name: 'header', cat: 'structure', snippet: '<header style="background: #f8fafc; padding: 16px; border-radius: 8px; margin-bottom: 12px;">\n  <h2>Website Header</h2>\n  <p>Introductory subtitle</p>\n</header>\n', desc: 'Header banner section.' },
+      { tag: '<main>', name: 'main', cat: 'structure', snippet: '<main style="padding: 8px 0;">\n  <p>Main content goes here.</p>\n</main>\n', desc: 'Central content wrapper.' },
+      { tag: '<section>', name: 'section', cat: 'structure', snippet: '<section style="margin: 16px 0; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">\n  <h3>Section Header</h3>\n  <p>Independent content section.</p>\n</section>\n', desc: 'Semantic document section.' },
+      { tag: '<footer>', name: 'footer', cat: 'structure', snippet: '<footer style="border-top: 1px solid #e2e8f0; padding-top: 12px; margin-top: 24px; font-size: 0.85em; color: #64748b;">\n  <p>&copy; 2026 Student Web Academy</p>\n</footer>\n', desc: 'Document footer block.' },
+      { tag: '<div>', name: 'div card', cat: 'structure', snippet: '<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 12px 0;">\n  <h3>Container Box</h3>\n  <p>Use div to group items with custom style.</p>\n</div>\n', desc: 'Generic content container.' }
+    ];
+
+    // Starter document templates
+    const STARTER_TEMPLATES = {
+      profile: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Profile</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+      display: flex;
+      justify-content: center;
+      padding: 30px 16px;
+      margin: 0;
+    }
+    .profile-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 340px;
+      width: 100%;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #3b82f6;
+    }
+    h1 { margin: 12px 0 4px; font-size: 1.4rem; color: #0f172a; }
+    .badge {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0284c7;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    p { color: #64748b; font-size: 0.9rem; line-height: 1.5; margin: 12px 0; }
+    .button-link {
+      display: block;
+      background: #2563eb;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-card">
+    <img class="avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300" alt="Student Profile Picture">
+    <h1>Maya Lin</h1>
+    <span class="badge">Web Dev Student</span>
+    <p>Exploring HTML5 tags, learning layout design, and creating responsive web components.</p>
+    <a href="#" class="button-link">View Portfolio</a>
+  </div>
+
+</body>
+</html>`,
+
+      article: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Getting Started with HTML5</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #334155;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+    header { border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 20px; }
+    h1 { color: #0f172a; margin-bottom: 4px; font-size: 1.6rem; }
+    .meta { color: #94a3b8; font-size: 0.85rem; }
+    blockquote {
+      background: #f8fafc;
+      border-left: 4px solid #3b82f6;
+      margin: 16px 0;
+      padding: 10px 16px;
+      font-style: italic;
+      color: #1e293b;
+    }
+    img { max-width: 100%; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>The Wonders of Modern HTML5</h1>
+    <p class="meta">By Student Alex &bull; 4 min read</p>
+  </header>
+
+  <main>
+    <p>HTML5 provides meaningful tags that make websites clean, accessible, and structured.</p>
+
+    <blockquote>
+      "Structure gives meaning to the design."
+    </blockquote>
+
+    <h2>Essential Tags</h2>
+    <ul>
+      <li><strong>&lt;header&gt;</strong>: Holds titles and menus</li>
+      <li><strong>&lt;main&gt;</strong>: The core topic content</li>
+      <li><strong>&lt;footer&gt;</strong>: Copyright & credits</li>
+    </ul>
+
+    <figure style="margin: 16px 0;">
+      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600" alt="Code on laptop screen">
+    </figure>
+  </main>
+
+  <footer style="margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 10px; font-size: 0.8rem; color: #94a3b8;">
+    <p>&copy; 2026 Student Web Academy</p>
+  </footer>
+
+</body>
+</html>`,
+
+      contact: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      padding: 24px 16px;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+    }
+    .box {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+    h2 { margin-top: 0; color: #0f172a; }
+    label { display: block; font-size: 0.85rem; font-weight: 500; margin: 10px 0 4px; color: #475569; }
+    input, textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+    button {
+      margin-top: 16px;
+      width: 100%;
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>Contact Us</h2>
+    <form action="#" method="GET">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="Alex Morgan">
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="alex@school.edu">
+
+      <label for="msg">Message</label>
+      <textarea id="msg" rows="3" placeholder="Questions or thoughts..."></textarea>
+
+      <button type="button" onclick="alert('Message recorded in playground!');">Submit Form</button>
+    </form>
+  </div>
+
+</body>
+</html>`,
+
+      recipe: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pancakes Recipe</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background: #fffbeb;
+      color: #451a03;
+      padding: 24px 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    h1 { color: #78350f; border-bottom: 2px solid #fde68a; padding-bottom: 6px; margin-top: 0; }
+    .hero { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+
+  <h1>Golden Pancakes</h1>
+  <img class="hero" src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=500" alt="Fluffy pancakes">
+
+  <h3>Ingredients</h3>
+  <ul>
+    <li>1 cup flour</li>
+    <li>2 tbsp sugar</li>
+    <li>1 egg & 1 cup milk</li>
+  </ul>
+
+  <h3>Instructions</h3>
+  <ol>
+    <li>Mix dry and wet ingredients in a bowl.</li>
+    <li>Cook on hot griddle until bubbly.</li>
+    <li>Flip and serve with maple syrup!</li>
+  </ol>
+
+</body>
+</html>`,
+
+      blank: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My First HTML5 Page</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 24px;
+      color: #1e293b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to HTML5!</h1>
+  <p>Start clicking tag snippets on the top bar or write code here...</p>
+
+</body>
+</html>`
+    };
+
+    // State Variables
+    let historyStack = [];
+    let historyIndex = -1;
+    const MAX_HISTORY = 40;
+    let renderTimer = null;
+
+    // DOM Elements
+    const editor = document.getElementById('codeEditor');
+    const lineNumbers = document.getElementById('lineNumbers');
+    const liveFrame = document.getElementById('liveFrame');
+    const templateSelect = document.getElementById('templateSelect');
+    const charCount = document.getElementById('charCount');
+    const tagChipsContainer = document.getElementById('tagChipsContainer');
+    const domTreeWrapper = document.getElementById('domTreeWrapper');
+    const domTreeContent = document.getElementById('domTreeContent');
+    const quickTip = document.getElementById('quickTip');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toastMsg');
+    const previewStatus = document.getElementById('previewStatus');
+    const deviceSizeLabel = document.getElementById('deviceSizeLabel');
+    const refDrawer = document.getElementById('refDrawer');
+    const refList = document.getElementById('refList');
+    const refSearch = document.getElementById('refSearch');
+
+    function renderSnippetChips(category = 'all') {
+      tagChipsContainer.innerHTML = '';
+      const filtered = category === 'all' 
+        ? TAG_LIBRARY 
+        : TAG_LIBRARY.filter(t => t.cat === category);
+
+      filtered.forEach(item => {
+        const btn = document.createElement('button');
+        btn.className = 'tag-chip px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 active:bg-blue-600 text-slate-200 hover:text-white font-mono text-[11px] font-semibold border border-slate-700/80 whitespace-nowrap flex items-center shrink-0 cursor-pointer';
+        btn.innerHTML = `<span>${escapeHtml(item.tag)}</span>`;
+        btn.title = item.desc;
+        
+        btn.addEventListener('click', () => {
+          insertSnippet(item.snippet);
+          showToast(`Inserted ${item.name}`);
+          quickTip.textContent = `${item.name}: ${item.desc}`;
+        });
+
+        tagChipsContainer.appendChild(btn);
+      });
+    }
+
+    function renderReferenceList(filterText = '') {
+      refList.innerHTML = '';
+      const query = filterText.toLowerCase();
+
+      const matched = TAG_LIBRARY.filter(t => 
+        t.name.toLowerCase().includes(query) || 
+        t.tag.toLowerCase().includes(query) ||
+        t.desc.toLowerCase().includes(query)
+      );
+
+      if (matched.length === 0) {
+        refList.innerHTML = `<div class="text-xs text-slate-500 text-center py-4">No matching tags found.</div>`;
+        return;
+      }
+
+      matched.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'bg-slate-800/80 border border-slate-700 rounded-md p-2.5 hover:border-slate-600 transition';
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-mono text-xs font-bold text-blue-400 bg-blue-950/60 px-1.5 py-0.5 rounded border border-blue-900">${escapeHtml(item.tag)}</span>
+            <span class="text-[9px] uppercase font-bold text-slate-400 bg-slate-700/60 px-1 py-0.5 rounded">${item.cat}</span>
+          </div>
+          <p class="text-[11px] text-slate-300 mb-2 leading-tight">${item.desc}</p>
+          <div class="flex items-center justify-end pt-1 border-t border-slate-700/50">
+            <button class="ref-insert-btn text-[11px] font-semibold text-indigo-400 hover:text-indigo-300 flex items-center space-x-1">
+              <span>Insert snippet &rarr;</span>
+            </button>
+          </div>
+        `;
+
+        card.querySelector('.ref-insert-btn').addEventListener('click', () => {
+          insertSnippet(item.snippet);
+          showToast(`Inserted ${item.name}`);
+          refDrawer.classList.add('hidden');
+        });
+
+        refList.appendChild(card);
+      });
+    }
+
+    function insertSnippet(textToInsert) {
+      const start = editor.selectionStart;
+      const end = editor.selectionEnd;
+      const currentVal = editor.value;
+
+      // Insert at caret or append
+      const newVal = currentVal.substring(0, start) + textToInsert + currentVal.substring(end);
+      editor.value = newVal;
+
+      const newCursor = start + textToInsert.length;
+      editor.focus();
+      editor.setSelectionRange(newCursor, newCursor);
+
+      recordHistory();
+      handleEditorInput(true);
+    }
+
+    /**
+     * Robust live render function:
+     * 1. Uses srcdoc with fallback to document.write
+     * 2. Wraps snippet in base HTML structure if user entered incomplete snippets
+     * 3. Provides clean default styling so raw tags render visibly and nicely immediately
+     */
+    function updatePreview() {
+      let rawCode = editor.value.trim();
+
+      // Check if code has complete html structure
+      const hasDoctypeOrHtml = /<!DOCTYPE|<html|<body/i.test(rawCode);
+
+      let finalHtml = rawCode;
+      if (!hasDoctypeOrHtml) {
+        // Automatically envelope snippet inside lightweight friendly HTML shell
+        finalHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+      color: #1e293b;
+      background-color: #ffffff;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+${rawCode}
+</body>
+</html>`;
+      }
+
+      // Method 1: Using srcdoc for reliable instant rendering
+      try {
+        liveFrame.srcdoc = finalHtml;
+        previewStatus.textContent = "Rendered live (" + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'}) + ")";
+      } catch (err) {
+        // Fallback: Direct iframe document write
+        try {
+          const doc = liveFrame.contentDocument || liveFrame.contentWindow.document;
+          doc.open();
+          doc.write(finalHtml);
+          doc.close();
+          previewStatus.textContent = "Rendered via document fallback";
+        } catch (e2) {
+          previewStatus.textContent = "Render error: " + e2.message;
+        }
+      }
+
+      // Update DOM inspector tree if open
+      updateDomTreeInspector(rawCode);
+    }
+
+    function triggerLiveRender() {
+      clearTimeout(renderTimer);
+      renderTimer = setTimeout(updatePreview, 120);
+    }
+
+    function handleEditorInput(record = true) {
+      updateLineNumbers();
+      triggerLiveRender();
+      charCount.textContent = `${editor.value.length} chars`;
+      if (record) {
+        recordHistory();
+      }
+    }
+
+    function updateLineNumbers() {
+      const lines = editor.value.split('\n').length;
+      let html = '';
+      for (let i = 1; i <= lines; i++) {
+        html += '<div class="line-number-row"></div>';
+      }
+      lineNumbers.innerHTML = html;
+    }
+
+    // Sync line number scroll with textarea
+    editor.addEventListener('scroll', () => {
+      lineNumbers.scrollTop = editor.scrollTop;
+    });
+
+    // Keyboard support: Tab indent, Undo/Redo shortcuts
+    editor.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        editor.value = editor.value.substring(0, start) + "  " + editor.value.substring(end);
+        editor.selectionStart = editor.selectionEnd = start + 2;
+        recordHistory();
+        handleEditorInput(true);
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+        e.preventDefault();
+        undo();
+      }
+      if (((e.ctrlKey || e.metaKey) && e.key === 'y') || ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'z')) {
+        e.preventDefault();
+        redo();
+      }
+    });
+
+    editor.addEventListener('input', () => handleEditorInput(true));
+
+    function recordHistory() {
+      const val = editor.value;
+      if (historyStack[historyIndex] === val) return;
+      historyStack = historyStack.slice(0, historyIndex + 1);
+      historyStack.push(val);
+      if (historyStack.length > MAX_HISTORY) {
+        historyStack.shift();
+      } else {
+        historyIndex++;
+      }
+    }
+
+    function undo() {
+      if (historyIndex > 0) {
+        historyIndex--;
+        editor.value = historyStack[historyIndex];
+        handleEditorInput(false);
+        showToast('Undo');
+      }
+    }
+
+    function redo() {
+      if (historyIndex < historyStack.length - 1) {
+        historyIndex++;
+        editor.value = historyStack[historyIndex];
+        handleEditorInput(false);
+        showToast('Redo');
+      }
+    }
+
+    function updateDomTreeInspector(htmlString) {
+      domTreeContent.innerHTML = '';
+      if (!htmlString.trim()) {
+        domTreeContent.innerHTML = '<span class="text-slate-500">Editor is empty. Add HTML tags to view DOM structure.</span>';
+        return;
+      }
+
+      try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+
+        function buildNodeView(node, depth = 0) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const text = node.textContent.trim();
+            if (!text) return null;
+            const textEl = document.createElement('div');
+            textEl.style.paddingLeft = `${depth * 12}px`;
+            textEl.className = 'text-slate-400 text-[11px] truncate py-0.5';
+            textEl.innerHTML = `<span class="text-amber-400/80">#text:</span> <span class="text-slate-300">"${escapeHtml(text.substring(0, 40))}${text.length > 40 ? '...' : ''}"</span>`;
+            return textEl;
+          }
+
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            const wrapper = document.createElement('div');
+            wrapper.style.paddingLeft = `${depth * 12}px`;
+
+            let attrsString = '';
+            for (let i = 0; i < node.attributes.length; i++) {
+              const attr = node.attributes[i];
+              attrsString += ` <span class="text-cyan-400">${attr.name}</span>="<span class="text-amber-300">${escapeHtml(attr.value)}</span>"`;
+            }
+
+            const tagHeader = document.createElement('div');
+            tagHeader.className = 'flex items-center space-x-1 hover:bg-slate-800/80 px-1 py-0.5 rounded text-[11px]';
+            tagHeader.innerHTML = `
+              <span class="text-slate-500">&lt;</span><span class="text-blue-400 font-bold">${node.tagName.toLowerCase()}</span>${attrsString}<span class="text-slate-500">&gt;</span>
+            `;
+            wrapper.appendChild(tagHeader);
+
+            node.childNodes.forEach(child => {
+              const childEl = buildNodeView(child, depth + 1);
+              if (childEl) wrapper.appendChild(childEl);
+            });
+
+            return wrapper;
+          }
+          return null;
+        }
+
+        const rootEl = buildNodeView(doc.body, 0);
+        if (rootEl) {
+          domTreeContent.appendChild(rootEl);
+        } else {
+          domTreeContent.innerHTML = '<span class="text-slate-500">No visual body nodes found.</span>';
+        }
+      } catch (e) {
+        domTreeContent.innerHTML = `<span class="text-red-400 text-xs">DOM parser error: ${e.message}</span>`;
+      }
+    }
+
+    function formatHTML(html) {
+      let formatted = '';
+      let indent = 0;
+      const tab = '  ';
+      const tokens = html.replace(/>\s*</g, '><').split(/(?=<)|(?<=>)/);
+
+      tokens.forEach(token => {
+        if (!token.trim()) return;
+
+        if (token.startsWith('</')) {
+          indent = Math.max(0, indent - 1);
+          formatted += tab.repeat(indent) + token.trim() + '\n';
+        } else if (token.startsWith('<') && !token.endsWith('/>') && !token.startsWith('<!') && !isSelfClosing(token)) {
+          formatted += tab.repeat(indent) + token.trim() + '\n';
+          indent++;
+        } else {
+          formatted += tab.repeat(indent) + token.trim() + '\n';
+        }
+      });
+
+      return formatted.trim();
+    }
+
+    function isSelfClosing(tagStr) {
+      const match = tagStr.match(/<([a-zA-Z0-9]+)/);
+      if (!match) return false;
+      const tagName = match[1].toLowerCase();
+      return ['img', 'br', 'hr', 'input', 'meta', 'link'].includes(tagName);
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function showToast(message) {
+      toastMsg.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 1800);
+    }
+
+    // Category pill filtering
+    document.querySelectorAll('.cat-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cat-pill').forEach(b => {
+          b.classList.remove('bg-blue-600', 'text-white');
+          b.classList.add('bg-slate-800', 'text-slate-300');
+        });
+        btn.classList.remove('bg-slate-800', 'text-slate-300');
+        btn.classList.add('bg-blue-600', 'text-white');
+        renderSnippetChips(btn.dataset.cat);
+      });
+    });
+
+    // Template selector change
+    templateSelect.addEventListener('change', (e) => {
+      const key = e.target.value;
+      if (STARTER_TEMPLATES[key]) {
+        editor.value = STARTER_TEMPLATES[key];
+        historyStack = [];
+        historyIndex = -1;
+        recordHistory();
+        handleEditorInput(false);
+        updatePreview();
+        showToast(`Loaded ${key} template`);
+      }
+    });
+
+    // Undo / Redo
+    document.getElementById('btnUndo').addEventListener('click', undo);
+    document.getElementById('btnRedo').addEventListener('click', redo);
+
+    // Clear and Reset
+    document.getElementById('btnClear').addEventListener('click', () => {
+      editor.value = '';
+      editor.focus();
+      handleEditorInput(true);
+      updatePreview();
+      showToast('Cleared editor');
+    });
+
+    document.getElementById('btnReset').addEventListener('click', () => {
+      const currentTpl = templateSelect.value;
+      editor.value = STARTER_TEMPLATES[currentTpl] || STARTER_TEMPLATES.profile;
+      editor.focus();
+      handleEditorInput(true);
+      updatePreview();
+      showToast('Reset template');
+    });
+
+    // Prettify button
+    document.getElementById('btnFormat').addEventListener('click', () => {
+      try {
+        editor.value = formatHTML(editor.value);
+        handleEditorInput(true);
+        showToast('Code formatted');
+      } catch (err) {
+        showToast('Format error');
+      }
+    });
+
+    // Copy to clipboard with fallback
+    document.getElementById('btnCopy').addEventListener('click', () => {
+      const code = editor.value;
+      const tempArea = document.createElement('textarea');
+      tempArea.value = code;
+      tempArea.style.position = 'fixed';
+      tempArea.style.left = '-9999px';
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempArea);
+      showToast('Copied to clipboard');
+    });
+
+    // Download .html file
+    document.getElementById('btnDownload').addEventListener('click', () => {
+      const blob = new Blob([editor.value], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Downloaded index.html');
+    });
+
+    // Device responsive frames
+    const viewDesktop = document.getElementById('viewDesktop');
+    const viewTablet = document.getElementById('viewTablet');
+    const viewMobile = document.getElementById('viewMobile');
+
+    function setDeviceView(mode) {
+      liveFrame.classList.remove('frame-desktop', 'frame-tablet', 'frame-mobile');
+      [viewDesktop, viewTablet, viewMobile].forEach(btn => {
+        btn.classList.remove('bg-slate-700', 'text-white');
+        btn.classList.add('text-slate-400');
+      });
+
+      if (mode === 'desktop') {
+        liveFrame.classList.add('frame-desktop');
+        viewDesktop.classList.add('bg-slate-700', 'text-white');
+        deviceSizeLabel.textContent = "100% responsive";
+      } else if (mode === 'tablet') {
+        liveFrame.classList.add('frame-tablet');
+        viewTablet.classList.add('bg-slate-700', 'text-white');
+        deviceSizeLabel.textContent = "Tablet (768px)";
+      } else if (mode === 'mobile') {
+        liveFrame.classList.add('frame-mobile');
+        viewMobile.classList.add('bg-slate-700', 'text-white');
+        deviceSizeLabel.textContent = "Mobile (375px)";
+      }
+    }
+
+    viewDesktop.addEventListener('click', () => setDeviceView('desktop'));
+    viewTablet.addEventListener('click', () => setDeviceView('tablet'));
+    viewMobile.addEventListener('click', () => setDeviceView('mobile'));
+
+    // DOM Tree vs Live Browser Toggle
+    const tabPreview = document.getElementById('tabPreview');
+    const tabDom = document.getElementById('tabDom');
+
+    tabPreview.addEventListener('click', () => {
+      tabPreview.classList.add('bg-blue-600', 'text-white');
+      tabPreview.classList.remove('text-slate-400');
+      tabDom.classList.remove('bg-blue-600', 'text-white');
+      tabDom.classList.add('text-slate-400');
+
+      liveFrame.classList.remove('hidden');
+      domTreeWrapper.classList.add('hidden');
+    });
+
+    tabDom.addEventListener('click', () => {
+      tabDom.classList.add('bg-blue-600', 'text-white');
+      tabDom.classList.remove('text-slate-400');
+      tabPreview.classList.remove('bg-blue-600', 'text-white');
+      tabPreview.classList.add('text-slate-400');
+
+      liveFrame.classList.add('hidden');
+      domTreeWrapper.classList.remove('hidden');
+      updateDomTreeInspector(editor.value);
+    });
+
+    // Run / Force Render button
+    document.getElementById('btnRun').addEventListener('click', () => {
+      updatePreview();
+      showToast('Preview re-rendered');
+    });
+
+    // Reference drawer toggles
+    document.getElementById('btnToggleRef').addEventListener('click', () => {
+      refDrawer.classList.toggle('hidden');
+    });
+    document.getElementById('btnCloseRef').addEventListener('click', () => {
+      refDrawer.classList.add('hidden');
+    });
+
+    refSearch.addEventListener('input', (e) => {
+      renderReferenceList(e.target.value);
+    });
+
+    // Initialize application on load
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderSnippetChips('all');
+      renderReferenceList('');
+      
+      // Load starter template
+      editor.value = STARTER_TEMPLATES.profile;
+      recordHistory();
+      handleEditorInput(false);
+      updatePreview();
+    });
+  </script>
+</body>
+</html>
