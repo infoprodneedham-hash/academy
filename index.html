@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>HTML5 Interactive Academy & Live Playground</title>
-  <!-- Tailwind CSS -->
+  <title>Code Academy: Learn Front-End Web Development</title>
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -19,8 +19,14 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            htmlColor: '#f97316',
+            cssColor: '#38bdf8',
+            jsColor: '#facc15',
+            fullColor: '#a855f7'
           }
         }
       }
@@ -28,35 +34,36 @@
   </script>
 
   <style>
-    /* Strict viewport and scrollbar settings */
+    /* Strict viewport constraint: zero body spillover */
     html, body {
       height: 100%;
       height: 100dvh;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background-color: #020617;
+      background-color: #090d16;
     }
 
     ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
     }
     ::-webkit-scrollbar-track {
-      background: #0f172a;
+      background: #0d121f;
     }
     ::-webkit-scrollbar-thumb {
-      background: #334155;
+      background: #232d42;
       border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #475569;
+      background: #384561;
     }
 
-    /* Editor styling */
-    .editor-container {
+    .editor-font {
       font-family: 'JetBrains Mono', monospace;
+      tab-size: 2;
     }
+
     .line-number-row {
       counter-increment: line;
       height: 1.5rem;
@@ -66,1094 +73,1638 @@
       content: counter(line);
       display: block;
       text-align: right;
-      padding-right: 10px;
-      color: #475569;
-      font-size: 0.75rem;
+      padding-right: 8px;
+      color: #4b5563;
+      font-size: 0.72rem;
     }
 
-    .tag-chip {
-      transition: all 0.12s ease-in-out;
+    .chip-btn {
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .tag-chip:active {
-      transform: scale(0.95);
+    .chip-btn:hover {
+      transform: translateY(-1px);
+    }
+    .chip-btn:active {
+      transform: translateY(1px);
     }
 
-    /* Device frame sizing */
+    /* Device viewport simulation frames */
     .frame-desktop {
       width: 100%;
       height: 100%;
       border-radius: 8px;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
     .frame-tablet {
       width: min(768px, 100%);
-      height: 100%;
-      margin: 0 auto;
-      border: 8px solid #334155;
+      height: 98%;
+      margin: auto;
+      border: 6px solid #1e293b;
       border-radius: 16px;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-      transition: all 0.2s ease;
+      box-shadow: 0 25px 35px -5px rgba(0,0,0,0.6);
+      transition: all 0.25s ease;
     }
     .frame-mobile {
       width: min(375px, 100%);
-      height: 100%;
-      margin: 0 auto;
-      border: 8px solid #1e293b;
-      border-radius: 20px;
-      box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.6);
-      transition: all 0.2s ease;
+      height: 96%;
+      margin: auto;
+      border: 6px solid #1e293b;
+      border-radius: 24px;
+      box-shadow: 0 25px 35px -5px rgba(0,0,0,0.6);
+      transition: all 0.25s ease;
     }
 
-    #toast {
-      transform: translateY(120%);
+    #toastNotification {
+      transform: translateY(150%);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    #toast.show {
+    #toastNotification.show {
       transform: translateY(0);
+    }
+
+    /* Subtle pulse animation for fun tagline badge */
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.02); }
+    }
+    .pulse-badge {
+      animation: subtlePulse 3s infinite ease-in-out;
     }
   </style>
 </head>
 
 <body class="bg-slate-950 text-slate-100 font-sans flex flex-col h-full w-full select-none">
 
-  <!-- Header: 48px height, pinned to top -->
-  <header class="h-12 bg-slate-900 border-b border-slate-800 px-3 sm:px-4 flex items-center justify-between shrink-0 z-30">
-    <div class="flex items-center space-x-2.5">
-      <div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow shadow-blue-500/30 text-white font-bold text-sm tracking-tight">
+  <!-- TOP HEADER & BRANDING (Height 52px) -->
+  <header class="h-13 bg-slate-900/90 backdrop-blur border-b border-slate-800/80 px-3.5 flex items-center justify-between shrink-0 z-40">
+    <div class="flex items-center space-x-3">
+      <div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 text-white font-extrabold text-sm tracking-tight">
         &lt;/&gt;
       </div>
       <div>
-        <div class="flex items-center space-x-1.5">
-          <span class="font-bold text-white text-sm tracking-tight">HTML5 Academy</span>
-          <span class="hidden sm:inline-block text-[10px] px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-400 font-medium border border-blue-500/30">Sandbox</span>
+        <div class="flex items-center space-x-2">
+          <span class="font-bold text-white text-sm sm:text-base tracking-tight leading-none">Code Academy</span>
+          <span class="text-xs text-slate-400 font-medium hidden md:inline">Learn Front-End Web Development</span>
+          <span class="pulse-badge text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1">
+            <span>✨ Have fun along the way!</span>
+          </span>
         </div>
       </div>
     </div>
 
-    <!-- Central Template Selector -->
+    <!-- TRACK SWITCHERS (HTML5 / CSS3 / JS / Full-Stack) -->
+    <div class="flex items-center bg-slate-950/80 p-1 rounded-lg border border-slate-800 space-x-1 shadow-inner">
+      <button data-track="html" class="track-tab px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-300 hover:text-white">
+        <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+        <span class="hidden sm:inline">HTML5</span> Architect
+      </button>
+
+      <button data-track="css" class="track-tab px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-300 hover:text-white">
+        <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+        <span class="hidden sm:inline">CSS3</span> Stylist
+      </button>
+
+      <button data-track="js" class="track-tab px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-300 hover:text-white">
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+        <span class="hidden sm:inline">JavaScript</span> Interactive
+      </button>
+
+      <button data-track="unified" class="track-tab px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition bg-purple-600 text-white shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-purple-300"></span>
+        <span class="font-bold">Full Suite</span>
+      </button>
+    </div>
+
+    <!-- UTILITY ACTIONS: Challenge, Cheatsheet, Export -->
     <div class="flex items-center space-x-2">
-      <div class="flex items-center space-x-1 bg-slate-800 px-2 py-1 rounded-md border border-slate-700 text-xs">
-        <label for="templateSelect" class="text-slate-400 text-[11px] hidden md:inline">Template:</label>
-        <select id="templateSelect" class="bg-transparent text-slate-200 text-xs outline-none cursor-pointer font-medium hover:text-white">
-          <option value="profile" class="bg-slate-900">Student Profile</option>
-          <option value="article" class="bg-slate-900">Article Post</option>
-          <option value="contact" class="bg-slate-900">Contact Form</option>
-          <option value="recipe" class="bg-slate-900">Recipe Card</option>
-          <option value="blank" class="bg-slate-900">Blank Starter</option>
-        </select>
-      </div>
-
-      <!-- Quick Action Buttons -->
-      <button id="btnFormat" title="Format HTML Code" class="px-2 py-1 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-md flex items-center space-x-1">
-        <i data-lucide="wand-2" class="w-3.5 h-3.5 text-emerald-400"></i>
-        <span class="hidden lg:inline text-[11px]">Format</span>
+      <!-- Challenge trigger button -->
+      <button id="btnOpenChallenges" class="px-2.5 py-1.5 text-xs font-semibold bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 border border-amber-500/30 rounded-md flex items-center space-x-1 transition shadow-sm">
+        <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i>
+        <span class="hidden lg:inline">Challenges</span>
       </button>
 
-      <button id="btnCopy" title="Copy HTML" class="px-2 py-1 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-md flex items-center space-x-1">
-        <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-400"></i>
-        <span class="hidden lg:inline text-[11px]">Copy</span>
-      </button>
-
-      <button id="btnDownload" title="Export HTML" class="px-2 py-1 text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-md flex items-center space-x-1">
-        <i data-lucide="download" class="w-3.5 h-3.5 text-amber-400"></i>
-        <span class="hidden lg:inline text-[11px]">Export</span>
-      </button>
-
-      <button id="btnToggleRef" class="px-2.5 py-1 text-xs font-medium bg-indigo-600/30 hover:bg-indigo-600/40 text-indigo-300 border border-indigo-500/40 rounded-md flex items-center space-x-1">
+      <!-- Cheatsheet drawer trigger -->
+      <button id="btnOpenDrawer" class="px-2.5 py-1.5 text-xs font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-md flex items-center space-x-1 transition">
         <i data-lucide="book-open" class="w-3.5 h-3.5 text-indigo-400"></i>
-        <span class="text-[11px]">Guide</span>
+        <span class="hidden lg:inline">Handbook</span>
+      </button>
+
+      <!-- Quick Export HTML file -->
+      <button id="btnExport" title="Export as standalone .html" class="px-2.5 py-1.5 text-xs font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-md flex items-center space-x-1 transition">
+        <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
+        <span class="hidden sm:inline">Export</span>
       </button>
     </div>
   </header>
 
-  <!-- Split Main Workspace: Occupies exactly 100% of remaining viewport -->
+  <!-- WORKSPACE WRAPPER (Exact remainder height with strict min-h-0) -->
   <main class="flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden relative">
 
-    <!-- LEFT PANEL: Tag Palette & Code Editor -->
-    <div class="w-full md:w-1/2 flex flex-col min-h-0 border-r border-slate-800 bg-slate-950 overflow-hidden">
+    <!-- LEFT PANEL: Snippet Bar & Multi-Tab Code Editor -->
+    <section class="w-full md:w-1/2 flex flex-col min-h-0 border-r border-slate-800/90 bg-slate-950 overflow-hidden">
       
-      <!-- Category Tabs (Horizontal Scrollable) -->
-      <div class="bg-slate-900 border-b border-slate-800 px-2 py-1.5 flex items-center space-x-1 overflow-x-auto shrink-0">
-        <span class="text-[10px] uppercase font-bold tracking-wider text-slate-500 px-1 shrink-0">Tags:</span>
-        <button data-cat="all" class="cat-pill active px-2 py-0.5 rounded text-[11px] font-medium bg-blue-600 text-white shrink-0">All</button>
-        <button data-cat="headings" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Headings</button>
-        <button data-cat="text" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Text</button>
-        <button data-cat="lists" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Lists</button>
-        <button data-cat="media" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Links & Media</button>
-        <button data-cat="forms" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Forms & Tables</button>
-        <button data-cat="structure" class="cat-pill px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">Layout</button>
-      </div>
-
-      <!-- Quick Snippet Insertion Chips -->
-      <div class="bg-slate-950 border-b border-slate-800/80 px-2 py-1.5 flex items-center space-x-1.5 overflow-x-auto shrink-0">
-        <div id="tagChipsContainer" class="flex items-center space-x-1.5">
-          <!-- Populated by JS -->
+      <!-- Track Header & Category Pill Filter -->
+      <div class="bg-slate-900 border-b border-slate-800 px-3 py-1.5 flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-2 overflow-x-auto py-0.5" id="categoryTabsContainer">
+          <!-- Populated dynamically based on active track -->
         </div>
-      </div>
 
-      <!-- Editor Subheader Toolbar -->
-      <div class="h-8 bg-slate-900/90 border-b border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
-        <div class="flex items-center space-x-2">
-          <span class="flex items-center space-x-1.5 text-slate-200 font-mono">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-            <span>editor.html</span>
+        <div class="flex items-center space-x-1 shrink-0 ml-2">
+          <span id="activeTrackBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase tracking-wider">
+            Full Suite
           </span>
-          <span id="charCount" class="text-slate-500 pl-1">0 chars</span>
-        </div>
-
-        <div class="flex items-center space-x-1.5">
-          <button id="btnUndo" title="Undo (Ctrl+Z)" class="p-1 hover:text-white rounded hover:bg-slate-800">
-            <i data-lucide="undo" class="w-3 h-3"></i>
-          </button>
-          <button id="btnRedo" title="Redo (Ctrl+Y)" class="p-1 hover:text-white rounded hover:bg-slate-800">
-            <i data-lucide="redo" class="w-3 h-3"></i>
-          </button>
-          <div class="h-3 w-[1px] bg-slate-700 mx-0.5"></div>
-          <button id="btnClear" title="Clear Code" class="px-1.5 py-0.5 text-slate-400 hover:text-red-400 rounded hover:bg-slate-800">Clear</button>
-          <button id="btnReset" title="Reset to Starter" class="px-1.5 py-0.5 text-slate-400 hover:text-blue-400 rounded hover:bg-slate-800">Reset</button>
         </div>
       </div>
 
-      <!-- Code Area: Line numbers + Textarea -->
-      <div class="flex-1 min-h-0 flex bg-slate-950 font-mono text-[13px] relative overflow-hidden">
-        <!-- Line Numbers Column -->
-        <div id="lineNumbers" class="w-11 py-2.5 bg-slate-950 text-slate-600 border-r border-slate-800 select-none overflow-hidden shrink-0 flex flex-col" style="counter-reset: line;">
+      <!-- Quick Insertion Toolbox (Chips Horizontal Bar) -->
+      <div class="bg-slate-950 border-b border-slate-800/80 px-2 py-1.5 overflow-x-auto shrink-0 flex items-center">
+        <div class="text-[10px] uppercase font-bold text-slate-500 px-1.5 flex items-center space-x-1 shrink-0">
+          <i data-lucide="zap" class="w-3 h-3 text-amber-400"></i>
+          <span>Insert:</span>
+        </div>
+        <div id="snippetChipsRow" class="flex items-center space-x-1.5 pl-1">
+          <!-- Snippet chips populated here -->
+        </div>
+      </div>
+
+      <!-- Code Editor File Switcher Bar (For Unified Track: HTML, CSS, JS tabs) -->
+      <div id="fileTabsBar" class="h-8 bg-slate-900/80 border-b border-slate-800 px-2.5 flex items-center justify-between shrink-0 text-xs">
+        <div class="flex items-center space-x-1" id="fileTabsList">
+          <button data-file="html" class="file-tab active px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 bg-slate-800 text-orange-400 border border-slate-700">
+            <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+            <span>index.html</span>
+          </button>
+          <button data-file="css" class="file-tab px-2.5 py-1 rounded text-xs font-medium flex items-center space-x-1.5 text-slate-400 hover:text-slate-200">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+            <span>style.css</span>
+          </button>
+          <button data-file="js" class="file-tab px-2.5 py-1 rounded text-xs font-medium flex items-center space-x-1.5 text-slate-400 hover:text-slate-200">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span>script.js</span>
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-1">
+          <button id="btnFormatCode" title="Auto-format / Prettify" class="p-1 hover:text-white rounded hover:bg-slate-800 text-slate-400 flex items-center space-x-1">
+            <i data-lucide="wand-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span class="text-[11px] hidden sm:inline">Format</span>
+          </button>
+          <button id="btnCopyCode" title="Copy Editor Code" class="p-1 hover:text-white rounded hover:bg-slate-800 text-slate-400 flex items-center space-x-1">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          </button>
+          <div class="h-3 w-[1px] bg-slate-800 mx-1"></div>
+          <button id="btnUndo" title="Undo (Ctrl+Z)" class="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800">
+            <i data-lucide="undo" class="w-3.5 h-3.5"></i>
+          </button>
+          <button id="btnRedo" title="Redo (Ctrl+Y)" class="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800">
+            <i data-lucide="redo" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Editor Code Area: Line numbers + Textarea -->
+      <div class="flex-1 min-h-0 flex bg-slate-950 relative overflow-hidden font-mono text-[13px]">
+        <div id="lineNumbersColumn" class="w-10 py-2.5 bg-slate-950 text-slate-600 border-r border-slate-800 select-none overflow-hidden shrink-0 flex flex-col" style="counter-reset: line;">
           <div class="line-number-row"></div>
         </div>
 
-        <!-- Textarea with direct input binding -->
-        <textarea id="codeEditor" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
-          class="flex-1 h-full min-h-0 p-2.5 bg-transparent text-slate-200 resize-none outline-none leading-6 font-mono whitespace-pre overflow-auto focus:ring-0 border-0"
-          placeholder="Type or click snippet tags above..."></textarea>
+        <textarea id="codeEditorArea" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
+          class="flex-1 h-full min-h-0 p-2.5 bg-transparent text-slate-200 resize-none outline-none leading-6 editor-font whitespace-pre overflow-auto focus:ring-0 border-0 selection:bg-indigo-500/30"
+          placeholder="Write your front-end code here or tap any snippet above..."></textarea>
       </div>
 
-      <!-- Editor Footer Notice: Kept within strict bounds -->
+      <!-- Editor Status Bar (Pinned firmly) -->
       <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
-        <div class="flex items-center space-x-1.5 truncate">
-          <i data-lucide="mouse-pointer-click" class="w-3 h-3 text-blue-400 shrink-0"></i>
-          <span id="quickTip" class="truncate">Click any tag above to insert code at cursor.</span>
+        <div class="flex items-center space-x-2 truncate">
+          <span class="flex items-center space-x-1 text-emerald-400 font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>Live Sync Active</span>
+          </span>
+          <span class="text-slate-600">|</span>
+          <span id="charCountLabel" class="text-slate-400">0 chars</span>
         </div>
-        <span class="text-slate-500 font-mono text-[10px] shrink-0 ml-2">Live Sync On</span>
-      </div>
-    </div>
 
-    <!-- RIGHT PANEL: Live Output & Viewport Controls -->
-    <div class="w-full md:w-1/2 flex flex-col min-h-0 bg-slate-900/50 overflow-hidden">
-      <!-- Preview Header Controls -->
+        <div class="flex items-center space-x-2 text-[10px] text-slate-500 font-mono">
+          <span>Tab = 2 spaces</span>
+          <button id="btnResetCurrent" class="text-slate-400 hover:text-amber-400 ml-1">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: Live Sandbox Preview + Virtual Console -->
+    <section class="w-full md:w-1/2 flex flex-col min-h-0 bg-slate-950 overflow-hidden relative">
+
+      <!-- Preview Header Controls Bar -->
       <div class="h-10 bg-slate-900 border-b border-slate-800 px-3 flex items-center justify-between shrink-0">
         <div class="flex items-center space-x-2">
-          <!-- Device Sizing Toggles -->
-          <div class="flex space-x-0.5 items-center bg-slate-800 p-0.5 rounded-md border border-slate-700">
-            <button id="viewDesktop" title="Desktop Mode" class="p-1 rounded bg-slate-700 text-white hover:text-white">
+          <!-- Viewport switches -->
+          <div class="flex space-x-0.5 items-center bg-slate-950 p-0.5 rounded-md border border-slate-800">
+            <button id="viewDesktop" title="Full Desktop View" class="p-1 rounded bg-slate-800 text-white hover:text-white">
               <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
             </button>
-            <button id="viewTablet" title="Tablet Mode" class="p-1 rounded text-slate-400 hover:text-white">
+            <button id="viewTablet" title="Tablet Simulator (768px)" class="p-1 rounded text-slate-400 hover:text-white">
               <i data-lucide="tablet" class="w-3.5 h-3.5"></i>
             </button>
-            <button id="viewMobile" title="Mobile Phone Mode" class="p-1 rounded text-slate-400 hover:text-white">
+            <button id="viewMobile" title="Mobile Simulator (375px)" class="p-1 rounded text-slate-400 hover:text-white">
               <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
             </button>
           </div>
-          <span class="text-xs text-slate-400 font-medium">Preview</span>
+
+          <!-- Canvas background theme toggle (Light preview canvas / Dark canvas) -->
+          <button id="btnToggleCanvasTheme" title="Toggle Preview Background Theme" class="p-1 text-slate-400 hover:text-white bg-slate-800 rounded border border-slate-700">
+            <i data-lucide="sun-moon" class="w-3.5 h-3.5 text-amber-300"></i>
+          </button>
+          <span class="text-xs text-slate-400 font-medium">Live Canvas</span>
         </div>
 
         <div class="flex items-center space-x-2">
-          <!-- View Modes (Browser vs DOM) -->
-          <div class="flex items-center bg-slate-800 p-0.5 rounded-md border border-slate-700 text-xs">
-            <button id="tabPreview" class="px-2 py-0.5 rounded bg-blue-600 text-white font-medium text-[11px]">Browser</button>
-            <button id="tabDom" class="px-2 py-0.5 rounded text-slate-400 hover:text-slate-200 text-[11px]">DOM Tree</button>
-          </div>
+          <!-- Console toggle badge -->
+          <button id="btnToggleConsole" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded text-xs font-mono flex items-center space-x-1.5 transition">
+            <i data-lucide="terminal" class="w-3 h-3 text-emerald-400"></i>
+            <span>Console</span>
+            <span id="consoleBadgeCount" class="w-4 h-4 rounded-full bg-slate-700 text-[10px] flex items-center justify-center font-bold text-slate-300">0</span>
+          </button>
 
           <!-- Run / Force Refresh button -->
-          <button id="btnRun" title="Re-render HTML" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-md text-xs font-semibold flex items-center space-x-1 shadow transition">
-            <i data-lucide="play" class="w-3 h-3 fill-current"></i>
-            <span>Run</span>
+          <button id="btnRunRefresh" class="px-3 py-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-md text-xs font-bold flex items-center space-x-1 shadow transition">
+            <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+            <span>Render</span>
           </button>
         </div>
       </div>
 
-      <!-- Live Preview Container: Strictly flex-1 min-h-0 to avoid overflow -->
-      <div id="previewContainer" class="flex-1 min-h-0 bg-slate-950 p-2 sm:p-3 flex items-center justify-center overflow-hidden relative">
-        <!-- Live iframe sandbox with full fallback -->
-        <iframe id="liveFrame" sandbox="allow-scripts allow-modals" class="frame-desktop bg-white shadow-lg" title="Live Preview"></iframe>
+      <!-- Preview Stage Container (Houses the sandboxed iframe) -->
+      <div id="previewCanvasArea" class="flex-1 min-h-0 bg-slate-900/60 p-2 sm:p-3 flex items-center justify-center overflow-hidden relative">
+        <iframe id="liveRenderFrame" sandbox="allow-scripts allow-modals allow-same-origin" class="frame-desktop bg-white shadow-xl transition-all" title="Output Preview"></iframe>
+      </div>
 
-        <!-- DOM Tree Inspector Container -->
-        <div id="domTreeWrapper" class="hidden absolute inset-2 bg-slate-900 border border-slate-800 rounded-lg p-3 font-mono text-xs overflow-auto text-slate-300">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-800 mb-2">
-            <span class="font-bold text-slate-200 flex items-center space-x-1.5 text-xs">
-              <i data-lucide="binary" class="w-3.5 h-3.5 text-blue-400"></i>
-              <span>Parsed Elements & Structure</span>
-            </span>
-            <span class="text-[10px] text-slate-500">Auto-generated</span>
+      <!-- COLLAPSIBLE JAVASCRIPT CONSOLE DRAWER (Bottom of Preview Pane) -->
+      <div id="consoleDrawer" class="h-36 bg-slate-900 border-t border-slate-800 flex flex-col shrink-0 transition-all">
+        <div class="h-7 bg-slate-950 px-3 flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 select-none">
+          <div class="flex items-center space-x-2">
+            <i data-lucide="terminal" class="w-3.5 h-3.5 text-emerald-400"></i>
+            <span class="font-mono font-semibold text-slate-300 text-[11px]">JavaScript Virtual Console</span>
           </div>
-          <div id="domTreeContent" class="space-y-1"></div>
+          <div class="flex items-center space-x-2">
+            <button id="btnClearConsole" class="hover:text-red-400 font-mono text-[10px] px-1 py-0.5 rounded hover:bg-slate-800">Clear</button>
+            <button id="btnMinimizeConsole" class="hover:text-white p-0.5 rounded">
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="consoleLogsList" class="flex-1 min-h-0 overflow-y-auto p-2 font-mono text-xs space-y-1 bg-slate-950/80">
+          <div class="text-slate-500 text-[11px] italic">Console ready. Use console.log(...) in your JavaScript code.</div>
         </div>
       </div>
 
-      <!-- Preview Footer Status Bar (Fully pinned and always visible) -->
-      <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
+      <!-- Preview Footer Status Bar (Always Visible at bottom) -->
+      <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0 z-10">
         <div class="flex items-center space-x-2">
-          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span id="previewStatus">Rendered successfully</span>
+          <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+          <span id="previewStatusLabel">Sandbox ready</span>
         </div>
         <div class="flex items-center space-x-2 font-mono text-[10px] text-slate-500">
-          <span id="deviceSizeLabel">100% responsive</span>
+          <span id="viewportDimensionsLabel">Responsive Desktop (100%)</span>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Tag Cheatsheet Reference Drawer -->
-    <div id="refDrawer" class="hidden fixed inset-y-0 right-0 w-full sm:w-96 bg-slate-900 border-l border-slate-800 shadow-2xl z-50 flex flex-col">
-      <div class="p-3 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+  </main>
+
+  <!-- CHALLENGES MODAL DIALOG -->
+  <div id="challengeModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+      <div class="p-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-950">
         <div class="flex items-center space-x-2">
-          <i data-lucide="book-open" class="w-4 h-4 text-indigo-400"></i>
-          <h2 class="text-xs font-bold text-white uppercase tracking-wider">HTML5 Cheatsheet</h2>
+          <i data-lucide="trophy" class="w-5 h-5 text-amber-400"></i>
+          <div>
+            <h3 class="font-bold text-white text-sm">Interactive Coding Challenges</h3>
+            <p class="text-[11px] text-slate-400">Choose a challenge to test your introductory and intermediate front-end skills!</p>
+          </div>
         </div>
-        <button id="btnCloseRef" class="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white">
+        <button id="btnCloseChallengeModal" class="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <div class="p-2 border-b border-slate-800 bg-slate-900">
-        <input type="text" id="refSearch" placeholder="Search HTML tags..." 
-          class="w-full px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-md text-xs text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500">
+      <div class="p-3 border-b border-slate-800 flex items-center space-x-2 bg-slate-900/60 overflow-x-auto text-xs">
+        <button data-challtrack="all" class="chall-filter active px-2.5 py-1 rounded-md bg-blue-600 text-white font-semibold">All Challenges</button>
+        <button data-challtrack="html" class="chall-filter px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white font-medium">HTML5</button>
+        <button data-challtrack="css" class="chall-filter px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white font-medium">CSS3</button>
+        <button data-challtrack="js" class="chall-filter px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white font-medium">JavaScript</button>
       </div>
 
-      <div id="refList" class="flex-1 overflow-y-auto p-3 space-y-2.5">
-        <!-- Rendered by JS -->
+      <div id="challengesList" class="p-3 overflow-y-auto space-y-2.5 flex-1 divide-y divide-slate-800/50">
+        <!-- Challenges injected via JS -->
       </div>
     </div>
-  </main>
+  </div>
 
-  <!-- Notification Toast -->
-  <div id="toast" class="fixed bottom-3 right-3 bg-blue-600 text-white text-xs px-3 py-1.5 rounded-lg shadow-xl flex items-center space-x-2 z-50 pointer-events-none">
-    <i data-lucide="check" class="w-3.5 h-3.5"></i>
-    <span id="toastMsg">Snippet Inserted</span>
+  <!-- REFERENCE CHEATSHEET & HANDBOOK DRAWER -->
+  <aside id="referenceDrawer" class="hidden fixed inset-y-0 right-0 w-full sm:w-96 bg-slate-900 border-l border-slate-800 shadow-2xl z-50 flex flex-col">
+    <div class="p-3 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="book-marked" class="w-4 h-4 text-indigo-400"></i>
+        <h2 class="text-xs font-bold text-white uppercase tracking-wider">Front-End Developer Handbook</h2>
+      </div>
+      <button id="btnCloseDrawer" class="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <div class="p-2 border-b border-slate-800 bg-slate-900">
+      <input type="text" id="handbookSearchInput" placeholder="Search HTML tags, CSS properties, or JS methods..."
+        class="w-full px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-md text-xs text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500">
+    </div>
+
+    <div id="handbookContentList" class="flex-1 overflow-y-auto p-3 space-y-2.5">
+      <!-- Populated via JS -->
+    </div>
+  </aside>
+
+  <!-- POPUP NOTIFICATION TOAST -->
+  <div id="toastNotification" class="fixed bottom-3 right-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs px-3.5 py-2 rounded-lg shadow-2xl flex items-center space-x-2 z-50 pointer-events-none">
+    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-300"></i>
+    <span id="toastNotificationMsg">Code snippet inserted</span>
   </div>
 
   <script>
-    // Snippet library with quick insert codes & categories
-    const TAG_LIBRARY = [
-      // Headings
-      { tag: '<h1>', name: 'h1', cat: 'headings', snippet: '<h1>Main Heading</h1>\n', desc: 'Primary level 1 page headline.' },
-      { tag: '<h2>', name: 'h2', cat: 'headings', snippet: '<h2>Sub Heading</h2>\n', desc: 'Level 2 section header.' },
-      { tag: '<h3>', name: 'h3', cat: 'headings', snippet: '<h3>Topic Header</h3>\n', desc: 'Level 3 topic header.' },
+    // -------------------------------------------------------------
+    // MASTER DATASETS: SNIPPETS, HANDBOOK, AND CHALLENGES
+    // -------------------------------------------------------------
 
-      // Text
-      { tag: '<p>', name: 'p', cat: 'text', snippet: '<p>This is a paragraph of informative text for students.</p>\n', desc: 'Standard paragraph block.' },
-      { tag: '<strong>', name: 'strong', cat: 'text', snippet: '<strong>important text</strong>', desc: 'Bold text with strong semantic importance.' },
-      { tag: '<em>', name: 'em', cat: 'text', snippet: '<em>emphasized text</em>', desc: 'Italicized emphasized text.' },
-      { tag: '<mark>', name: 'mark', cat: 'text', snippet: '<mark>highlighted text</mark>', desc: 'Highlighted background text.' },
-      { tag: '<blockquote>', name: 'quote', cat: 'text', snippet: '<blockquote style="border-left: 3px solid #3b82f6; padding-left: 12px; margin: 10px 0; color: #475569; font-style: italic;">\n  "Learning by doing is the key to mastery."\n</blockquote>\n', desc: 'Quotation block.' },
-      { tag: '<hr>', name: 'hr', cat: 'text', snippet: '<hr style="border:0; border-top:1px solid #cbd5e1; margin:16px 0;">\n', desc: 'Horizontal rule line break.', selfClosing: true },
-      { tag: '<br>', name: 'br', cat: 'text', snippet: '<br>\n', desc: 'Single line break.', selfClosing: true },
+    const SNIPPET_DATA = {
+      html: {
+        categories: [
+          { id: 'all', label: 'All Tags' },
+          { id: 'structure', label: 'Structure' },
+          { id: 'typography', label: 'Typography' },
+          { id: 'lists', label: 'Lists' },
+          { id: 'media', label: 'Links & Media' },
+          { id: 'forms', label: 'Forms & Tables' }
+        ],
+        snippets: [
+          { name: 'h1', tag: '<h1>', cat: 'typography', desc: 'Main headline for page or section', code: '<h1>Welcome to HTML5</h1>\n' },
+          { name: 'h2', tag: '<h2>', cat: 'typography', desc: 'Secondary section subtitle', code: '<h2>About This Project</h2>\n' },
+          { name: 'p', tag: '<p>', cat: 'typography', desc: 'Paragraph text element', code: '<p>Learning front-end development is exciting and creative!</p>\n' },
+          { name: 'strong', tag: '<strong>', cat: 'typography', desc: 'Bold text with semantic importance', code: '<strong>Important Notice:</strong> ' },
+          { name: 'em', tag: '<em>', cat: 'typography', desc: 'Italicized emphasized text', code: '<em>featured</em> ' },
+          { name: 'header', tag: '<header>', cat: 'structure', desc: 'Introductory container or navigational banner', code: '<header class="header">\n  <h1>My Cool App</h1>\n  <p>Learn front-end step by step</p>\n</header>\n' },
+          { name: 'main', tag: '<main>', cat: 'structure', desc: 'Central body content container', code: '<main>\n  <section>\n    <h2>Getting Started</h2>\n    <p>Write clean semantics!</p>\n  </section>\n</main>\n' },
+          { name: 'section', tag: '<section>', cat: 'structure', desc: 'Thematic grouping of content', code: '<section>\n  <h3>Key Concept</h3>\n  <p>Everything in HTML is a box.</p>\n</section>\n' },
+          { name: 'footer', tag: '<footer>', cat: 'structure', desc: 'Footer area for author, links & copyright', code: '<footer>\n  <p>&copy; 2026 Code Academy &bull; Have fun along the way!</p>\n</footer>\n' },
+          { name: 'div.card', tag: '<div card>', cat: 'structure', desc: 'Flexible container card wrapper', code: '<div class="card">\n  <h3>Card Title</h3>\n  <p>Card body description here.</p>\n</div>\n' },
+          { name: 'ul', tag: '<ul>', cat: 'lists', desc: 'Unordered bullet point list', code: '<ul>\n  <li>HTML5 for Structure</li>\n  <li>CSS3 for Style</li>\n  <li>JavaScript for Interactivity</li>\n</ul>\n' },
+          { name: 'ol', tag: '<ol>', cat: 'lists', desc: 'Ordered numbered sequence list', code: '<ol>\n  <li>Draft HTML markup</li>\n  <li>Add CSS styling</li>\n  <li>Add JavaScript interactivity</li>\n</ol>\n' },
+          { name: 'a', tag: '<a>', cat: 'media', desc: 'Hyperlink to websites or internal anchors', code: '<a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a>' },
+          { name: 'img', tag: '<img>', cat: 'media', desc: 'Responsive image element', code: '<img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500" alt="Code laptop" style="max-width:100%; border-radius:8px;">\n' },
+          { name: 'button', tag: '<button>', cat: 'forms', desc: 'Clickable action button', code: '<button class="btn">Explore More</button>\n' },
+          { name: 'form', tag: '<form>', cat: 'forms', desc: 'Interactive input form', code: '<form id="contactForm">\n  <label for="username">Username:</label>\n  <input type="text" id="username" placeholder="alex123">\n  <button type="submit">Send</button>\n</form>\n' },
+          { name: 'table', tag: '<table>', cat: 'forms', desc: 'Data grid table structure', code: '<table>\n  <tr><th>Language</th><th>Role</th></tr>\n  <tr><td>HTML5</td><td>Structure</td></tr>\n  <tr><td>CSS3</td><td>Aesthetics</td></tr>\n  <tr><td>JavaScript</td><td>Logic</td></tr>\n</table>\n' }
+        ]
+      },
 
-      // Lists
-      { tag: '<ul>', name: 'ul (bullets)', cat: 'lists', snippet: '<ul>\n  <li>First list item</li>\n  <li>Second list item</li>\n  <li>Third list item</li>\n</ul>\n', desc: 'Unordered bulleted list.' },
-      { tag: '<ol>', name: 'ol (numbers)', cat: 'lists', snippet: '<ol>\n  <li>First step</li>\n  <li>Second step</li>\n  <li>Third step</li>\n</ol>\n', desc: 'Numbered sequential list.' },
-      { tag: '<li>', name: 'li item', cat: 'lists', snippet: '<li>New list item</li>\n', desc: 'Individual item inside a list.' },
+      css: {
+        categories: [
+          { id: 'all', label: 'All CSS' },
+          { id: 'flexbox', label: 'Flexbox' },
+          { id: 'grid', label: 'CSS Grid' },
+          { id: 'effects', label: 'Gradients & Glow' },
+          { id: 'glass', label: 'Glassmorphism' },
+          { id: 'animation', label: 'Animations' },
+          { id: 'box', label: 'Box Model' }
+        ],
+        snippets: [
+          { name: 'Center with Flex', tag: 'flex: center', cat: 'flexbox', desc: 'Perfect horizontal & vertical centering', code: 'display: flex;\njustify-content: center;\nalign-items: center;\n' },
+          { name: 'Flex Column', tag: 'flex: column', cat: 'flexbox', desc: 'Stack items vertically with a gap', code: 'display: flex;\nflex-direction: column;\ngap: 1rem;\n' },
+          { name: 'Flex Space-Between', tag: 'flex: between', cat: 'flexbox', desc: 'Even horizontal space distribution', code: 'display: flex;\njustify-content: space-between;\nalign-items: center;\n' },
+          { name: 'Auto-Fit Grid', tag: 'grid: auto-fit', cat: 'grid', desc: 'Responsive card grid with no media queries', code: 'display: grid;\ngrid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\ngap: 1.5rem;\n' },
+          { name: '3-Column Grid', tag: 'grid: 3-col', cat: 'grid', desc: 'Fixed 3 column balanced grid', code: 'display: grid;\ngrid-template-columns: 1fr 1fr 1fr;\ngap: 1rem;\n' },
+          { name: 'Glass Card', tag: 'glassmorphism', cat: 'glass', desc: 'Frosted glass blur with subtle border', code: 'background: rgba(255, 255, 255, 0.15);\nbackdrop-filter: blur(12px);\n-webkit-backdrop-filter: blur(12px);\nborder: 1px solid rgba(255, 255, 255, 0.25);\nborder-radius: 14px;\nbox-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);\n' },
+          { name: 'Neon Glow', tag: 'box-shadow: glow', cat: 'effects', desc: 'Cyberpunk neon border and drop shadow', code: 'box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(56, 189, 248, 0.3);\nborder: 1px solid #38bdf8;\n' },
+          { name: 'Vibrant Gradient', tag: 'linear-gradient', cat: 'effects', desc: 'Modern high-contrast gradient background', code: 'background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);\ncolor: #ffffff;\n' },
+          { name: 'Smooth Hover Lift', tag: 'hover: lift', cat: 'box', desc: 'Card float lift transition on mouse hover', code: 'transition: transform 0.2s ease, box-shadow 0.2s ease;\ncursor: pointer;\n/* On hover: transform: translateY(-4px); */\n' },
+          { name: 'Spin Animation', tag: '@keyframes spin', cat: 'animation', desc: 'Infinite 360 degree rotating spinner', code: '@keyframes spin {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\nanimation: spin 2s linear infinite;\n' },
+          { name: 'Pulse Keyframes', tag: '@keyframes pulse', cat: 'animation', desc: 'Subtle breathing pulse animation', code: '@keyframes pulse {\n  0%, 100% { transform: scale(1); opacity: 1; }\n  50% { transform: scale(1.05); opacity: 0.85; }\n}\nanimation: pulse 2.5s ease-in-out infinite;\n' },
+          { name: 'Clean Card Box', tag: 'box model', cat: 'box', desc: 'Standard modern card padding & rounded corners', code: 'padding: 1.5rem;\nborder-radius: 0.75rem;\nbackground-color: #ffffff;\nborder: 1px solid #e2e8f0;\nbox-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);\n' }
+        ]
+      },
 
-      // Links & Media
-      { tag: '<a>', name: 'link <a>', cat: 'media', snippet: '<a href="https://wikipedia.org" target="_blank" style="color: #2563eb; text-decoration: underline;">Click Here to Learn More</a>', desc: 'Hyperlink to a web page or file.' },
-      { tag: '<img>', name: 'img', cat: 'media', snippet: '<img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600" alt="Laptop on desk" style="max-width: 100%; height: auto; border-radius: 8px;">\n', desc: 'Displays an image.', selfClosing: true },
-      { tag: '<figure>', name: 'figure', cat: 'media', snippet: '<figure style="margin: 0;">\n  <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=600" alt="Art" style="max-width: 100%; border-radius: 8px;">\n  <figcaption style="font-size: 0.85em; color: #64748b; margin-top: 4px;">Figure description goes here.</figcaption>\n</figure>\n', desc: 'Image or media with caption.' },
-      { tag: '<video>', name: 'video', cat: 'media', snippet: '<video controls width="100%" style="border-radius: 8px;">\n  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">\n  Your browser does not support the video tag.\n</video>\n', desc: 'Interactive HTML5 video player.' },
-
-      // Forms & Tables
-      { tag: '<button>', name: 'button', cat: 'forms', snippet: '<button style="background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 500;">Click Me</button>\n', desc: 'Clickable button element.' },
-      { tag: '<input>', name: 'input (text)', cat: 'forms', snippet: '<input type="text" placeholder="Type your text..." style="padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%; box-sizing: border-box; margin: 6px 0;">\n', desc: 'Text input field.', selfClosing: true },
-      { tag: '<form>', name: 'form', cat: 'forms', snippet: '<form action="#" method="GET" style="display: flex; flex-direction: column; gap: 8px; max-width: 320px;">\n  <label>Your Name: <input type="text" placeholder="John Doe" style="padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; width: 100%;"></label>\n  <button type="submit" style="background: #059669; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer;">Submit</button>\n</form>\n', desc: 'Form container for collecting inputs.' },
-      { tag: '<table>', name: 'table', cat: 'forms', snippet: '<table style="width: 100%; border-collapse: collapse; margin: 12px 0;">\n  <thead>\n    <tr style="background: #f1f5f9; text-align: left;">\n      <th style="padding: 8px; border: 1px solid #cbd5e1;">Subject</th>\n      <th style="padding: 8px; border: 1px solid #cbd5e1;">Grade</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td style="padding: 8px; border: 1px solid #cbd5e1;">HTML5</td>\n      <td style="padding: 8px; border: 1px solid #cbd5e1;">A+</td>\n    </tr>\n    <tr>\n      <td style="padding: 8px; border: 1px solid #cbd5e1;">CSS3</td>\n      <td style="padding: 8px; border: 1px solid #cbd5e1;">A</td>\n    </tr>\n  </tbody>\n</table>\n', desc: 'Tabular data display.' },
-
-      // Structure
-      { tag: '<header>', name: 'header', cat: 'structure', snippet: '<header style="background: #f8fafc; padding: 16px; border-radius: 8px; margin-bottom: 12px;">\n  <h2>Website Header</h2>\n  <p>Introductory subtitle</p>\n</header>\n', desc: 'Header banner section.' },
-      { tag: '<main>', name: 'main', cat: 'structure', snippet: '<main style="padding: 8px 0;">\n  <p>Main content goes here.</p>\n</main>\n', desc: 'Central content wrapper.' },
-      { tag: '<section>', name: 'section', cat: 'structure', snippet: '<section style="margin: 16px 0; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">\n  <h3>Section Header</h3>\n  <p>Independent content section.</p>\n</section>\n', desc: 'Semantic document section.' },
-      { tag: '<footer>', name: 'footer', cat: 'structure', snippet: '<footer style="border-top: 1px solid #e2e8f0; padding-top: 12px; margin-top: 24px; font-size: 0.85em; color: #64748b;">\n  <p>&copy; 2026 Student Web Academy</p>\n</footer>\n', desc: 'Document footer block.' },
-      { tag: '<div>', name: 'div card', cat: 'structure', snippet: '<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin: 12px 0;">\n  <h3>Container Box</h3>\n  <p>Use div to group items with custom style.</p>\n</div>\n', desc: 'Generic content container.' }
-    ];
-
-    // Starter document templates
-    const STARTER_TEMPLATES = {
-      profile: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Student Profile</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f1f5f9;
-      color: #1e293b;
-      display: flex;
-      justify-content: center;
-      padding: 30px 16px;
-      margin: 0;
-    }
-    .profile-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 24px;
-      max-width: 340px;
-      width: 100%;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.06);
-      text-align: center;
-    }
-    .avatar {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #3b82f6;
-    }
-    h1 { margin: 12px 0 4px; font-size: 1.4rem; color: #0f172a; }
-    .badge {
-      display: inline-block;
-      background: #e0f2fe;
-      color: #0284c7;
-      padding: 3px 10px;
-      border-radius: 99px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    p { color: #64748b; font-size: 0.9rem; line-height: 1.5; margin: 12px 0; }
-    .button-link {
-      display: block;
-      background: #2563eb;
-      color: #ffffff;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-top: 14px;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="profile-card">
-    <img class="avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300" alt="Student Profile Picture">
-    <h1>Maya Lin</h1>
-    <span class="badge">Web Dev Student</span>
-    <p>Exploring HTML5 tags, learning layout design, and creating responsive web components.</p>
-    <a href="#" class="button-link">View Portfolio</a>
-  </div>
-
-</body>
-</html>`,
-
-      article: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Getting Started with HTML5</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      color: #334155;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 24px 16px;
-    }
-    header { border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 20px; }
-    h1 { color: #0f172a; margin-bottom: 4px; font-size: 1.6rem; }
-    .meta { color: #94a3b8; font-size: 0.85rem; }
-    blockquote {
-      background: #f8fafc;
-      border-left: 4px solid #3b82f6;
-      margin: 16px 0;
-      padding: 10px 16px;
-      font-style: italic;
-      color: #1e293b;
-    }
-    img { max-width: 100%; border-radius: 8px; }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>The Wonders of Modern HTML5</h1>
-    <p class="meta">By Student Alex &bull; 4 min read</p>
-  </header>
-
-  <main>
-    <p>HTML5 provides meaningful tags that make websites clean, accessible, and structured.</p>
-
-    <blockquote>
-      "Structure gives meaning to the design."
-    </blockquote>
-
-    <h2>Essential Tags</h2>
-    <ul>
-      <li><strong>&lt;header&gt;</strong>: Holds titles and menus</li>
-      <li><strong>&lt;main&gt;</strong>: The core topic content</li>
-      <li><strong>&lt;footer&gt;</strong>: Copyright & credits</li>
-    </ul>
-
-    <figure style="margin: 16px 0;">
-      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600" alt="Code on laptop screen">
-    </figure>
-  </main>
-
-  <footer style="margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 10px; font-size: 0.8rem; color: #94a3b8;">
-    <p>&copy; 2026 Student Web Academy</p>
-  </footer>
-
-</body>
-</html>`,
-
-      contact: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Contact Form</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #f8fafc;
-      padding: 24px 16px;
-      display: flex;
-      justify-content: center;
-      margin: 0;
-    }
-    .box {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      max-width: 360px;
-      width: 100%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
-    }
-    h2 { margin-top: 0; color: #0f172a; }
-    label { display: block; font-size: 0.85rem; font-weight: 500; margin: 10px 0 4px; color: #475569; }
-    input, textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 8px 10px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 0.9rem;
-    }
-    button {
-      margin-top: 16px;
-      width: 100%;
-      background: #10b981;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="box">
-    <h2>Contact Us</h2>
-    <form action="#" method="GET">
-      <label for="name">Your Name</label>
-      <input type="text" id="name" placeholder="Alex Morgan">
-
-      <label for="email">Email Address</label>
-      <input type="email" id="email" placeholder="alex@school.edu">
-
-      <label for="msg">Message</label>
-      <textarea id="msg" rows="3" placeholder="Questions or thoughts..."></textarea>
-
-      <button type="button" onclick="alert('Message recorded in playground!');">Submit Form</button>
-    </form>
-  </div>
-
-</body>
-</html>`,
-
-      recipe: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Pancakes Recipe</title>
-  <style>
-    body {
-      font-family: Georgia, serif;
-      background: #fffbeb;
-      color: #451a03;
-      padding: 24px 16px;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    h1 { color: #78350f; border-bottom: 2px solid #fde68a; padding-bottom: 6px; margin-top: 0; }
-    .hero { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
-  </style>
-</head>
-<body>
-
-  <h1>Golden Pancakes</h1>
-  <img class="hero" src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=500" alt="Fluffy pancakes">
-
-  <h3>Ingredients</h3>
-  <ul>
-    <li>1 cup flour</li>
-    <li>2 tbsp sugar</li>
-    <li>1 egg & 1 cup milk</li>
-  </ul>
-
-  <h3>Instructions</h3>
-  <ol>
-    <li>Mix dry and wet ingredients in a bowl.</li>
-    <li>Cook on hot griddle until bubbly.</li>
-    <li>Flip and serve with maple syrup!</li>
-  </ol>
-
-</body>
-</html>`,
-
-      blank: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>My First HTML5 Page</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 24px;
-      color: #1e293b;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Welcome to HTML5!</h1>
-  <p>Start clicking tag snippets on the top bar or write code here...</p>
-
-</body>
-</html>`
+      js: {
+        categories: [
+          { id: 'all', label: 'All JS' },
+          { id: 'dom', label: 'DOM Selectors' },
+          { id: 'events', label: 'Events' },
+          { id: 'interactive', label: 'Interactive UI' },
+          { id: 'async', label: 'Async & Fetch' },
+          { id: 'basics', label: 'Variables & Math' }
+        ],
+        snippets: [
+          { name: 'querySelector', tag: 'doc.querySelector', cat: 'dom', desc: 'Grab first matching element by CSS selector', code: 'const button = document.querySelector("#myBtn");\nconsole.log("Selected element:", button);\n' },
+          { name: 'Click Event', tag: 'addEventListener', cat: 'events', desc: 'Attach mouse click listener to element', code: 'document.querySelector("#btn").addEventListener("click", () => {\n  console.log("Button was clicked!");\n});\n' },
+          { name: 'Toggle Class', tag: 'classList.toggle', cat: 'dom', desc: 'Add or remove an active/dark class name', code: 'const card = document.querySelector(".card");\ncard.classList.toggle("active");\nconsole.log("Toggled active class!");\n' },
+          { name: 'Change Text Content', tag: 'textContent =', cat: 'dom', desc: 'Update HTML element text safely', code: 'document.querySelector("#output").textContent = "Updated via JavaScript!";\n' },
+          { name: 'Click Counter', tag: 'counter pattern', cat: 'interactive', desc: 'Functional incremental click counter', code: 'let count = 0;\nconst counterBtn = document.querySelector("#counterBtn");\nconst counterDisplay = document.querySelector("#counterDisplay");\n\ncounterBtn.addEventListener("click", () => {\n  count++;\n  counterDisplay.textContent = count;\n  console.log("Current count:", count);\n});\n' },
+          { name: 'Fetch Simulator', tag: 'fetch simulation', cat: 'async', desc: 'Simulate asynchronous web request with delay', code: 'console.log("Fetching user profile...");\nsetTimeout(() => {\n  const user = { name: "Taylor", role: "Junior Frontend Dev", score: 98 };\n  console.log("Data loaded successfully:", user);\n  document.querySelector("#status").textContent = `Welcome ${user.name} (${user.role})!`;\n}, 1200);\n' },
+          { name: 'Random Color Generator', tag: 'random color', cat: 'basics', desc: 'Generate a random hex color code', code: 'function getRandomColor() {\n  const hex = Math.floor(Math.random() * 16777215).toString(16);\n  return "#" + hex.padStart(6, "0");\n}\nconsole.log("Generated Color:", getRandomColor());\n' },
+          { name: 'Interval Clock', tag: 'setInterval', cat: 'interactive', desc: 'Run code every second like a timer', code: 'setInterval(() => {\n  const now = new Date().toLocaleTimeString();\n  console.log("Tick:", now);\n  const timeEl = document.querySelector("#time");\n  if (timeEl) timeEl.textContent = now;\n}, 1000);\n' }
+        ]
+      }
     };
 
-    // State Variables
-    let historyStack = [];
-    let historyIndex = -1;
-    const MAX_HISTORY = 40;
-    let renderTimer = null;
-
-    // DOM Elements
-    const editor = document.getElementById('codeEditor');
-    const lineNumbers = document.getElementById('lineNumbers');
-    const liveFrame = document.getElementById('liveFrame');
-    const templateSelect = document.getElementById('templateSelect');
-    const charCount = document.getElementById('charCount');
-    const tagChipsContainer = document.getElementById('tagChipsContainer');
-    const domTreeWrapper = document.getElementById('domTreeWrapper');
-    const domTreeContent = document.getElementById('domTreeContent');
-    const quickTip = document.getElementById('quickTip');
-    const toast = document.getElementById('toast');
-    const toastMsg = document.getElementById('toastMsg');
-    const previewStatus = document.getElementById('previewStatus');
-    const deviceSizeLabel = document.getElementById('deviceSizeLabel');
-    const refDrawer = document.getElementById('refDrawer');
-    const refList = document.getElementById('refList');
-    const refSearch = document.getElementById('refSearch');
-
-    function renderSnippetChips(category = 'all') {
-      tagChipsContainer.innerHTML = '';
-      const filtered = category === 'all' 
-        ? TAG_LIBRARY 
-        : TAG_LIBRARY.filter(t => t.cat === category);
-
-      filtered.forEach(item => {
-        const btn = document.createElement('button');
-        btn.className = 'tag-chip px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 active:bg-blue-600 text-slate-200 hover:text-white font-mono text-[11px] font-semibold border border-slate-700/80 whitespace-nowrap flex items-center shrink-0 cursor-pointer';
-        btn.innerHTML = `<span>${escapeHtml(item.tag)}</span>`;
-        btn.title = item.desc;
-        
-        btn.addEventListener('click', () => {
-          insertSnippet(item.snippet);
-          showToast(`Inserted ${item.name}`);
-          quickTip.textContent = `${item.name}: ${item.desc}`;
-        });
-
-        tagChipsContainer.appendChild(btn);
-      });
-    }
-
-    function renderReferenceList(filterText = '') {
-      refList.innerHTML = '';
-      const query = filterText.toLowerCase();
-
-      const matched = TAG_LIBRARY.filter(t => 
-        t.name.toLowerCase().includes(query) || 
-        t.tag.toLowerCase().includes(query) ||
-        t.desc.toLowerCase().includes(query)
-      );
-
-      if (matched.length === 0) {
-        refList.innerHTML = `<div class="text-xs text-slate-500 text-center py-4">No matching tags found.</div>`;
-        return;
+    // CHALLENGES DIRECTORY
+    const CHALLENGES = [
+      {
+        id: 'html-1',
+        track: 'html',
+        level: 'Introductory',
+        title: 'HTML5: Build a Developer Bio Card',
+        desc: 'Construct a semantic card with a level 1 heading (&lt;h1&gt;), a short paragraph bio, and an unordered list with 3 technologies.',
+        starterHtml: '<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: sans-serif; padding: 20px; }\n    .bio-card { border: 2px dashed #94a3b8; padding: 20px; border-radius: 8px; }\n  </style>\n</head>\n<body>\n  <div class="bio-card">\n    <!-- 1. Add your <h1> name here -->\n    \n    <!-- 2. Add your bio <p> here -->\n    \n    <!-- 3. Add a <ul> with 3 <li> skills -->\n    \n  </div>\n</body>\n</html>',
+        solutionHtml: '<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: sans-serif; padding: 20px; }\n    .bio-card { border: 2px solid #3b82f6; padding: 20px; border-radius: 8px; background: #eff6ff; }\n  </style>\n</head>\n<body>\n  <div class="bio-card">\n    <h1>Alex River</h1>\n    <p>Front-end developer passionate about clean UI & interactive experiences.</p>\n    <ul>\n      <li>HTML5 Semantic Architecture</li>\n      <li>CSS3 Flexbox & Grid</li>\n      <li>JavaScript ES6</li>\n    </ul>\n  </div>\n</body>\n</html>'
+      },
+      {
+        id: 'css-1',
+        track: 'css',
+        level: 'Introductory',
+        title: 'CSS3: Center a Card with Flexbox',
+        desc: 'Use CSS Flexbox on the body container to center the `.box` div both horizontally and vertically.',
+        starterCss: 'body {\n  height: 100vh;\n  margin: 0;\n  background: #0f172a;\n  /* Add Flexbox centering properties here: */\n}\n\n.box {\n  width: 220px;\n  padding: 24px;\n  background: #3b82f6;\n  color: white;\n  text-align: center;\n  border-radius: 12px;\n  font-family: sans-serif;\n}',
+        starterHtml: '<div class="box">\n  <h3>Flexbox Master</h3>\n  <p>I am centered!</p>\n</div>',
+        solutionCss: 'body {\n  height: 100vh;\n  margin: 0;\n  background: #0f172a;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.box {\n  width: 220px;\n  padding: 24px;\n  background: #3b82f6;\n  color: white;\n  text-align: center;\n  border-radius: 12px;\n  font-family: sans-serif;\n  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);\n}'
+      },
+      {
+        id: 'css-2',
+        track: 'css',
+        level: 'Intermediate',
+        title: 'CSS3: Glowing Glassmorphism Button',
+        desc: 'Create an engaging glassmorphic button with backdrop-filter blur, border radius, and a neon hover glow effect.',
+        starterCss: 'body {\n  height: 100vh;\n  background: linear-gradient(135deg, #1e1b4b, #31104b);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin: 0;\n}\n\n.glass-btn {\n  /* Add glassmorphic styling and glow here: */\n  color: white;\n  padding: 14px 28px;\n  font-size: 16px;\n  font-weight: 600;\n  cursor: pointer;\n}',
+        starterHtml: '<button class="glass-btn">Launch Academy 🚀</button>',
+        solutionCss: 'body {\n  height: 100vh;\n  background: linear-gradient(135deg, #1e1b4b, #31104b);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin: 0;\n}\n\n.glass-btn {\n  background: rgba(255, 255, 255, 0.1);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border: 1px solid rgba(255, 255, 255, 0.3);\n  border-radius: 12px;\n  color: white;\n  padding: 14px 28px;\n  font-size: 16px;\n  font-weight: 600;\n  cursor: pointer;\n  transition: all 0.25s ease;\n  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);\n}\n\n.glass-btn:hover {\n  transform: translateY(-3px) scale(1.03);\n  box-shadow: 0 0 25px rgba(236, 72, 153, 0.7);\n  border-color: #ec4899;\n}'
+      },
+      {
+        id: 'js-1',
+        track: 'js',
+        level: 'Introductory',
+        title: 'JavaScript: Interactive Click Counter',
+        desc: 'Write the click listener logic to increment a number on button press and log the new count in the console.',
+        starterJs: '// 1. Initialize count variable\nlet count = 0;\n\n// 2. Select elements\nconst btn = document.querySelector("#clicker");\nconst display = document.querySelector("#number");\n\n// 3. Attach click event listener\nbtn.addEventListener("click", () => {\n  // Increment and display here!\n  \n});',
+        starterHtml: '<div style="font-family: sans-serif; text-align: center; padding: 40px;">\n  <h1>Click Counter Challenge</h1>\n  <h2 id="number" style="font-size: 48px; color: #f59e0b; margin: 10px 0;">0</h2>\n  <button id="clicker" style="background:#2563eb; color:white; border:none; padding:12px 24px; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer;">Click Me!</button>\n</div>',
+        solutionJs: 'let count = 0;\nconst btn = document.querySelector("#clicker");\nconst display = document.querySelector("#number");\n\nbtn.addEventListener("click", () => {\n  count++;\n  display.textContent = count;\n  console.log("Updated count to:", count);\n});'
+      },
+      {
+        id: 'js-2',
+        track: 'js',
+        level: 'Intermediate',
+        title: 'JavaScript: Theme Mode Switcher',
+        desc: 'Toggle a dark theme class on the body when clicking the toggle button and log the active theme state.',
+        starterJs: 'const toggleBtn = document.querySelector("#themeBtn");\n\ntoggleBtn.addEventListener("click", () => {\n  // Toggle the "dark-theme" class on document.body\n  \n  // Log current theme in console\n});',
+        starterHtml: '<style>\n  body { font-family: sans-serif; transition: background 0.3s, color 0.3s; padding: 40px; text-align: center; background: #ffffff; color: #1e293b; }\n  body.dark-theme { background: #0f172a; color: #f8fafc; }\n  .card { border: 1px solid #cbd5e1; padding: 24px; border-radius: 12px; display: inline-block; }\n  body.dark-theme .card { border-color: #334155; }\n</style>\n\n<div class="card">\n  <h2>Theme Switcher Demo</h2>\n  <p>Test light and dark modes with JavaScript!</p>\n  <button id="themeBtn" style="padding:10px 20px; border-radius:6px; cursor:pointer; font-weight:600;">Switch Theme</button>\n</div>',
+        solutionJs: 'const toggleBtn = document.querySelector("#themeBtn");\n\ntoggleBtn.addEventListener("click", () => {\n  document.body.classList.toggle("dark-theme");\n  const isDark = document.body.classList.contains("dark-theme");\n  console.log("Current theme mode:", isDark ? "Dark" : "Light");\n  toggleBtn.textContent = isDark ? "Switch to Light Mode" : "Switch to Dark Mode";\n});'
       }
+    ];
 
-      matched.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'bg-slate-800/80 border border-slate-700 rounded-md p-2.5 hover:border-slate-600 transition';
-        card.innerHTML = `
-          <div class="flex items-center justify-between mb-1">
-            <span class="font-mono text-xs font-bold text-blue-400 bg-blue-950/60 px-1.5 py-0.5 rounded border border-blue-900">${escapeHtml(item.tag)}</span>
-            <span class="text-[9px] uppercase font-bold text-slate-400 bg-slate-700/60 px-1 py-0.5 rounded">${item.cat}</span>
-          </div>
-          <p class="text-[11px] text-slate-300 mb-2 leading-tight">${item.desc}</p>
-          <div class="flex items-center justify-end pt-1 border-t border-slate-700/50">
-            <button class="ref-insert-btn text-[11px] font-semibold text-indigo-400 hover:text-indigo-300 flex items-center space-x-1">
-              <span>Insert snippet &rarr;</span>
-            </button>
-          </div>
-        `;
-
-        card.querySelector('.ref-insert-btn').addEventListener('click', () => {
-          insertSnippet(item.snippet);
-          showToast(`Inserted ${item.name}`);
-          refDrawer.classList.add('hidden');
-        });
-
-        refList.appendChild(card);
-      });
-    }
-
-    function insertSnippet(textToInsert) {
-      const start = editor.selectionStart;
-      const end = editor.selectionEnd;
-      const currentVal = editor.value;
-
-      // Insert at caret or append
-      const newVal = currentVal.substring(0, start) + textToInsert + currentVal.substring(end);
-      editor.value = newVal;
-
-      const newCursor = start + textToInsert.length;
-      editor.focus();
-      editor.setSelectionRange(newCursor, newCursor);
-
-      recordHistory();
-      handleEditorInput(true);
-    }
-
-    /**
-     * Robust live render function:
-     * 1. Uses srcdoc with fallback to document.write
-     * 2. Wraps snippet in base HTML structure if user entered incomplete snippets
-     * 3. Provides clean default styling so raw tags render visibly and nicely immediately
-     */
-    function updatePreview() {
-      let rawCode = editor.value.trim();
-
-      // Check if code has complete html structure
-      const hasDoctypeOrHtml = /<!DOCTYPE|<html|<body/i.test(rawCode);
-
-      let finalHtml = rawCode;
-      if (!hasDoctypeOrHtml) {
-        // Automatically envelope snippet inside lightweight friendly HTML shell
-        finalHtml = `<!DOCTYPE html>
+    // STARTER WORKSPACES FOR TRACKS
+    const TRACK_STARTERS = {
+      html: {
+        html: `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>HTML5 Architect Playground</title>
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.6;
-      color: #1e293b;
-      background-color: #ffffff;
+      color: #334155;
+      background: #f8fafc;
+      padding: 30px 20px;
       margin: 0;
     }
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    h1 { color: #0f172a; margin-top: 0; }
+    .highlight { color: #ea580c; font-weight: 600; }
   </style>
 </head>
 <body>
-${rawCode}
-</body>
-</html>`;
-      }
 
-      // Method 1: Using srcdoc for reliable instant rendering
-      try {
-        liveFrame.srcdoc = finalHtml;
-        previewStatus.textContent = "Rendered live (" + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'}) + ")";
-      } catch (err) {
-        // Fallback: Direct iframe document write
-        try {
-          const doc = liveFrame.contentDocument || liveFrame.contentWindow.document;
-          doc.open();
-          doc.write(finalHtml);
-          doc.close();
-          previewStatus.textContent = "Rendered via document fallback";
-        } catch (e2) {
-          previewStatus.textContent = "Render error: " + e2.message;
+  <div class="container">
+    <header>
+      <h1>Welcome to HTML5 Architect</h1>
+      <p class="highlight">Step 1: Master semantic tags and document flow!</p>
+    </header>
+
+    <main>
+      <p>HTML (HyperText Markup Language) gives your website structure, meaning, and accessibility.</p>
+
+      <h3>Popular HTML5 Tags:</h3>
+      <ul>
+        <li><strong>&lt;header&gt;</strong>: Website banners and titles</li>
+        <li><strong>&lt;article&gt;</strong> &amp; <strong>&lt;section&gt;</strong>: Grouping content</li>
+        <li><strong>&lt;button&gt;</strong>: Call to action triggers</li>
+      </ul>
+    </main>
+
+    <footer>
+      <hr style="border:0; border-top:1px solid #e2e8f0; margin: 20px 0;">
+      <p style="font-size: 0.85rem; color: #94a3b8;">&copy; Code Academy &bull; Have fun along the way!</p>
+    </footer>
+  </div>
+
+</body>
+</html>`,
+        css: `/* CSS is embedded in HTML for this track */`,
+        js: `// No JS needed for HTML track`
+      },
+
+      css: {
+        html: `<div class="hero-wrapper">
+  <div class="glass-card">
+    <div class="tag">CSS3 Stylist</div>
+    <h1 class="glow-title">Style with Superpowers</h1>
+    <p class="subtitle">Tweak Flexbox, modern CSS Grid, frosted glassmorphism, and smooth animations in real time.</p>
+
+    <div class="button-group">
+      <button class="btn btn-primary">Get Started</button>
+      <button class="btn btn-ghost">Learn More</button>
+    </div>
+  </div>
+</div>`,
+        css: `/* CSS3 Stylist Playground Stylesheet */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: radial-gradient(circle at top right, #1e1b4b, #0f172a 60%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #f8fafc;
+}
+
+.hero-wrapper {
+  width: 100%;
+  max-width: 480px;
+}
+
+/* Glassmorphism Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.glow-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, #bae6fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* Flexbox Buttons */
+.button-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: #38bdf8;
+  color: #0f172a;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}`,
+        js: `// No JS needed for CSS styling track`
+      },
+
+      js: {
+        html: `<div class="interactive-box">
+  <h2>JavaScript Interactive Lab</h2>
+  <p>Open the virtual console below to see events and logs in action!</p>
+
+  <div class="metrics">
+    <div class="metric-card">
+      <span class="label">Count:</span>
+      <span id="counterNum" class="value">0</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="incBtn" class="action-btn blue">Add (+1)</button>
+    <button id="decBtn" class="action-btn red">Minus (-1)</button>
+    <button id="colorBtn" class="action-btn purple">Random Color</button>
+  </div>
+
+  <div id="statusMessage" class="status-msg">Click buttons to trigger JavaScript logic!</div>
+</div>`,
+        css: `body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f172a;
+  color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 16px;
+  transition: background 0.4s ease;
+}
+.interactive-box {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+h2 { margin-top: 0; font-size: 1.4rem; color: #facc15; }
+p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px; }
+.metrics { margin-bottom: 20px; }
+.metric-card {
+  background: #0f172a;
+  padding: 14px;
+  border-radius: 10px;
+  display: inline-block;
+  min-width: 140px;
+  border: 1px solid #334155;
+}
+.label { display: block; font-size: 0.75rem; color: #64748b; text-transform: uppercase; font-weight: 700; }
+.value { font-size: 2.2rem; font-weight: 800; color: #38bdf8; font-family: monospace; }
+.controls { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
+.action-btn {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.action-btn:hover { transform: translateY(-2px); }
+.blue { background: #2563eb; }
+.red { background: #ef4444; }
+.purple { background: #8b5cf6; }
+.status-msg { font-size: 0.85rem; color: #38bdf8; min-height: 20px; font-style: italic; }`,
+        js: `// Interactive Click and Color Logic
+let counter = 0;
+const counterNum = document.querySelector("#counterNum");
+const incBtn = document.querySelector("#incBtn");
+const decBtn = document.querySelector("#decBtn");
+const colorBtn = document.querySelector("#colorBtn");
+const statusMessage = document.querySelector("#statusMessage");
+
+console.log("Interactive JavaScript Lab Initialized!");
+
+incBtn.addEventListener("click", () => {
+  counter++;
+  counterNum.textContent = counter;
+  statusMessage.textContent = \`Incremented count to \${counter}\`;
+  console.log("Counter increased:", counter);
+});
+
+decBtn.addEventListener("click", () => {
+  counter--;
+  counterNum.textContent = counter;
+  statusMessage.textContent = \`Decremented count to \${counter}\`;
+  console.warn("Counter decreased:", counter);
+});
+
+colorBtn.addEventListener("click", () => {
+  const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, "0");
+  document.body.style.backgroundColor = randomColor;
+  statusMessage.textContent = \`Background changed to \${randomColor}\`;
+  console.log("New Background applied:", randomColor);
+});`
+      },
+
+      unified: {
+        html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Full Suite App</title>
+</head>
+<body>
+
+  <div class="app-card">
+    <div class="header">
+      <span class="badge">Unified Suite</span>
+      <h1>Front-End Trio in Action</h1>
+      <p>HTML5 for bones &bull; CSS3 for skin &bull; JS for brains</p>
+    </div>
+
+    <div class="playground-area">
+      <input type="text" id="taskInput" placeholder="Enter a goal for today...">
+      <button id="addBtn">Add Task</button>
+    </div>
+
+    <ul id="taskList">
+      <li>Have fun along the way! <span class="check">✓</span></li>
+    </ul>
+  </div>
+
+</body>
+</html>`,
+        css: `body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #090d16;
+  color: #f8fafc;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 0;
+}
+
+.app-card {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.badge {
+  background: #a855f7;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h1 { font-size: 1.3rem; margin: 10px 0 4px; color: #ffffff; }
+p { font-size: 0.85rem; color: #9ca3af; margin-bottom: 20px; }
+
+.playground-area {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+input {
+  flex: 1;
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: white;
+  font-size: 0.85rem;
+  outline: none;
+}
+input:focus { border-color: #a855f7; }
+
+button {
+  background: #a855f7;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+button:hover { background: #9333ea; }
+
+ul { list-style: none; padding: 0; margin: 0; }
+li {
+  background: #1f2937;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+}
+.check { color: #10b981; font-weight: bold; }`,
+        js: `// Interactive Task Adder Logic
+const addBtn = document.querySelector("#addBtn");
+const taskInput = document.querySelector("#taskInput");
+const taskList = document.querySelector("#taskList");
+
+console.log("Full Suite loaded: HTML, CSS, and JS bound together!");
+
+addBtn.addEventListener("click", () => {
+  const text = taskInput.value.trim();
+  if (!text) {
+    console.warn("Please enter a valid task name!");
+    return;
+  }
+
+  const li = document.createElement("li");
+  li.innerHTML = \`\${text} <span class="check">✓</span>\`;
+  taskList.appendChild(li);
+
+  console.log("New item added:", text);
+  taskInput.value = "";
+  taskInput.focus();
+});`
+      }
+    };
+  </script>
+
+  <script>
+    // -------------------------------------------------------------
+    // RUNTIME APPLICATION STATE & CONTROLLER
+    // -------------------------------------------------------------
+
+    const state = {
+      activeTrack: 'unified', // 'html' | 'css' | 'js' | 'unified'
+      activeFile: 'html',     // 'html' | 'css' | 'js'
+      activeCategory: 'all',
+      editorValues: {
+        html: TRACK_STARTERS.unified.html,
+        css: TRACK_STARTERS.unified.css,
+        js: TRACK_STARTERS.unified.js
+      },
+      historyStack: [],
+      historyIndex: -1,
+      maxHistory: 35,
+      isLightCanvas: false,
+      isConsoleOpen: true,
+      logCount: 0
+    };
+
+    // DOM Elements
+    const codeEditorArea = document.getElementById('codeEditorArea');
+    const lineNumbersColumn = document.getElementById('lineNumbersColumn');
+    const liveRenderFrame = document.getElementById('liveRenderFrame');
+    const categoryTabsContainer = document.getElementById('categoryTabsContainer');
+    const snippetChipsRow = document.getElementById('snippetChipsRow');
+    const fileTabsBar = document.getElementById('fileTabsBar');
+    const fileTabsList = document.getElementById('fileTabsList');
+    const activeTrackBadge = document.getElementById('activeTrackBadge');
+    const charCountLabel = document.getElementById('charCountLabel');
+    const previewStatusLabel = document.getElementById('previewStatusLabel');
+    const viewportDimensionsLabel = document.getElementById('viewportDimensionsLabel');
+    const consoleDrawer = document.getElementById('consoleDrawer');
+    const consoleLogsList = document.getElementById('consoleLogsList');
+    const consoleBadgeCount = document.getElementById('consoleBadgeCount');
+    const toastNotification = document.getElementById('toastNotification');
+    const toastNotificationMsg = document.getElementById('toastNotificationMsg');
+    const challengeModal = document.getElementById('challengeModal');
+    const challengesList = document.getElementById('challengesList');
+    const referenceDrawer = document.getElementById('referenceDrawer');
+    const handbookContentList = document.getElementById('handbookContentList');
+    const handbookSearchInput = document.getElementById('handbookSearchInput');
+
+    let debounceTimer = null;
+
+    // Switch active track
+    function setTrack(trackKey) {
+      state.activeTrack = trackKey;
+
+      // Update Header Track Buttons
+      document.querySelectorAll('.track-tab').forEach(tab => {
+        if (tab.dataset.track === trackKey) {
+          tab.classList.remove('text-slate-300', 'bg-transparent');
+          tab.classList.add('bg-slate-800', 'text-white', 'shadow');
+          if (trackKey === 'unified') tab.classList.add('bg-purple-600');
+        } else {
+          tab.classList.remove('bg-slate-800', 'bg-purple-600', 'text-white', 'shadow');
+          tab.classList.add('text-slate-300');
+        }
+      });
+
+      // Update badge label
+      const badgeNames = {
+        html: 'HTML5 Architect',
+        css: 'CSS3 Stylist',
+        js: 'JavaScript Interactive',
+        unified: 'Unified Suite'
+      };
+      activeTrackBadge.textContent = badgeNames[trackKey] || trackKey;
+
+      // Load starter template for the track
+      state.editorValues = {
+        html: TRACK_STARTERS[trackKey].html,
+        css: TRACK_STARTERS[trackKey].css,
+        js: TRACK_STARTERS[trackKey].js
+      };
+
+      // Set default focused editor file tab based on track
+      if (trackKey === 'html') state.activeFile = 'html';
+      else if (trackKey === 'css') state.activeFile = 'css';
+      else if (trackKey === 'js') state.activeFile = 'js';
+      else state.activeFile = 'html';
+
+      updateFileTabsVisibility();
+      renderCategoryFilters();
+      renderSnippetChips('all');
+      loadActiveFileIntoEditor();
+      renderLiveSandbox();
+      showToast(`Switched to ${badgeNames[trackKey]}`);
+    }
+
+    function updateFileTabsVisibility() {
+      // In full-stack mode, show tabs for html, css, js. In single-track mode, tailor tabs.
+      const buttons = fileTabsList.querySelectorAll('.file-tab');
+      buttons.forEach(btn => {
+        const file = btn.dataset.file;
+        if (state.activeTrack === 'unified') {
+          btn.classList.remove('hidden');
+        } else {
+          btn.classList.toggle('hidden', file !== state.activeTrack);
+        }
+
+        if (file === state.activeFile) {
+          btn.classList.add('bg-slate-800', 'text-white', 'border', 'border-slate-700');
+          btn.classList.remove('text-slate-400');
+        } else {
+          btn.classList.remove('bg-slate-800', 'text-white', 'border', 'border-slate-700');
+          btn.classList.add('text-slate-400');
+        }
+      });
+    }
+
+    function loadActiveFileIntoEditor() {
+      codeEditorArea.value = state.editorValues[state.activeFile] || '';
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
+    }
+
+    function renderCategoryFilters() {
+      categoryTabsContainer.innerHTML = '';
+      const trackSource = (state.activeTrack === 'unified') ? state.activeFile : state.activeTrack;
+      const data = SNIPPET_DATA[trackSource] || SNIPPET_DATA.html;
+
+      data.categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = `px-2 py-0.5 rounded text-[11px] font-semibold shrink-0 transition ${
+          cat.id === 'all' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+        }`;
+        btn.textContent = cat.label;
+        btn.addEventListener('click', () => {
+          categoryTabsContainer.querySelectorAll('button').forEach(b => {
+            b.classList.remove('bg-blue-600', 'text-white');
+            b.classList.add('bg-slate-800', 'text-slate-300');
+          });
+          btn.classList.remove('bg-slate-800', 'text-slate-300');
+          btn.classList.add('bg-blue-600', 'text-white');
+          renderSnippetChips(cat.id);
+        });
+        categoryTabsContainer.appendChild(btn);
+      });
+    }
+
+    function renderSnippetChips(catId = 'all') {
+      snippetChipsRow.innerHTML = '';
+      const trackSource = (state.activeTrack === 'unified') ? state.activeFile : state.activeTrack;
+      const data = SNIPPET_DATA[trackSource] || SNIPPET_DATA.html;
+
+      const list = catId === 'all'
+        ? data.snippets
+        : data.snippets.filter(s => s.cat === catId);
+
+      list.forEach(item => {
+        const chip = document.createElement('button');
+        chip.className = 'chip-btn px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 active:bg-blue-600 text-slate-200 hover:text-white font-mono text-[11px] font-semibold border border-slate-700/80 whitespace-nowrap flex items-center shrink-0 cursor-pointer shadow-sm';
+        chip.innerHTML = `<span>${escapeHtml(item.name || item.tag)}</span>`;
+        chip.title = item.desc;
+
+        chip.addEventListener('click', () => {
+          insertSnippetText(item.code);
+          showToast(`Inserted ${item.name}`);
+        });
+
+        snippetChipsRow.appendChild(chip);
+      });
+    }
+
+    function insertSnippetText(snippet) {
+      const start = codeEditorArea.selectionStart;
+      const end = codeEditorArea.selectionEnd;
+      const val = codeEditorArea.value;
+
+      codeEditorArea.value = val.substring(0, start) + snippet + val.substring(end);
+      const newPos = start + snippet.length;
+      codeEditorArea.focus();
+      codeEditorArea.setSelectionRange(newPos, newPos);
+
+      state.editorValues[state.activeFile] = codeEditorArea.value;
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
+      triggerDebouncedRender();
+    }
+
+    // Live Render Assembly & Injection
+    function renderLiveSandbox() {
+      let finalHtml = '';
+      const htmlCode = state.editorValues.html || '';
+      const cssCode = state.editorValues.css || '';
+      const jsCode = state.editorValues.js || '';
+
+      // Console message interceptor script for child iframe
+      const consoleInterceptor = `
+        <script>
+          (function() {
+            function sendToHost(type, args) {
+              try {
+                const message = args.map(arg => {
+                  if (typeof arg === 'object' && arg !== null) {
+                    try { return JSON.stringify(arg); } catch(e) { return String(arg); }
+                  }
+                  return String(arg);
+                }).join(' ');
+                window.parent.postMessage({ type: 'CONSOLE_LOG', level: type, text: message }, '*');
+              } catch(err) {}
+            }
+
+            const _log = console.log;
+            const _warn = console.warn;
+            const _error = console.error;
+            const _info = console.info;
+
+            console.log = function(...args) { sendToHost('log', args); _log.apply(console, args); };
+            console.warn = function(...args) { sendToHost('warn', args); _warn.apply(console, args); };
+            console.error = function(...args) { sendToHost('error', args); _error.apply(console, args); };
+            console.info = function(...args) { sendToHost('info', args); _info.apply(console, args); };
+
+            window.onerror = function(msg, url, line) {
+              sendToHost('error', ['Uncaught Error: ' + msg + ' (Line: ' + line + ')']);
+              return false;
+            };
+          })();
+        <\/script>
+      `;
+
+      if (state.activeTrack === 'html') {
+        const hasShell = /<!DOCTYPE|<html|<body/i.test(htmlCode);
+        if (hasShell) {
+          finalHtml = htmlCode.replace('<head>', `<head>${consoleInterceptor}`);
+        } else {
+          finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>body{font-family:sans-serif;padding:20px;margin:0;}</style></head><body>${htmlCode}</body></html>`;
+        }
+      } else if (state.activeTrack === 'css') {
+        finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}</body></html>`;
+      } else if (state.activeTrack === 'js') {
+        finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}<script>${jsCode}<\/script></body></html>`;
+      } else {
+        // Unified full-stack
+        const hasShell = /<!DOCTYPE|<html|<body/i.test(htmlCode);
+        if (hasShell) {
+          finalHtml = htmlCode
+            .replace('</head>', `<style>${cssCode}</style>${consoleInterceptor}</head>`)
+            .replace('</body>', `<script>${jsCode}<\/script></body>`);
+        } else {
+          finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}<script>${jsCode}<\/script></body></html>`;
         }
       }
 
-      // Update DOM inspector tree if open
-      updateDomTreeInspector(rawCode);
-    }
-
-    function triggerLiveRender() {
-      clearTimeout(renderTimer);
-      renderTimer = setTimeout(updatePreview, 120);
-    }
-
-    function handleEditorInput(record = true) {
-      updateLineNumbers();
-      triggerLiveRender();
-      charCount.textContent = `${editor.value.length} chars`;
-      if (record) {
-        recordHistory();
+      try {
+        liveRenderFrame.srcdoc = finalHtml;
+        previewStatusLabel.textContent = "Compiled live (" + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'}) + ")";
+      } catch (err) {
+        try {
+          const doc = liveRenderFrame.contentDocument || liveRenderFrame.contentWindow.document;
+          doc.open();
+          doc.write(finalHtml);
+          doc.close();
+        } catch (e2) {
+          previewStatusLabel.textContent = "Render error: " + e2.message;
+        }
       }
     }
 
+    function triggerDebouncedRender() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(renderLiveSandbox, 150);
+    }
+
+    // Line numbers generator
     function updateLineNumbers() {
-      const lines = editor.value.split('\n').length;
+      const count = codeEditorArea.value.split('\n').length;
       let html = '';
-      for (let i = 1; i <= lines; i++) {
+      for (let i = 1; i <= count; i++) {
         html += '<div class="line-number-row"></div>';
       }
-      lineNumbers.innerHTML = html;
+      lineNumbersColumn.innerHTML = html;
     }
 
-    // Sync line number scroll with textarea
-    editor.addEventListener('scroll', () => {
-      lineNumbers.scrollTop = editor.scrollTop;
+    function updateCharCount() {
+      charCountLabel.textContent = `${codeEditorArea.value.length} chars`;
+    }
+
+    // Scroll sync
+    codeEditorArea.addEventListener('scroll', () => {
+      lineNumbersColumn.scrollTop = codeEditorArea.scrollTop;
     });
 
-    // Keyboard support: Tab indent, Undo/Redo shortcuts
-    editor.addEventListener('keydown', (e) => {
+    // Editor typing & indentation
+    codeEditorArea.addEventListener('input', () => {
+      state.editorValues[state.activeFile] = codeEditorArea.value;
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
+      triggerDebouncedRender();
+    });
+
+    codeEditorArea.addEventListener('keydown', (e) => {
       if (e.key === 'Tab') {
         e.preventDefault();
-        const start = editor.selectionStart;
-        const end = editor.selectionEnd;
-        editor.value = editor.value.substring(0, start) + "  " + editor.value.substring(end);
-        editor.selectionStart = editor.selectionEnd = start + 2;
-        recordHistory();
-        handleEditorInput(true);
+        const start = codeEditorArea.selectionStart;
+        const end = codeEditorArea.selectionEnd;
+        codeEditorArea.value = codeEditorArea.value.substring(0, start) + "  " + codeEditorArea.value.substring(end);
+        codeEditorArea.selectionStart = codeEditorArea.selectionEnd = start + 2;
+        state.editorValues[state.activeFile] = codeEditorArea.value;
+        updateLineNumbers();
+        triggerDebouncedRender();
       }
       if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
         e.preventDefault();
-        undo();
+        undoEditor();
       }
       if (((e.ctrlKey || e.metaKey) && e.key === 'y') || ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'z')) {
         e.preventDefault();
-        redo();
+        redoEditor();
       }
     });
 
-    editor.addEventListener('input', () => handleEditorInput(true));
-
-    function recordHistory() {
-      const val = editor.value;
-      if (historyStack[historyIndex] === val) return;
-      historyStack = historyStack.slice(0, historyIndex + 1);
-      historyStack.push(val);
-      if (historyStack.length > MAX_HISTORY) {
-        historyStack.shift();
+    // Undo / Redo history
+    function recordHistoryState() {
+      const val = codeEditorArea.value;
+      if (state.historyStack[state.historyIndex] === val) return;
+      state.historyStack = state.historyStack.slice(0, state.historyIndex + 1);
+      state.historyStack.push(val);
+      if (state.historyStack.length > state.maxHistory) {
+        state.historyStack.shift();
       } else {
-        historyIndex++;
+        state.historyIndex++;
       }
     }
 
-    function undo() {
-      if (historyIndex > 0) {
-        historyIndex--;
-        editor.value = historyStack[historyIndex];
-        handleEditorInput(false);
+    function undoEditor() {
+      if (state.historyIndex > 0) {
+        state.historyIndex--;
+        codeEditorArea.value = state.historyStack[state.historyIndex];
+        state.editorValues[state.activeFile] = codeEditorArea.value;
+        updateLineNumbers();
+        updateCharCount();
+        triggerDebouncedRender();
         showToast('Undo');
       }
     }
 
-    function redo() {
-      if (historyIndex < historyStack.length - 1) {
-        historyIndex++;
-        editor.value = historyStack[historyIndex];
-        handleEditorInput(false);
+    function redoEditor() {
+      if (state.historyIndex < state.historyStack.length - 1) {
+        state.historyIndex++;
+        codeEditorArea.value = state.historyStack[state.historyIndex];
+        state.editorValues[state.activeFile] = codeEditorArea.value;
+        updateLineNumbers();
+        updateCharCount();
+        triggerDebouncedRender();
         showToast('Redo');
       }
     }
 
-    function updateDomTreeInspector(htmlString) {
-      domTreeContent.innerHTML = '';
-      if (!htmlString.trim()) {
-        domTreeContent.innerHTML = '<span class="text-slate-500">Editor is empty. Add HTML tags to view DOM structure.</span>';
-        return;
+    document.getElementById('btnUndo').addEventListener('click', undoEditor);
+    document.getElementById('btnRedo').addEventListener('click', redoEditor);
+
+    // Switch file in editor (index.html, style.css, script.js)
+    fileTabsList.querySelectorAll('.file-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        state.activeFile = tab.dataset.file;
+        updateFileTabsVisibility();
+        renderCategoryFilters();
+        renderSnippetChips('all');
+        loadActiveFileIntoEditor();
+      });
+    });
+
+    // Reset current file button
+    document.getElementById('btnResetCurrent').addEventListener('click', () => {
+      const initial = TRACK_STARTERS[state.activeTrack][state.activeFile];
+      codeEditorArea.value = initial;
+      state.editorValues[state.activeFile] = initial;
+      loadActiveFileIntoEditor();
+      triggerDebouncedRender();
+      showToast('Reset current file');
+    });
+
+    // Virtual console postMessage receiver
+    window.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'CONSOLE_LOG') {
+        appendConsoleLog(event.data.level, event.data.text);
+      }
+    });
+
+    function appendConsoleLog(level, text) {
+      state.logCount++;
+      consoleBadgeCount.textContent = state.logCount;
+
+      const row = document.createElement('div');
+      row.className = 'py-0.5 flex items-start space-x-1.5 text-[11px] leading-relaxed';
+
+      let icon = '>';
+      let textStyle = 'text-slate-300';
+
+      if (level === 'warn') {
+        icon = '⚠️';
+        textStyle = 'text-amber-300 bg-amber-950/20 px-1 rounded';
+      } else if (level === 'error') {
+        icon = '❌';
+        textStyle = 'text-rose-400 bg-rose-950/25 px-1 rounded font-semibold';
+      } else {
+        icon = '›';
+        textStyle = 'text-emerald-300';
       }
 
-      try {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlString, 'text/html');
-
-        function buildNodeView(node, depth = 0) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            const text = node.textContent.trim();
-            if (!text) return null;
-            const textEl = document.createElement('div');
-            textEl.style.paddingLeft = `${depth * 12}px`;
-            textEl.className = 'text-slate-400 text-[11px] truncate py-0.5';
-            textEl.innerHTML = `<span class="text-amber-400/80">#text:</span> <span class="text-slate-300">"${escapeHtml(text.substring(0, 40))}${text.length > 40 ? '...' : ''}"</span>`;
-            return textEl;
-          }
-
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            const wrapper = document.createElement('div');
-            wrapper.style.paddingLeft = `${depth * 12}px`;
-
-            let attrsString = '';
-            for (let i = 0; i < node.attributes.length; i++) {
-              const attr = node.attributes[i];
-              attrsString += ` <span class="text-cyan-400">${attr.name}</span>="<span class="text-amber-300">${escapeHtml(attr.value)}</span>"`;
-            }
-
-            const tagHeader = document.createElement('div');
-            tagHeader.className = 'flex items-center space-x-1 hover:bg-slate-800/80 px-1 py-0.5 rounded text-[11px]';
-            tagHeader.innerHTML = `
-              <span class="text-slate-500">&lt;</span><span class="text-blue-400 font-bold">${node.tagName.toLowerCase()}</span>${attrsString}<span class="text-slate-500">&gt;</span>
-            `;
-            wrapper.appendChild(tagHeader);
-
-            node.childNodes.forEach(child => {
-              const childEl = buildNodeView(child, depth + 1);
-              if (childEl) wrapper.appendChild(childEl);
-            });
-
-            return wrapper;
-          }
-          return null;
-        }
-
-        const rootEl = buildNodeView(doc.body, 0);
-        if (rootEl) {
-          domTreeContent.appendChild(rootEl);
-        } else {
-          domTreeContent.innerHTML = '<span class="text-slate-500">No visual body nodes found.</span>';
-        }
-      } catch (e) {
-        domTreeContent.innerHTML = `<span class="text-red-400 text-xs">DOM parser error: ${e.message}</span>`;
-      }
+      row.innerHTML = `<span class="text-slate-500 font-bold select-none">${icon}</span> <span class="${textStyle} break-all">${escapeHtml(text)}</span>`;
+      consoleLogsList.appendChild(row);
+      consoleLogsList.scrollTop = consoleLogsList.scrollHeight;
     }
 
-    function formatHTML(html) {
-      let formatted = '';
-      let indent = 0;
-      const tab = '  ';
-      const tokens = html.replace(/>\s*</g, '><').split(/(?=<)|(?<=>)/);
+    document.getElementById('btnClearConsole').addEventListener('click', () => {
+      consoleLogsList.innerHTML = '<div class="text-slate-500 text-[11px] italic">Console cleared.</div>';
+      state.logCount = 0;
+      consoleBadgeCount.textContent = '0';
+    });
 
-      tokens.forEach(token => {
-        if (!token.trim()) return;
+    const btnToggleConsole = document.getElementById('btnToggleConsole');
+    const btnMinimizeConsole = document.getElementById('btnMinimizeConsole');
 
-        if (token.startsWith('</')) {
-          indent = Math.max(0, indent - 1);
-          formatted += tab.repeat(indent) + token.trim() + '\n';
-        } else if (token.startsWith('<') && !token.endsWith('/>') && !token.startsWith('<!') && !isSelfClosing(token)) {
-          formatted += tab.repeat(indent) + token.trim() + '\n';
-          indent++;
-        } else {
-          formatted += tab.repeat(indent) + token.trim() + '\n';
-        }
+    function toggleConsoleDrawer() {
+      state.isConsoleOpen = !state.isConsoleOpen;
+      consoleDrawer.classList.toggle('hidden', !state.isConsoleOpen);
+    }
+    btnToggleConsole.addEventListener('click', toggleConsoleDrawer);
+    btnMinimizeConsole.addEventListener('click', toggleConsoleDrawer);
+
+    // Viewport devices (Desktop, Tablet, Mobile)
+    const viewDesktop = document.getElementById('viewDesktop');
+    const viewTablet = document.getElementById('viewTablet');
+    const viewMobile = document.getElementById('viewMobile');
+
+    function setViewportFrame(type) {
+      liveRenderFrame.classList.remove('frame-desktop', 'frame-tablet', 'frame-mobile');
+      [viewDesktop, viewTablet, viewMobile].forEach(b => {
+        b.classList.remove('bg-slate-800', 'text-white');
+        b.classList.add('text-slate-400');
       });
 
-      return formatted.trim();
+      if (type === 'desktop') {
+        liveRenderFrame.classList.add('frame-desktop');
+        viewDesktop.classList.add('bg-slate-800', 'text-white');
+        viewportDimensionsLabel.textContent = 'Responsive Desktop (100%)';
+      } else if (type === 'tablet') {
+        liveRenderFrame.classList.add('frame-tablet');
+        viewTablet.classList.add('bg-slate-800', 'text-white');
+        viewportDimensionsLabel.textContent = 'Tablet Simulation (768px)';
+      } else {
+        liveRenderFrame.classList.add('frame-mobile');
+        viewMobile.classList.add('bg-slate-800', 'text-white');
+        viewportDimensionsLabel.textContent = 'Mobile Simulation (375px)';
+      }
     }
 
-    function isSelfClosing(tagStr) {
-      const match = tagStr.match(/<([a-zA-Z0-9]+)/);
-      if (!match) return false;
-      const tagName = match[1].toLowerCase();
-      return ['img', 'br', 'hr', 'input', 'meta', 'link'].includes(tagName);
+    viewDesktop.addEventListener('click', () => setViewportFrame('desktop'));
+    viewTablet.addEventListener('click', () => setViewportFrame('tablet'));
+    viewMobile.addEventListener('click', () => setViewportFrame('mobile'));
+
+    // Toggle Preview Canvas Light/Dark Background
+    document.getElementById('btnToggleCanvasTheme').addEventListener('click', () => {
+      state.isLightCanvas = !state.isLightCanvas;
+      if (state.isLightCanvas) {
+        liveRenderFrame.classList.remove('bg-white');
+        liveRenderFrame.classList.add('bg-slate-900');
+        showToast('Canvas theme: Dark');
+      } else {
+        liveRenderFrame.classList.remove('bg-slate-900');
+        liveRenderFrame.classList.add('bg-white');
+        showToast('Canvas theme: Light');
+      }
+    });
+
+    // Run / Re-render button
+    document.getElementById('btnRunRefresh').addEventListener('click', () => {
+      renderLiveSandbox();
+      showToast('Re-rendered sandbox!');
+    });
+
+    // Format / Tidy HTML button
+    document.getElementById('btnFormatCode').addEventListener('click', () => {
+      const code = codeEditorArea.value;
+      if (state.activeFile === 'html') {
+        codeEditorArea.value = formatMarkup(code);
+      }
+      state.editorValues[state.activeFile] = codeEditorArea.value;
+      updateLineNumbers();
+      triggerDebouncedRender();
+      showToast('Code tidied up');
+    });
+
+    // Clipboard Copy
+    document.getElementById('btnCopyCode').addEventListener('click', () => {
+      const temp = document.createElement('textarea');
+      temp.value = codeEditorArea.value;
+      temp.style.position = 'fixed';
+      temp.style.left = '-9999px';
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      showToast('Code copied to clipboard');
+    });
+
+    // Export complete HTML document
+    document.getElementById('btnExport').addEventListener('click', () => {
+      let bundle = '';
+      if (state.activeTrack === 'html') {
+        bundle = state.editorValues.html;
+      } else {
+        bundle = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exported from Code Academy</title>
+  <style>
+${state.editorValues.css}
+  </style>
+</head>
+<body>
+${state.editorValues.html}
+
+  <script>
+${state.editorValues.js}
+  <\/script>
+</body>
+</html>`;
+      }
+
+      const blob = new Blob([bundle], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `code-academy-${state.activeTrack}.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Project exported!');
+    });
+
+    // Track tab clicks in top navbar
+    document.querySelectorAll('.track-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        setTrack(tab.dataset.track);
+      });
+    });
+
+    // -------------------------------------------------------------
+    // CHALLENGES SYSTEM CONTROLLER
+    // -------------------------------------------------------------
+    const btnOpenChallenges = document.getElementById('btnOpenChallenges');
+    const btnCloseChallengeModal = document.getElementById('btnCloseChallengeModal');
+
+    function renderChallengesList(filter = 'all') {
+      challengesList.innerHTML = '';
+      const list = filter === 'all' ? CHALLENGES : CHALLENGES.filter(c => c.track === filter);
+
+      list.forEach(c => {
+        const item = document.createElement('div');
+        item.className = 'pt-3 first:pt-0';
+        item.innerHTML = `
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="flex items-center space-x-2">
+                <span class="text-xs font-bold text-white">${c.title}</span>
+                <span class="text-[9px] uppercase font-bold px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">${c.level}</span>
+              </div>
+              <p class="text-xs text-slate-400 mt-1">${c.desc}</p>
+            </div>
+            <div class="flex items-center space-x-1.5 shrink-0 ml-3">
+              <button class="btn-load-chall text-xs font-semibold px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-500 text-white transition">Start</button>
+              <button class="btn-sol-chall text-xs font-semibold px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition">Solution</button>
+            </div>
+          </div>
+        `;
+
+        item.querySelector('.btn-load-chall').addEventListener('click', () => {
+          loadChallenge(c, false);
+          challengeModal.classList.add('hidden');
+        });
+
+        item.querySelector('.btn-sol-chall').addEventListener('click', () => {
+          loadChallenge(c, true);
+          challengeModal.classList.add('hidden');
+        });
+
+        challengesList.appendChild(item);
+      });
     }
 
+    function loadChallenge(chall, loadSolution) {
+      setTrack(chall.track);
+
+      if (chall.track === 'html') {
+        state.editorValues.html = loadSolution ? chall.solutionHtml : chall.starterHtml;
+      } else if (chall.track === 'css') {
+        state.editorValues.html = chall.starterHtml || '';
+        state.editorValues.css = loadSolution ? chall.solutionCss : chall.starterCss;
+      } else if (chall.track === 'js') {
+        state.editorValues.html = chall.starterHtml || '';
+        state.editorValues.js = loadSolution ? chall.solutionJs : chall.starterJs;
+      }
+
+      loadActiveFileIntoEditor();
+      renderLiveSandbox();
+      showToast(loadSolution ? `Loaded solution for ${chall.title}` : `Started ${chall.title}`);
+    }
+
+    btnOpenChallenges.addEventListener('click', () => {
+      renderChallengesList('all');
+      challengeModal.classList.remove('hidden');
+    });
+    btnCloseChallengeModal.addEventListener('click', () => {
+      challengeModal.classList.add('hidden');
+    });
+
+    document.querySelectorAll('.chall-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.chall-filter').forEach(b => {
+          b.classList.remove('bg-blue-600', 'text-white');
+          b.classList.add('bg-slate-800', 'text-slate-300');
+        });
+        btn.classList.remove('bg-slate-800', 'text-slate-300');
+        btn.classList.add('bg-blue-600', 'text-white');
+        renderChallengesList(btn.dataset.challtrack);
+      });
+    });
+
+    // -------------------------------------------------------------
+    // HANDBOOK & CHEATSHEET CONTROLLER
+    // -------------------------------------------------------------
+    const btnOpenDrawer = document.getElementById('btnOpenDrawer');
+    const btnCloseDrawer = document.getElementById('btnCloseDrawer');
+
+    function renderHandbookItems(query = '') {
+      handbookContentList.innerHTML = '';
+      const q = query.toLowerCase();
+
+      // Aggregate all snippets across HTML, CSS, JS
+      const allEntries = [
+        ...SNIPPET_DATA.html.snippets.map(s => ({ ...s, track: 'HTML5' })),
+        ...SNIPPET_DATA.css.snippets.map(s => ({ ...s, track: 'CSS3' })),
+        ...SNIPPET_DATA.js.snippets.map(s => ({ ...s, track: 'JavaScript' }))
+      ];
+
+      const filtered = allEntries.filter(e =>
+        e.name.toLowerCase().includes(q) ||
+        e.desc.toLowerCase().includes(q) ||
+        e.cat.toLowerCase().includes(q)
+      );
+
+      filtered.forEach(entry => {
+        const item = document.createElement('div');
+        item.className = 'bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5 text-xs';
+        item.innerHTML = `
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-bold text-white font-mono">${escapeHtml(entry.tag || entry.name)}</span>
+            <span class="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-slate-700 text-slate-300">${entry.track}</span>
+          </div>
+          <p class="text-slate-300 text-[11px] mb-2 leading-tight">${entry.desc}</p>
+          <button class="insert-handbook-btn text-[11px] font-semibold text-blue-400 hover:text-blue-300 flex items-center space-x-1">
+            <span>Insert Code &rarr;</span>
+          </button>
+        `;
+
+        item.querySelector('.insert-handbook-btn').addEventListener('click', () => {
+          insertSnippetText(entry.code);
+          referenceDrawer.classList.add('hidden');
+          showToast(`Inserted ${entry.name}`);
+        });
+
+        handbookContentList.appendChild(item);
+      });
+    }
+
+    btnOpenDrawer.addEventListener('click', () => {
+      renderHandbookItems();
+      referenceDrawer.classList.remove('hidden');
+    });
+    btnCloseDrawer.addEventListener('click', () => {
+      referenceDrawer.classList.add('hidden');
+    });
+    handbookSearchInput.addEventListener('input', (e) => {
+      renderHandbookItems(e.target.value);
+    });
+
+    // Helper functions
     function escapeHtml(str) {
-      return str
+      if (!str) return '';
+      return String(str)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;');
     }
 
-    function showToast(message) {
-      toastMsg.textContent = message;
-      toast.classList.add('show');
+    function formatMarkup(str) {
+      let formatted = '';
+      let indent = 0;
+      const tab = '  ';
+      const tokens = str.replace(/>\s*</g, '><').split(/(?=<)|(?<=>)/);
+
+      tokens.forEach(token => {
+        if (!token.trim()) return;
+        if (token.startsWith('</')) {
+          indent = Math.max(0, indent - 1);
+          formatted += tab.repeat(indent) + token.trim() + '\n';
+        } else if (token.startsWith('<') && !token.endsWith('/>') && !token.startsWith('<!')) {
+          formatted += tab.repeat(indent) + token.trim() + '\n';
+          indent++;
+        } else {
+          formatted += tab.repeat(indent) + token.trim() + '\n';
+        }
+      });
+      return formatted.trim();
+    }
+
+    function showToast(msg) {
+      toastNotificationMsg.textContent = msg;
+      toastNotification.classList.add('show');
       setTimeout(() => {
-        toast.classList.remove('show');
+        toastNotification.classList.remove('show');
       }, 1800);
     }
 
-    // Category pill filtering
-    document.querySelectorAll('.cat-pill').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.cat-pill').forEach(b => {
-          b.classList.remove('bg-blue-600', 'text-white');
-          b.classList.add('bg-slate-800', 'text-slate-300');
-        });
-        btn.classList.remove('bg-slate-800', 'text-slate-300');
-        btn.classList.add('bg-blue-600', 'text-white');
-        renderSnippetChips(btn.dataset.cat);
-      });
-    });
-
-    // Template selector change
-    templateSelect.addEventListener('change', (e) => {
-      const key = e.target.value;
-      if (STARTER_TEMPLATES[key]) {
-        editor.value = STARTER_TEMPLATES[key];
-        historyStack = [];
-        historyIndex = -1;
-        recordHistory();
-        handleEditorInput(false);
-        updatePreview();
-        showToast(`Loaded ${key} template`);
-      }
-    });
-
-    // Undo / Redo
-    document.getElementById('btnUndo').addEventListener('click', undo);
-    document.getElementById('btnRedo').addEventListener('click', redo);
-
-    // Clear and Reset
-    document.getElementById('btnClear').addEventListener('click', () => {
-      editor.value = '';
-      editor.focus();
-      handleEditorInput(true);
-      updatePreview();
-      showToast('Cleared editor');
-    });
-
-    document.getElementById('btnReset').addEventListener('click', () => {
-      const currentTpl = templateSelect.value;
-      editor.value = STARTER_TEMPLATES[currentTpl] || STARTER_TEMPLATES.profile;
-      editor.focus();
-      handleEditorInput(true);
-      updatePreview();
-      showToast('Reset template');
-    });
-
-    // Prettify button
-    document.getElementById('btnFormat').addEventListener('click', () => {
-      try {
-        editor.value = formatHTML(editor.value);
-        handleEditorInput(true);
-        showToast('Code formatted');
-      } catch (err) {
-        showToast('Format error');
-      }
-    });
-
-    // Copy to clipboard with fallback
-    document.getElementById('btnCopy').addEventListener('click', () => {
-      const code = editor.value;
-      const tempArea = document.createElement('textarea');
-      tempArea.value = code;
-      tempArea.style.position = 'fixed';
-      tempArea.style.left = '-9999px';
-      document.body.appendChild(tempArea);
-      tempArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempArea);
-      showToast('Copied to clipboard');
-    });
-
-    // Download .html file
-    document.getElementById('btnDownload').addEventListener('click', () => {
-      const blob = new Blob([editor.value], { type: 'text/html;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'index.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      showToast('Downloaded index.html');
-    });
-
-    // Device responsive frames
-    const viewDesktop = document.getElementById('viewDesktop');
-    const viewTablet = document.getElementById('viewTablet');
-    const viewMobile = document.getElementById('viewMobile');
-
-    function setDeviceView(mode) {
-      liveFrame.classList.remove('frame-desktop', 'frame-tablet', 'frame-mobile');
-      [viewDesktop, viewTablet, viewMobile].forEach(btn => {
-        btn.classList.remove('bg-slate-700', 'text-white');
-        btn.classList.add('text-slate-400');
-      });
-
-      if (mode === 'desktop') {
-        liveFrame.classList.add('frame-desktop');
-        viewDesktop.classList.add('bg-slate-700', 'text-white');
-        deviceSizeLabel.textContent = "100% responsive";
-      } else if (mode === 'tablet') {
-        liveFrame.classList.add('frame-tablet');
-        viewTablet.classList.add('bg-slate-700', 'text-white');
-        deviceSizeLabel.textContent = "Tablet (768px)";
-      } else if (mode === 'mobile') {
-        liveFrame.classList.add('frame-mobile');
-        viewMobile.classList.add('bg-slate-700', 'text-white');
-        deviceSizeLabel.textContent = "Mobile (375px)";
-      }
-    }
-
-    viewDesktop.addEventListener('click', () => setDeviceView('desktop'));
-    viewTablet.addEventListener('click', () => setDeviceView('tablet'));
-    viewMobile.addEventListener('click', () => setDeviceView('mobile'));
-
-    // DOM Tree vs Live Browser Toggle
-    const tabPreview = document.getElementById('tabPreview');
-    const tabDom = document.getElementById('tabDom');
-
-    tabPreview.addEventListener('click', () => {
-      tabPreview.classList.add('bg-blue-600', 'text-white');
-      tabPreview.classList.remove('text-slate-400');
-      tabDom.classList.remove('bg-blue-600', 'text-white');
-      tabDom.classList.add('text-slate-400');
-
-      liveFrame.classList.remove('hidden');
-      domTreeWrapper.classList.add('hidden');
-    });
-
-    tabDom.addEventListener('click', () => {
-      tabDom.classList.add('bg-blue-600', 'text-white');
-      tabDom.classList.remove('text-slate-400');
-      tabPreview.classList.remove('bg-blue-600', 'text-white');
-      tabPreview.classList.add('text-slate-400');
-
-      liveFrame.classList.add('hidden');
-      domTreeWrapper.classList.remove('hidden');
-      updateDomTreeInspector(editor.value);
-    });
-
-    // Run / Force Render button
-    document.getElementById('btnRun').addEventListener('click', () => {
-      updatePreview();
-      showToast('Preview re-rendered');
-    });
-
-    // Reference drawer toggles
-    document.getElementById('btnToggleRef').addEventListener('click', () => {
-      refDrawer.classList.toggle('hidden');
-    });
-    document.getElementById('btnCloseRef').addEventListener('click', () => {
-      refDrawer.classList.add('hidden');
-    });
-
-    refSearch.addEventListener('input', (e) => {
-      renderReferenceList(e.target.value);
-    });
-
-    // Initialize application on load
+    // App Initialization
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      renderSnippetChips('all');
-      renderReferenceList('');
-      
-      // Load starter template
-      editor.value = STARTER_TEMPLATES.profile;
-      recordHistory();
-      handleEditorInput(false);
-      updatePreview();
+      setTrack('unified');
     });
   </script>
 </body>
