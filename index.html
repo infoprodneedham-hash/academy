@@ -2032,29 +2032,26 @@ ${state.editorValues.js}
         info.biz.developer@gmail.com
 </span>
 </footer>
-  <!-- ================= START: AFFILIATE / ECOSYSTEM DRAWER ================= -->
+ <!-- ================= START: AFFILIATE / ECOSYSTEM BOTTOM DRAWER ================= -->
 <style>
-  /* Drawer Floating Toggle Tab */
+  /* Floating Toggle Tab at Bottom */
   .aff-toggle-btn {
     position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 0;
+    right: 24px;
     background: #111827;
     color: #f3f4f6;
     border: 1px solid #374151;
-    border-right: none;
-    border-radius: 8px 0 0 8px;
-    padding: 12px 10px;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 10px 18px;
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     cursor: pointer;
-    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.35);
     z-index: 99998;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
     transition: background 0.2s, transform 0.2s;
@@ -2064,12 +2061,19 @@ ${state.editorValues.js}
     background: #1f2937;
     color: #60a5fa;
   }
+  .aff-toggle-arrow {
+    font-size: 10px;
+    transition: transform 0.2s;
+  }
+  .aff-toggle-btn:hover .aff-toggle-arrow {
+    transform: translateY(-2px);
+  }
 
   /* Overlay Backdrop */
   .aff-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.45);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(3px);
     z-index: 99999;
     opacity: 0;
@@ -2081,20 +2085,20 @@ ${state.editorValues.js}
     visibility: visible;
   }
 
-  /* Slide-Out Drawer Panel */
+  /* Slide-Up Bottom Drawer */
   .aff-drawer {
     position: fixed;
-    top: 0;
-    right: 0;
-    width: 320px;
-    max-width: 88vw;
-    height: 100%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 82vh;
     background: #0f172a;
     color: #f8fafc;
-    border-left: 1px solid #1e293b;
-    box-shadow: -8px 0 25px rgba(0, 0, 0, 0.5);
+    border-top: 1px solid #1e293b;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
     z-index: 100000;
-    transform: translateX(100%);
+    transform: translateY(100%);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
@@ -2105,17 +2109,25 @@ ${state.editorValues.js}
     box-sizing: border-box;
   }
   .aff-drawer.is-open {
-    transform: translateX(0);
+    transform: translateY(0);
   }
 
-  /* Drawer Header */
+  /* Drag / Visual Indicator Bar */
+  .aff-handle {
+    width: 38px;
+    height: 4px;
+    background: #334155;
+    border-radius: 999px;
+    margin: 10px auto 2px;
+  }
+
+  /* Header */
   .aff-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 20px;
+    padding: 12px 24px 14px;
     border-bottom: 1px solid #1e293b;
-    background: #131d35;
   }
   .aff-header h3 {
     margin: 0;
@@ -2139,22 +2151,25 @@ ${state.editorValues.js}
     color: #f8fafc;
   }
 
-  /* Card Links List */
+  /* Content Cards (Grid layout on medium/large screens) */
   .aff-list {
-    padding: 16px;
+    padding: 20px 24px;
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
   }
   .aff-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
     background: #1e293b;
     border: 1px solid #334155;
-    border-radius: 8px;
-    padding: 14px;
+    border-radius: 10px;
+    padding: 14px 16px;
     transition: border-color 0.2s, transform 0.15s, background 0.2s;
   }
   .aff-card:hover {
@@ -2188,19 +2203,21 @@ ${state.editorValues.js}
     color: #cbd5e1;
   }
 
-  /* Drawer Footer */
+  /* Footer */
   .aff-footer {
-    padding: 14px;
+    padding: 12px 24px;
     border-top: 1px solid #1e293b;
     font-size: 11px;
     text-align: center;
     color: #64748b;
+    background: #0b1120;
   }
 </style>
 
 <!-- Trigger Button -->
 <button class="aff-toggle-btn" id="affToggleBtn" aria-label="Open Featured Apps">
-  ✦ Featured Tools
+  <span class="aff-toggle-arrow">▲</span>
+  <span>Featured Tools</span>
 </button>
 
 <!-- Backdrop -->
@@ -2208,6 +2225,7 @@ ${state.editorValues.js}
 
 <!-- Drawer Container -->
 <aside class="aff-drawer" id="affDrawer" aria-hidden="true">
+  <div class="aff-handle"></div>
   <div class="aff-header">
     <h3>Recommended Tools</h3>
     <button class="aff-close-btn" id="affCloseBtn" aria-label="Close drawer">✕</button>
@@ -2286,10 +2304,10 @@ ${state.editorValues.js}
       }
     });
 
-    // Expose open trigger if needed after modals or specific events
+    // Global hook for programmatically opening the drawer (e.g., after dismissing a modal)
     window.openAffiliateDrawer = openDrawer;
   })();
 </script>
-<!-- ================= END: AFFILIATE / ECOSYSTEM DRAWER ================= -->
+<!-- ================= END: AFFILIATE / ECOSYSTEM BOTTOM DRAWER ================= -->
 </body>
 </html>
