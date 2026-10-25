@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="https://cdn.counter.dev/script.js" data-id="da4b8fa3-0676-4ec8-a4ee-4f118e988fb1" data-utcoffset="11"></script>
+  <title>CSS3 Stylist - Master Modern Responsive Web Styling | Code Academy</title>
+  <link rel="canonical" href="https://codeacademy.app/learnstyles.html" />
+
+  <meta name="description" content="Master modern CSS3 styling, Flexbox, CSS Grid, Glassmorphism, animations, and responsive design in an interactive live browser sandbox.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            htmlColor: '#f97316',
+            cssColor: '#0ea5e9',
+            jsColor: '#facc15',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Strict viewport constraint: zero body spillover */
+    html, body {
+      height: 100%;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #090d16;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d121f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    .editor-font {
+      font-family: 'JetBrains Mono', monospace;
+      tab-size: 2;
+    }
+
+    .line-number-row {
+      counter-increment: line;
+      height: 1.5rem;
+      line-height: 1.5rem;
+    }
+    .line-number-row::before {
+      content: counter(line);
+      display: block;
+      text-align: right;
+      padding-right: 8px;
+      color: #475569;
+      font-size: 0.72rem;
+    }
+
+    .chip-btn {
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .chip-btn:hover {
+      transform: translateY(-1px);
+    }
+    .chip-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Device viewport simulation frames */
+    .frame-desktop {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+    }
+    .frame-tablet {
+      width: min(768px, 100%);
+      height: 98%;
+      margin: auto;
+      border: 6px solid #1e293b;
+      border-radius: 16px;
+      box-shadow: 0 25px 35px -5px rgba(0,0,0,0.6);
+      transition: all 0.25s ease;
+    }
+    .frame-mobile {
+      width: min(375px, 100%);
+      height: 96%;
+      margin: auto;
+      border: 6px solid #1e293b;
+      border-radius: 24px;
+      box-shadow: 0 25px 35px -5px rgba(0,0,0,0.6);
+      transition: all 0.25s ease;
+    }
+
+    #toastNotification {
+      transform: translateY(150%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #toastNotification.show {
+      transform: translateY(0);
+    }
+
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.02); }
+    }
+    .pulse-badge {
+      animation: subtlePulse 3s infinite ease-in-out;
+    }
+
+    .contact-dev-btn {
+      display: inline-block;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #ffffff;
+      background-color: #000000;
+      border: 1px solid #1e293b;
+      border-radius: 9999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .contact-dev-btn:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .download-btn:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+    .download-btn:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+
+<body class="bg-slate-950 text-slate-100 font-sans flex flex-col h-full w-full select-none">
+
+  <!-- TOP HEADER & BRANDING (Height 52px) -->
+  <header class="h-13 bg-slate-900/95 backdrop-blur border-b border-slate-800/90 px-3 flex items-center justify-between shrink-0 z-40">
+    <div class="flex items-center space-x-3">
+      <div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-sky-600 via-cyan-500 to-teal-400 flex items-center justify-center shadow-lg shadow-sky-500/25 text-white font-black text-sm tracking-tight">
+        #{}
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="font-extrabold text-white text-sm sm:text-base tracking-tight leading-none">Code Academy</span>
+          <span class="text-xs text-sky-400 font-bold hidden md:inline">CSS3 Stylist</span>
+          <span class="pulse-badge text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center">
+            <a href="https://support-lilac-omega.vercel.app/" target="_blank" rel="noopener noreferrer" class="contact-dev-btn">
+              Contact Dev
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SISTER APPS NAVIGATION (CSS3 Stylist Active, links to index.html and learnjs.html) -->
+    <nav class="flex items-center bg-slate-950/90 p-1 rounded-lg border border-slate-800 space-x-1 shadow-inner" aria-label="Curriculum Tracks">
+      <a href="index.html" class="px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-400 hover:text-white hover:bg-slate-800">
+        <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+        <span class="hidden sm:inline">HTML5</span> Architect
+      </a>
+
+      <a href="learnstyles.html" class="px-2.5 py-1 rounded-md text-xs font-bold flex items-center space-x-1.5 transition bg-sky-600 text-white shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-sky-200"></span>
+        <span>CSS3 Stylist</span>
+      </a>
+
+      <a href="learnjs.html" class="px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-400 hover:text-white hover:bg-slate-800">
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+        <span class="hidden sm:inline">JavaScript</span> Interactive
+      </a>
+
+      <a href="file.zip" download="file.zip" class="download-btn ml-1 hidden sm:inline-flex items-center space-x-1">
+        <i data-lucide="folder-archive" class="w-3 h-3 text-slate-400"></i>
+        <span>Download Zip</span>
+      </a>
+    </nav>
+
+    <!-- UTILITY ACTIONS: Challenge, Cheatsheet, Export -->
+    <div class="flex items-center space-x-2">
+      <button id="btnOpenChallenges" class="px-2.5 py-1.5 text-xs font-semibold bg-sky-500/15 text-sky-300 hover:bg-sky-500/25 border border-sky-500/30 rounded-md flex items-center space-x-1 transition shadow-sm">
+        <i data-lucide="trophy" class="w-3.5 h-3.5 text-sky-400"></i>
+        <span class="hidden lg:inline">CSS Challenges</span>
+      </button>
+
+      <button id="btnOpenDrawer" class="px-2.5 py-1.5 text-xs font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-md flex items-center space-x-1 transition">
+        <i data-lucide="book-open" class="w-3.5 h-3.5 text-sky-400"></i>
+        <span class="hidden lg:inline">CSS Handbook</span>
+      </button>
+
+      <button id="btnExport" title="Export as standalone style-demo.html" class="px-2.5 py-1.5 text-xs font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-md flex items-center space-x-1 transition">
+        <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
+        <span class="hidden sm:inline">Export</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE WRAPPER -->
+  <main class="flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden relative">
+
+    <!-- LEFT PANEL: Category Filter, Chips Toolbox & Code Editor -->
+    <section class="w-full md:w-1/2 flex flex-col min-h-0 border-r border-slate-800/90 bg-slate-950 overflow-hidden">
+      
+      <!-- Category Pill Filter -->
+      <div class="bg-slate-900 border-b border-slate-800 px-3 py-1.5 flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-1.5 overflow-x-auto py-0.5" id="categoryTabsContainer"></div>
+        <div class="flex items-center space-x-1 shrink-0 ml-2">
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30 uppercase tracking-wider flex items-center space-x-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+            <span>CSS3 Mode</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Quick Insertion Toolbox (CSS Rules Chips Bar) -->
+      <div class="bg-slate-950 border-b border-slate-800/80 px-2.5 py-1.5 overflow-x-auto shrink-0 flex items-center">
+        <div class="text-[10px] uppercase font-bold text-slate-500 px-1 flex items-center space-x-1 shrink-0">
+          <i data-lucide="zap" class="w-3 h-3 text-sky-400"></i>
+          <span>Insert CSS:</span>
+        </div>
+        <div id="snippetChipsRow" class="flex items-center space-x-1.5 pl-1.5"></div>
+      </div>
+
+      <!-- Code Editor File & View Switcher Bar -->
+      <div class="h-8 bg-slate-900/80 border-b border-slate-800 px-2.5 flex items-center justify-between shrink-0 text-xs">
+        <div class="flex items-center space-x-1">
+          <button id="tabCssFile" class="px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 bg-slate-800 text-sky-400 border border-slate-700">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+            <span>style.css</span>
+          </button>
+          <button id="tabHtmlStructure" class="px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 text-slate-400 hover:text-slate-200">
+            <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+            <span>preview.html (Markup)</span>
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-1">
+          <button id="btnFormatCode" title="Tidy / Format CSS" class="p-1 hover:text-white rounded hover:bg-slate-800 text-slate-400 flex items-center space-x-1">
+            <i data-lucide="wand-2" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span class="text-[11px] hidden sm:inline">Format</span>
+          </button>
+          <button id="btnCopyCode" title="Copy Current Code" class="p-1 hover:text-white rounded hover:bg-slate-800 text-slate-400 flex items-center space-x-1">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+          </button>
+          <div class="h-3 w-[1px] bg-slate-800 mx-1"></div>
+          <button id="btnUndo" title="Undo (Ctrl+Z)" class="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800">
+            <i data-lucide="undo" class="w-3.5 h-3.5"></i>
+          </button>
+          <button id="btnRedo" title="Redo (Ctrl+Y)" class="p-1 text-slate-400 hover:text-white rounded hover:bg-slate-800">
+            <i data-lucide="redo" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Editor Area: Line Numbers + Textarea -->
+      <div class="flex-1 min-h-0 flex bg-slate-950 relative overflow-hidden font-mono text-[13px]">
+        <div id="lineNumbersColumn" class="w-10 py-2.5 bg-slate-950 text-slate-600 border-r border-slate-800 select-none overflow-hidden shrink-0 flex flex-col" style="counter-reset: line;">
+          <div class="line-number-row"></div>
+        </div>
+
+        <textarea id="codeEditorArea" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
+          class="flex-1 h-full min-h-0 p-2.5 bg-transparent text-slate-200 resize-none outline-none leading-6 editor-font whitespace-pre overflow-auto focus:ring-0 border-0 selection:bg-sky-500/30"
+          placeholder="Write modern CSS3 properties here or click any snippet above..."></textarea>
+      </div>
+
+      <!-- Editor Status Bar -->
+      <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
+        <div class="flex items-center space-x-2 truncate">
+          <span class="flex items-center space-x-1 text-emerald-400 font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>Live Style Engine Active</span>
+          </span>
+          <span class="text-slate-600">|</span>
+          <span id="charCountLabel" class="text-slate-400">0 chars</span>
+        </div>
+
+        <div class="flex items-center space-x-2 text-[10px] text-slate-500 font-mono">
+          <span>Tab = 2 spaces</span>
+          <button id="btnResetCurrent" class="text-slate-400 hover:text-sky-400 ml-1">Reset Defaults</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: Live Sandbox Preview + Virtual Diagnostics Console -->
+    <section class="w-full md:w-1/2 flex flex-col min-h-0 bg-slate-950 overflow-hidden relative">
+
+      <!-- Preview Header Controls Bar -->
+      <div class="h-10 bg-slate-900 border-b border-slate-800 px-3 flex items-center justify-between shrink-0">
+        <div class="flex items-center space-x-2">
+          <div class="flex space-x-0.5 items-center bg-slate-950 p-0.5 rounded-md border border-slate-800">
+            <button id="viewDesktop" title="Full Desktop View" class="p-1 rounded bg-slate-800 text-white hover:text-white">
+              <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
+            </button>
+            <button id="viewTablet" title="Tablet Simulator (768px)" class="p-1 rounded text-slate-400 hover:text-white">
+              <i data-lucide="tablet" class="w-3.5 h-3.5"></i>
+            </button>
+            <button id="viewMobile" title="Mobile Simulator (375px)" class="p-1 rounded text-slate-400 hover:text-white">
+              <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <button id="btnToggleCanvasTheme" title="Toggle Preview Background Theme" class="p-1 text-slate-400 hover:text-white bg-slate-800 rounded border border-slate-700">
+            <i data-lucide="sun-moon" class="w-3.5 h-3.5 text-amber-300"></i>
+          </button>
+          <span class="text-xs text-slate-400 font-medium">CSS3 Stage</span>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <button id="btnToggleConsole" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded text-xs font-mono flex items-center space-x-1.5 transition">
+            <i data-lucide="terminal" class="w-3 h-3 text-sky-400"></i>
+            <span>CSS Inspector</span>
+            <span id="consoleBadgeCount" class="w-4 h-4 rounded-full bg-slate-700 text-[10px] flex items-center justify-center font-bold text-slate-300">0</span>
+          </button>
+
+          <button id="btnRunRefresh" class="px-3 py-1 bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-500 hover:to-cyan-500 text-white rounded-md text-xs font-bold flex items-center space-x-1 shadow transition">
+            <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
+            <span>Render</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Preview Stage Container -->
+      <div id="previewCanvasArea" class="flex-1 min-h-0 bg-slate-900/60 p-2 sm:p-3 flex items-center justify-center overflow-hidden relative">
+        <iframe id="liveRenderFrame" sandbox="allow-scripts allow-modals allow-same-origin" class="frame-desktop bg-slate-950 shadow-xl transition-all" title="CSS3 Live Output"></iframe>
+      </div>
+
+      <!-- COLLAPSIBLE CSS DIAGNOSTICS & STYLESHEET CONSOLE -->
+      <div id="consoleDrawer" class="h-32 bg-slate-900 border-t border-slate-800 flex flex-col shrink-0 transition-all">
+        <div class="h-7 bg-slate-950 px-3 flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 select-none">
+          <div class="flex items-center space-x-2">
+            <i data-lucide="terminal" class="w-3.5 h-3.5 text-sky-400"></i>
+            <span class="font-mono font-semibold text-slate-300 text-[11px]">CSS3 Engine Diagnostics & Selector State</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button id="btnClearConsole" class="hover:text-red-400 font-mono text-[10px] px-1 py-0.5 rounded hover:bg-slate-800">Clear</button>
+            <button id="btnMinimizeConsole" class="hover:text-white p-0.5 rounded">
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <div id="consoleLogsList" class="flex-1 min-h-0 overflow-y-auto p-2 font-mono text-xs space-y-1 bg-slate-950/80">
+          <div class="text-slate-500 text-[11px] italic">Stylesheet engine active. Layout events and inline errors will report here.</div>
+        </div>
+      </div>
+
+      <!-- Preview Footer Status Bar -->
+      <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0 z-10">
+        <div class="flex items-center space-x-2">
+          <span class="w-2 h-2 rounded-full bg-sky-400 inline-block animate-pulse"></span>
+          <span id="previewStatusLabel">Ready</span>
+        </div>
+        <div class="flex items-center space-x-2 font-mono text-[10px] text-slate-500">
+          <span id="viewportDimensionsLabel">Responsive Desktop (100%)</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CHALLENGES MODAL DIALOG (Focused on CSS3) -->
+  <div id="challengeModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+      <!-- Header -->
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-sky-500/15 border border-sky-500/30 text-sky-400 flex items-center justify-center shrink-0">
+            <i data-lucide="trophy" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-white text-base tracking-tight leading-snug">CSS3 Stylist Challenges</h3>
+            <p class="text-xs text-slate-400 leading-normal">Interactive Flexbox centering, auto-fit grids, glassmorphism, and keyframe animations.</p>
+          </div>
+        </div>
+        <button id="btnCloseChallengeModal" class="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition" aria-label="Close Challenges Modal">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Filter Tabs Bar -->
+      <div class="px-4 py-2.5 border-b border-slate-800/80 flex items-center space-x-2 bg-slate-900/80 overflow-x-auto text-xs shrink-0">
+        <button data-level="all" class="chall-filter active px-3 py-1.5 rounded-lg bg-sky-600 text-white font-semibold transition shrink-0 shadow-sm">All Challenges</button>
+        <button data-level="Introductory" class="chall-filter px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 font-medium transition shrink-0">Introductory</button>
+        <button data-level="Intermediate" class="chall-filter px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 font-medium transition shrink-0">Intermediate</button>
+      </div>
+
+      <!-- Challenge Cards List -->
+      <div id="challengesList" class="p-4 overflow-y-auto space-y-3.5 flex-1 bg-slate-950/40"></div>
+    </div>
+  </div>
+
+  <!-- REFERENCE CHEATSHEET & CSS HANDBOOK DRAWER -->
+  <aside id="referenceDrawer" class="hidden fixed inset-y-0 right-0 w-full sm:w-96 bg-slate-900 border-l border-slate-800 shadow-2xl z-50 flex flex-col">
+    <div class="p-3 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="book-marked" class="w-4 h-4 text-sky-400"></i>
+        <h2 class="text-xs font-bold text-white uppercase tracking-wider">CSS3 Modern Handbook</h2>
+      </div>
+      <button id="btnCloseDrawer" class="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <div class="p-2 border-b border-slate-800 bg-slate-900">
+      <input type="text" id="handbookSearchInput" placeholder="Search Flexbox, Grid, keyframes, shadows..."
+        class="w-full px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-md text-xs text-white placeholder-slate-400 focus:outline-none focus:border-sky-500">
+    </div>
+
+    <div id="handbookContentList" class="flex-1 overflow-y-auto p-3 space-y-2.5"></div>
+  </aside>
+
+  <!-- POPUP NOTIFICATION TOAST -->
+  <div id="toastNotification" class="fixed bottom-3 right-4 bg-gradient-to-r from-sky-600 to-cyan-600 text-white text-xs px-3.5 py-2 rounded-lg shadow-2xl flex items-center space-x-2 z-50 pointer-events-none">
+    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-300"></i>
+    <span id="toastNotificationMsg">CSS Snippet inserted</span>
+  </div>
+
+  <!-- MASTER CSS3 DATASETS SCRIPT -->
+  <script>
+    const CSS3_DATA = {
+      categories: [
+        { id: 'all', label: 'All CSS' },
+        { id: 'flexbox', label: 'Flexbox' },
+        { id: 'grid', label: 'CSS Grid' },
+        { id: 'glass', label: 'Glassmorphism' },
+        { id: 'effects', label: 'Gradients & Glow' },
+        { id: 'animation', label: 'Animations' },
+        { id: 'cards', label: 'Modern UI Cards' }
+      ],
+      snippets: [
+        { name: 'Flex Center', cat: 'flexbox', desc: 'Perfect horizontal & vertical centering', code: 'display: flex;\njustify-content: center;\nalign-items: center;\n' },
+        { name: 'Flex Column Gap', cat: 'flexbox', desc: 'Stack items vertically with clean spacing', code: 'display: flex;\nflex-direction: column;\ngap: 1rem;\n' },
+        { name: 'Flex Space-Between', cat: 'flexbox', desc: 'Spread items evenly across the row axis', code: 'display: flex;\njustify-content: space-between;\nalign-items: center;\n' },
+        { name: 'Auto-Fit Grid', cat: 'grid', desc: 'Fluid auto-wrapping grid with zero media queries', code: 'display: grid;\ngrid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\ngap: 1.5rem;\n' },
+        { name: '3-Column Grid', cat: 'grid', desc: 'Balanced fixed three-column layout', code: 'display: grid;\ngrid-template-columns: 1fr 1fr 1fr;\ngap: 1rem;\n' },
+        { name: 'Glassmorphism Card', cat: 'glass', desc: 'Frosted translucent backdrop blur and hairline border', code: 'background: rgba(255, 255, 255, 0.08);\nbackdrop-filter: blur(12px);\n-webkit-backdrop-filter: blur(12px);\nborder: 1px solid rgba(255, 255, 255, 0.18);\nborder-radius: 16px;\nbox-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);\n' },
+        { name: 'Cyberpunk Neon Glow', cat: 'effects', desc: 'Vibrant neon cyan glow and border effect', code: 'border: 1px solid #38bdf8;\nbox-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(56, 189, 248, 0.3);\n' },
+        { name: 'Vibrant Gradient', cat: 'effects', desc: 'Modern high-contrast angle gradient fill', code: 'background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);\ncolor: #ffffff;\n' },
+        { name: 'Smooth Hover Lift', cat: 'cards', desc: 'Card float lift transition on cursor hover', code: 'transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;\ncursor: pointer;\n/* Use on hover: transform: translateY(-4px); */\n' },
+        { name: 'Spin Animation', cat: 'animation', desc: 'Infinite 360-degree smooth rotational keyframe', code: '@keyframes spin {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\nanimation: spin 2s linear infinite;\n' },
+        { name: 'Breathing Pulse', cat: 'animation', desc: 'Gentle organic scale pulse animation loop', code: '@keyframes pulse {\n  0%, 100% { transform: scale(1); opacity: 1; }\n  50% { transform: scale(1.05); opacity: 0.85; }\n}\nanimation: pulse 2.5s ease-in-out infinite;\n' },
+        { name: 'Neumorphic Soft Box', cat: 'cards', desc: 'Subtle embossed inner & outer soft shadows', code: 'border-radius: 16px;\nbackground: #1e293b;\nbox-shadow: 8px 8px 16px #131a26, -8px -8px 16px #293850;\n' }
+      ]
+    };
+
+    const CSS3_CHALLENGES = [
+      {
+        id: 'css-center',
+        level: 'Introductory',
+        title: 'CSS3: Center a Card with Flexbox',
+        desc: 'Apply Flexbox rules to the container to center the .box element horizontally and vertically inside the viewport.',
+        starterCss: `/* Center the .box element inside body using Flexbox */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* 1. Add display: flex here */
+  
+  /* 2. Add horizontal centering property */
+  
+  /* 3. Add vertical alignment property */
+  
+}
+
+.box {
+  width: 240px;
+  padding: 28px;
+  background: #0284c7;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(2, 132, 199, 0.35);
+}`,
+        starterHtml: `<div class="box">
+  <h2 style="margin: 0 0 8px 0; font-size: 1.25rem;">Flexbox Center</h2>
+  <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">I am centered in the viewport!</p>
+</div>`,
+        solutionCss: `body {
+  margin: 0;
+  min-height: 100vh;
+  background: #0f172a;
+  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: 240px;
+  padding: 28px;
+  background: #0284c7;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(2, 132, 199, 0.45);
+}`
+      },
+      {
+        id: 'css-grid',
+        level: 'Introductory',
+        title: 'CSS3: Responsive Auto-Fit Product Grid',
+        desc: 'Build an auto-fitting responsive CSS Grid layout where product cards wrap fluidly without requiring media queries.',
+        starterCss: `body {
+  margin: 0;
+  padding: 30px 20px;
+  background: #090d16;
+  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.grid-container {
+  /* 1. Turn on CSS Grid */
+  
+  /* 2. Use repeat() with auto-fit and minmax(200px, 1fr) */
+  
+  /* 3. Set a gap of 1.25rem */
+  
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}`,
+        starterHtml: `<div class="grid-container">
+  <div class="product-card">
+    <div style="font-size: 2rem;">⚡</div>
+    <h3 style="margin: 8px 0;">Ultra Fast</h3>
+    <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Instantaneous sub-millisecond compile speeds.</p>
+  </div>
+  <div class="product-card">
+    <div style="font-size: 2rem;">🛡️</div>
+    <h3 style="margin: 8px 0;">Accessible</h3>
+    <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">WCAG AA compliant color contrast tokens.</p>
+  </div>
+  <div class="product-card">
+    <div style="font-size: 2rem;">🎨</div>
+    <h3 style="margin: 8px 0;">Stylist Pro</h3>
+    <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Pure CSS variables, Flexbox & Grid architecture.</p>
+  </div>
+</div>`,
+        solutionCss: `body {
+  margin: 0;
+  padding: 30px 20px;
+  background: #090d16;
+  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: #38bdf8;
+}`
+      },
+      {
+        id: 'css-glass',
+        level: 'Intermediate',
+        title: 'CSS3: Glowing Glassmorphism Action Button',
+        desc: 'Create an engaging frosted glass button using backdrop-filter blur, translucent borders, and a vibrant neon glow hover state.',
+        starterCss: `body {
+  min-height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at center, #1e1b4b 0%, #090d16 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.glass-btn {
+  /* 1. Add translucent white background: rgba(255, 255, 255, 0.1) */
+  
+  /* 2. Add backdrop-filter: blur(12px) */
+  
+  /* 3. Add thin hairline border: 1px solid rgba(255, 255, 255, 0.25) */
+  
+  /* 4. Rounded corners & padding */
+  color: #ffffff;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+.glass-btn:hover {
+  /* Add cyan neon glow: box-shadow & border color change */
+}`,
+        starterHtml: `<button class="glass-btn">Launch Stylist 🚀</button>`,
+        solutionCss: `body {
+  min-height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at center, #1e1b4b 0%, #090d16 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.glass-btn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  color: #ffffff;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+}`
+      },
+      {
+        id: 'css-keyframes',
+        level: 'Intermediate',
+        title: 'CSS3: Smooth Infinite Pulse & Shimmer Card',
+        desc: 'Define custom @keyframes animation rules to create an infinite breathing pulse effect on an interactive badge.',
+        starterCss: `body {
+  min-height: 100vh;
+  margin: 0;
+  background: #0b1120;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  max-width: 320px;
+}
+
+/* 1. Define @keyframes pulse here */
+
+.pulse-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #0284c7;
+  color: white;
+  font-weight: bold;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  /* 2. Attach the animation: pulse */
+}`,
+        starterHtml: `<div class="card">
+  <div class="pulse-badge">LIVE STATUS</div>
+  <h2 style="color: white; margin: 16px 0 8px;">Quantum Server</h2>
+  <p style="color: #94a3b8; margin: 0; font-size: 0.9rem;">Real-time continuous sync across all nodes.</p>
+</div>`,
+        solutionCss: `body {
+  min-height: 100vh;
+  margin: 0;
+  background: #0b1120;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  max-width: 320px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.7);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 10px rgba(2, 132, 199, 0);
+  }
+}
+
+.pulse-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #0284c7;
+  color: white;
+  font-weight: bold;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  animation: pulse 2s infinite ease-in-out;
+}`
+      }
+    ];
+
+    const DEFAULT_CSS_STARTER = `/* ========================================================
+   CSS3 Stylist Playground - Live Stylesheet
+   ======================================================== */
+
+body {
+  margin: 0;
+  padding: 30px 20px;
+  min-height: 100vh;
+  background: radial-gradient(circle at top right, #1e1b4b, #090d16 65%);
+  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.stylist-showcase {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+.track-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(14, 165, 233, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(14, 165, 233, 0.35);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 1.85rem;
+  font-weight: 800;
+  margin: 0 0 10px;
+  background: linear-gradient(135deg, #ffffff 0%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p.description {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.action-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: #0ea5e9;
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.45);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(14, 165, 233, 0.7);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+`;
+
+    const DEFAULT_HTML_PREVIEW_STRUCTURE = `<div class="stylist-showcase">
+  <div class="track-tag">
+    <span>✨</span> CSS3 Visual Stylist
+  </div>
+  <h1>Style with Superpowers</h1>
+  <p class="description">
+    Harness modern CSS3: Flexbox alignment, Auto-fit Grid tracks, frosted Glassmorphism, and responsive keyframes in real time.
+  </p>
+
+  <div class="action-row">
+    <button class="btn-primary">Explore Rules</button>
+    <button class="btn-secondary">Insert Chip</button>
+  </div>
+</div>`;
+  </script>
+
+  <!-- APPLICATION CONTROLLER SCRIPT -->
+  <script>
+    const appState = {
+      activeCategory: 'all',
+      activeTab: 'css', // 'css' or 'html'
+      cssValue: DEFAULT_CSS_STARTER,
+      htmlValue: DEFAULT_HTML_PREVIEW_STRUCTURE,
+      historyStack: [],
+      historyIndex: -1,
+      maxHistory: 40,
+      isLightCanvas: false,
+      isConsoleOpen: false,
+      logCount: 0
+    };
+
+    const codeEditorArea = document.getElementById('codeEditorArea');
+    const lineNumbersColumn = document.getElementById('lineNumbersColumn');
+    const liveRenderFrame = document.getElementById('liveRenderFrame');
+    const categoryTabsContainer = document.getElementById('categoryTabsContainer');
+    const snippetChipsRow = document.getElementById('snippetChipsRow');
+    const charCountLabel = document.getElementById('charCountLabel');
+    const previewStatusLabel = document.getElementById('previewStatusLabel');
+    const viewportDimensionsLabel = document.getElementById('viewportDimensionsLabel');
+    const consoleDrawer = document.getElementById('consoleDrawer');
+    const consoleLogsList = document.getElementById('consoleLogsList');
+    const consoleBadgeCount = document.getElementById('consoleBadgeCount');
+    const toastNotification = document.getElementById('toastNotification');
+    const toastNotificationMsg = document.getElementById('toastNotificationMsg');
+    const challengeModal = document.getElementById('challengeModal');
+    const challengesList = document.getElementById('challengesList');
+    const referenceDrawer = document.getElementById('referenceDrawer');
+    const handbookContentList = document.getElementById('handbookContentList');
+    const handbookSearchInput = document.getElementById('handbookSearchInput');
+    const tabCssFile = document.getElementById('tabCssFile');
+    const tabHtmlStructure = document.getElementById('tabHtmlStructure');
+
+    let debounceTimer = null;
+
+    function initEditor() {
+      codeEditorArea.value = appState.cssValue;
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
+      renderCategoryFilters();
+      renderSnippetChips('all');
+      renderLiveSandbox();
+    }
+
+    function switchEditorTab(tab) {
+      if (tab === appState.activeTab) return;
+      if (appState.activeTab === 'css') {
+        appState.cssValue = codeEditorArea.value;
+      } else {
+        appState.htmlValue = codeEditorArea.value;
+      }
+
+      appState.activeTab = tab;
+
+      if (tab === 'css') {
+        tabCssFile.className = 'px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 bg-slate-800 text-sky-400 border border-slate-700';
+        tabHtmlStructure.className = 'px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 text-slate-400 hover:text-slate-200';
+        codeEditorArea.value = appState.cssValue;
+        codeEditorArea.placeholder = 'Write modern CSS3 properties here...';
+      } else {
+        tabHtmlStructure.className = 'px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 bg-slate-800 text-orange-400 border border-slate-700';
+        tabCssFile.className = 'px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 text-slate-400 hover:text-slate-200';
+        codeEditorArea.value = appState.htmlValue;
+        codeEditorArea.placeholder = 'Edit preview HTML structure here...';
+      }
+
+      updateLineNumbers();
+      updateCharCount();
+      showToast(`Switched to ${tab === 'css' ? 'style.css' : 'preview.html'}`);
+    }
+
+    tabCssFile.addEventListener('click', () => switchEditorTab('css'));
+    tabHtmlStructure.addEventListener('click', () => switchEditorTab('html'));
+
+    function renderCategoryFilters() {
+      categoryTabsContainer.innerHTML = '';
+      CSS3_DATA.categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = `px-2 py-0.5 rounded text-[11px] font-semibold shrink-0 transition ${
+          cat.id === appState.activeCategory ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+        }`;
+        btn.textContent = cat.label;
+        btn.addEventListener('click', () => {
+          appState.activeCategory = cat.id;
+          categoryTabsContainer.querySelectorAll('button').forEach(b => {
+            b.classList.remove('bg-sky-600', 'text-white');
+            b.classList.add('bg-slate-800', 'text-slate-300');
+          });
+          btn.classList.remove('bg-slate-800', 'text-slate-300');
+          btn.classList.add('bg-sky-600', 'text-white');
+          renderSnippetChips(cat.id);
+        });
+        categoryTabsContainer.appendChild(btn);
+      });
+    }
+
+    function renderSnippetChips(catId = 'all') {
+      snippetChipsRow.innerHTML = '';
+      const list = catId === 'all'
+        ? CSS3_DATA.snippets
+        : CSS3_DATA.snippets.filter(s => s.cat === catId);
+
+      list.forEach(item => {
+        const chip = document.createElement('button');
+        chip.className = 'chip-btn px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 active:bg-sky-600 text-slate-200 hover:text-white font-mono text-[11px] font-semibold border border-slate-700/80 whitespace-nowrap flex items-center shrink-0 cursor-pointer shadow-sm';
+        chip.innerHTML = `<span>${escapeHtml(item.name)}</span>`;
+        chip.title = item.desc;
+
+        chip.addEventListener('click', () => {
+          if (appState.activeTab !== 'css') {
+            switchEditorTab('css');
+          }
+          insertSnippetText(item.code);
+          showToast(`Inserted ${item.name}`);
+        });
+
+        snippetChipsRow.appendChild(chip);
+      });
+    }
+
+    function insertSnippetText(snippet) {
+      const start = codeEditorArea.selectionStart;
+      const end = codeEditorArea.selectionEnd;
+      const val = codeEditorArea.value;
+
+      codeEditorArea.value = val.substring(0, start) + snippet + val.substring(end);
+      const newPos = start + snippet.length;
+      codeEditorArea.focus();
+      codeEditorArea.setSelectionRange(newPos, newPos);
+
+      if (appState.activeTab === 'css') {
+        appState.cssValue = codeEditorArea.value;
+      } else {
+        appState.htmlValue = codeEditorArea.value;
+      }
+
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
+      triggerDebouncedRender();
+    }
+
+    function renderLiveSandbox() {
+      if (appState.activeTab === 'css') {
+        appState.cssValue = codeEditorArea.value;
+      } else {
+        appState.htmlValue = codeEditorArea.value;
+      }
+
+      const css = appState.cssValue || '';
+      const html = appState.htmlValue || '';
+
+      const consoleInterceptor = `
+        <script>
+          (function() {
+            function report(type, args) {
+              try {
+                const message = args.map(arg => {
+                  if (typeof arg === 'object' && arg !== null) {
+                    try { return JSON.stringify(arg); } catch(e) { return String(arg); }
+                  }
+                  return String(arg);
+                }).join(' ');
+                window.parent.postMessage({ type: 'CONSOLE_LOG', level: type, text: message }, '*');
+              } catch(err) {}
+            }
+            const _log = console.log;
+            const _warn = console.warn;
+            const _error = console.error;
+            console.log = function(...args) { report('log', args); _log.apply(console, args); };
+            console.warn = function(...args) { report('warn', args); _warn.apply(console, args); };
+            console.error = function(...args) { report('error', args); _error.apply(console, args); };
+            window.onerror = function(msg, url, line) {
+              report('error', ['CSS/Style Error: ' + msg + ' (Line ' + line + ')']);
+              return false;
+            };
+          })();
+        <\/script>
+      `;
+
+      const finalHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  ${consoleInterceptor}
+  <style>
+    ${css}
+  </style>
+</head>
+<body>
+  ${html}
+</body>
+</html>`;
+
+      try {
+        liveRenderFrame.srcdoc = finalHtml;
+        previewStatusLabel.textContent = "Compiled live (" + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'}) + ")";
+      } catch (err) {
+        try {
+          const doc = liveRenderFrame.contentDocument || liveRenderFrame.contentWindow.document;
+          doc.open();
+          doc.write(finalHtml);
+          doc.close();
+        } catch (e2) {
+          previewStatusLabel.textContent = "Render error: " + e2.message;
+        }
+      }
+    }
+
+    function triggerDebouncedRender() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(renderLiveSandbox, 350);
+    }
+
+    function updateLineNumbers() {
+      const count = codeEditorArea.value.split('\n').length;
+      let html = '';
+      for (let i = 1; i <= count; i++) {
+        html += '<div class="line-number-row"></div>';
+      }
+      lineNumbersColumn.innerHTML = html;
+    }
+
+    function updateCharCount() {
+      charCountLabel.textContent = `${codeEditorArea.value.length} chars`;
+    }
+
+    codeEditorArea.addEventListener('scroll', () => {
+      lineNumbersColumn.scrollTop = codeEditorArea.scrollTop;
+    });
+
+    codeEditorArea.addEventListener('input', () => {
+      if (appState.activeTab === 'css') {
+        appState.cssValue = codeEditorArea.value;
+      } else {
+        appState.htmlValue = codeEditorArea.value;
+      }
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
+      triggerDebouncedRender();
+    });
+
+    codeEditorArea.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = codeEditorArea.selectionStart;
+        const end = codeEditorArea.selectionEnd;
+        codeEditorArea.value = codeEditorArea.value.substring(0, start) + "  " + codeEditorArea.value.substring(end);
+        codeEditorArea.selectionStart = codeEditorArea.selectionEnd = start + 2;
+        if (appState.activeTab === 'css') {
+          appState.cssValue = codeEditorArea.value;
+        } else {
+          appState.htmlValue = codeEditorArea.value;
+        }
+        updateLineNumbers();
+        triggerDebouncedRender();
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey) {
+        e.preventDefault();
+        undoEditor();
+      }
+      if (((e.ctrlKey || e.metaKey) && e.key === 'y') || ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'z')) {
+        e.preventDefault();
+        redoEditor();
+      }
+    });
+
+    function recordHistoryState() {
+      const val = codeEditorArea.value;
+      if (appState.historyStack[appState.historyIndex] === val) return;
+      appState.historyStack = appState.historyStack.slice(0, appState.historyIndex + 1);
+      appState.historyStack.push(val);
+      if (appState.historyStack.length > appState.maxHistory) {
+        appState.historyStack.shift();
+      } else {
+        appState.historyIndex++;
+      }
+    }
+
+    function undoEditor() {
+      if (appState.historyIndex > 0) {
+        appState.historyIndex--;
+        codeEditorArea.value = appState.historyStack[appState.historyIndex];
+        if (appState.activeTab === 'css') {
+          appState.cssValue = codeEditorArea.value;
+        } else {
+          appState.htmlValue = codeEditorArea.value;
+        }
+        updateLineNumbers();
+        updateCharCount();
+        triggerDebouncedRender();
+        showToast('Undo');
+      }
+    }
+
+    function redoEditor() {
+      if (appState.historyIndex < appState.historyStack.length - 1) {
+        appState.historyIndex++;
+        codeEditorArea.value = appState.historyStack[appState.historyIndex];
+        if (appState.activeTab === 'css') {
+          appState.cssValue = codeEditorArea.value;
+        } else {
+          appState.htmlValue = codeEditorArea.value;
+        }
+        updateLineNumbers();
+        updateCharCount();
+        triggerDebouncedRender();
+        showToast('Redo');
+      }
+    }
+
+    document.getElementById('btnUndo').addEventListener('click', undoEditor);
+    document.getElementById('btnRedo').addEventListener('click', redoEditor);
+
+    document.getElementById('btnResetCurrent').addEventListener('click', () => {
+      if (appState.activeTab === 'css') {
+        appState.cssValue = DEFAULT_CSS_STARTER;
+        codeEditorArea.value = DEFAULT_CSS_STARTER;
+      } else {
+        appState.htmlValue = DEFAULT_HTML_PREVIEW_STRUCTURE;
+        codeEditorArea.value = DEFAULT_HTML_PREVIEW_STRUCTURE;
+      }
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
+      triggerDebouncedRender();
+      showToast('Boilerplate reset');
+    });
+
+    // Console message capturing
+    window.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'CONSOLE_LOG') {
+        appendConsoleLog(event.data.level, event.data.text);
+      }
+    });
+
+    function appendConsoleLog(level, text) {
+      appState.logCount++;
+      consoleBadgeCount.textContent = appState.logCount;
+
+      const row = document.createElement('div');
+      row.className = 'py-0.5 flex items-start space-x-1.5 text-[11px] leading-relaxed';
+
+      let icon = '›';
+      let textStyle = 'text-slate-300';
+
+      if (level === 'warn') {
+        icon = '⚠️';
+        textStyle = 'text-amber-300 bg-amber-950/20 px-1 rounded';
+      } else if (level === 'error') {
+        icon = '❌';
+        textStyle = 'text-rose-400 bg-rose-950/25 px-1 rounded font-semibold';
+      } else {
+        icon = '›';
+        textStyle = 'text-sky-300';
+      }
+
+      row.innerHTML = `<span class="text-slate-500 font-bold select-none">${icon}</span> <span class="${textStyle} break-all">${escapeHtml(text)}</span>`;
+      consoleLogsList.appendChild(row);
+      consoleLogsList.scrollTop = consoleLogsList.scrollHeight;
+    }
+
+    document.getElementById('btnClearConsole').addEventListener('click', () => {
+      consoleLogsList.innerHTML = '<div class="text-slate-500 text-[11px] italic">Console cleared.</div>';
+      appState.logCount = 0;
+      consoleBadgeCount.textContent = '0';
+    });
+
+    const btnToggleConsole = document.getElementById('btnToggleConsole');
+    const btnMinimizeConsole = document.getElementById('btnMinimizeConsole');
+
+    function toggleConsoleDrawer() {
+      appState.isConsoleOpen = !appState.isConsoleOpen;
+      consoleDrawer.classList.toggle('hidden', !appState.isConsoleOpen);
+    }
+    btnToggleConsole.addEventListener('click', toggleConsoleDrawer);
+    btnMinimizeConsole.addEventListener('click', toggleConsoleDrawer);
+    consoleDrawer.classList.add('hidden');
+
+    // Viewport Simulation Frames
+    const viewDesktop = document.getElementById('viewDesktop');
+    const viewTablet = document.getElementById('viewTablet');
+    const viewMobile = document.getElementById('viewMobile');
+
+    function setViewportFrame(type) {
+      liveRenderFrame.classList.remove('frame-desktop', 'frame-tablet', 'frame-mobile');
+      [viewDesktop, viewTablet, viewMobile].forEach(b => {
+        b.classList.remove('bg-slate-800', 'text-white');
+        b.classList.add('text-slate-400');
+      });
+
+      if (type === 'desktop') {
+        liveRenderFrame.classList.add('frame-desktop');
+        viewDesktop.classList.add('bg-slate-800', 'text-white');
+        viewportDimensionsLabel.textContent = 'Responsive Desktop (100%)';
+      } else if (type === 'tablet') {
+        liveRenderFrame.classList.add('frame-tablet');
+        viewTablet.classList.add('bg-slate-800', 'text-white');
+        viewportDimensionsLabel.textContent = 'Tablet Simulation (768px)';
+      } else {
+        liveRenderFrame.classList.add('frame-mobile');
+        viewMobile.classList.add('bg-slate-800', 'text-white');
+        viewportDimensionsLabel.textContent = 'Mobile Simulation (375px)';
+      }
+    }
+
+    viewDesktop.addEventListener('click', () => setViewportFrame('desktop'));
+    viewTablet.addEventListener('click', () => setViewportFrame('tablet'));
+    viewMobile.addEventListener('click', () => setViewportFrame('mobile'));
+
+    document.getElementById('btnToggleCanvasTheme').addEventListener('click', () => {
+      appState.isLightCanvas = !appState.isLightCanvas;
+      if (appState.isLightCanvas) {
+        liveRenderFrame.classList.remove('bg-slate-950');
+        liveRenderFrame.classList.add('bg-slate-100');
+        showToast('Canvas theme: Light background');
+      } else {
+        liveRenderFrame.classList.remove('bg-slate-100');
+        liveRenderFrame.classList.add('bg-slate-950');
+        showToast('Canvas theme: Dark background');
+      }
+    });
+
+    document.getElementById('btnRunRefresh').addEventListener('click', () => {
+      renderLiveSandbox();
+      showToast('Re-rendered CSS3 sandbox!');
+    });
+
+    document.getElementById('btnFormatCode').addEventListener('click', () => {
+      const code = codeEditorArea.value;
+      codeEditorArea.value = formatCssCode(code);
+      if (appState.activeTab === 'css') {
+        appState.cssValue = codeEditorArea.value;
+      } else {
+        appState.htmlValue = codeEditorArea.value;
+      }
+      updateLineNumbers();
+      triggerDebouncedRender();
+      showToast('Styles formatted');
+    });
+
+    document.getElementById('btnCopyCode').addEventListener('click', () => {
+      const temp = document.createElement('textarea');
+      temp.value = codeEditorArea.value;
+      temp.style.position = 'fixed';
+      temp.style.left = '-9999px';
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      showToast('Copied to clipboard');
+    });
+
+    document.getElementById('btnExport').addEventListener('click', () => {
+      const bundle = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS3 Stylist Export</title>
+  <style>
+${appState.cssValue}
+  </style>
+</head>
+<body>
+${appState.htmlValue}
+</body>
+</html>`;
+      const blob = new Blob([bundle], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `style-demo.html`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Exported style-demo.html!');
+    });
+
+    // CHALLENGES SYSTEM
+    const btnOpenChallenges = document.getElementById('btnOpenChallenges');
+    const btnCloseChallengeModal = document.getElementById('btnCloseChallengeModal');
+
+    function renderChallengesList(filterLevel = 'all') {
+      challengesList.innerHTML = '';
+      const list = filterLevel === 'all'
+        ? CSS3_CHALLENGES
+        : CSS3_CHALLENGES.filter(c => c.level === filterLevel);
+
+      list.forEach(c => {
+        const item = document.createElement('div');
+        const badgeColor = c.level === 'Introductory' 
+          ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' 
+          : 'bg-amber-500/15 text-amber-300 border-amber-500/30';
+
+        item.className = 'bg-slate-900 border border-slate-800/90 hover:border-slate-700 rounded-xl p-4 transition shadow-sm';
+        item.innerHTML = `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center space-x-2 mb-1.5 flex-wrap gap-y-1">
+                <span class="text-sm font-bold text-white tracking-tight">${escapeHtml(c.title)}</span>
+                <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded-md border ${badgeColor}">
+                  ${escapeHtml(c.level)}
+                </span>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed m-0">${escapeHtml(c.desc)}</p>
+            </div>
+            <div class="flex items-center space-x-2 shrink-0 self-end sm:self-center pt-1 sm:pt-0">
+              <button class="btn-load-chall px-3.5 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition active:scale-95 flex items-center space-x-1">
+                <span>Start Challenge</span>
+              </button>
+              <button class="btn-sol-chall px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold transition active:scale-95">
+                <span>Solution</span>
+              </button>
+            </div>
+          </div>
+        `;
+
+        item.querySelector('.btn-load-chall').addEventListener('click', () => {
+          loadChallenge(c, false);
+          challengeModal.classList.add('hidden');
+        });
+
+        item.querySelector('.btn-sol-chall').addEventListener('click', () => {
+          loadChallenge(c, true);
+          challengeModal.classList.add('hidden');
+        });
+
+        challengesList.appendChild(item);
+      });
+    }
+
+    function loadChallenge(chall, loadSolution) {
+      appState.cssValue = loadSolution ? chall.solutionCss : chall.starterCss;
+      appState.htmlValue = chall.starterHtml;
+      
+      switchEditorTab('css');
+      codeEditorArea.value = appState.cssValue;
+
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
+      renderLiveSandbox();
+      showToast(loadSolution ? `Loaded solution for ${chall.title}` : `Started: ${chall.title}`);
+    }
+
+    btnOpenChallenges.addEventListener('click', () => {
+      renderChallengesList('all');
+      challengeModal.classList.remove('hidden');
+    });
+    btnCloseChallengeModal.addEventListener('click', () => {
+      challengeModal.classList.add('hidden');
+    });
+
+    document.querySelectorAll('.chall-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.chall-filter').forEach(b => {
+          b.classList.remove('bg-sky-600', 'text-white');
+          b.classList.add('bg-slate-800', 'text-slate-300');
+        });
+        btn.classList.remove('bg-slate-800', 'text-slate-300');
+        btn.classList.add('bg-sky-600', 'text-white');
+        renderChallengesList(btn.dataset.level);
+      });
+    });
+
+    // HANDBOOK & CHEATSHEET
+    const btnOpenDrawer = document.getElementById('btnOpenDrawer');
+    const btnCloseDrawer = document.getElementById('btnCloseDrawer');
+
+    const CSS_HANDBOOK_ENTRIES = [
+      { name: 'display: flex', cat: 'Flexbox', desc: 'Activates flexbox context for instant single-axis distribution.', code: 'display: flex;\ngap: 1rem;\nalign-items: center;\n' },
+      { name: 'display: grid', cat: 'Grid', desc: 'Activates two-dimensional grid layouts with columns and rows.', code: 'display: grid;\ngrid-template-columns: repeat(3, 1fr);\ngap: 1rem;\n' },
+      { name: 'backdrop-filter', cat: 'Glassmorphism', desc: 'Applies graphical blur effects behind the translucent element.', code: 'backdrop-filter: blur(14px);\n-webkit-backdrop-filter: blur(14px);\n' },
+      { name: 'box-shadow', cat: 'Effects', desc: 'Adds cast shadow effects around an element frame.', code: 'box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);\n' },
+      { name: 'transform: translate', cat: 'Transforms', desc: 'Repositions an element in the 2D or 3D coordinate space.', code: 'transform: translateY(-4px);\n' },
+      { name: 'transition', cat: 'Animation', desc: 'Smoothly interpolates property changes over time.', code: 'transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);\n' },
+      { name: 'linear-gradient', cat: 'Colors', desc: 'Creates a progressive transition between two or more colors.', code: 'background: linear-gradient(135deg, #0ea5e9, #6366f1);\n' },
+      { name: ':hover & :active', cat: 'Pseudo-classes', desc: 'Interactive states when cursor hovers or clicks an element.', code: '&:hover {\n  opacity: 0.9;\n  transform: scale(1.02);\n}\n' },
+      { name: 'CSS Variables', cat: 'Custom Properties', desc: 'Re-usable custom properties across stylesheets.', code: ':root {\n  --brand-primary: #0ea5e9;\n  --surface-dark: #0f172a;\n}\n' }
+    ];
+
+    function renderHandbookItems(query = '') {
+      handbookContentList.innerHTML = '';
+      const q = query.toLowerCase();
+
+      const filtered = CSS_HANDBOOK_ENTRIES.filter(e =>
+        e.name.toLowerCase().includes(q) ||
+        e.desc.toLowerCase().includes(q) ||
+        e.cat.toLowerCase().includes(q)
+      );
+
+      filtered.forEach(entry => {
+        const item = document.createElement('div');
+        item.className = 'bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5 text-xs';
+        item.innerHTML = `
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-bold text-sky-400 font-mono">${escapeHtml(entry.name)}</span>
+            <span class="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-slate-700 text-slate-300">${entry.cat}</span>
+          </div>
+          <p class="text-slate-300 text-[11px] mb-2 leading-tight">${entry.desc}</p>
+          <button class="insert-handbook-btn text-[11px] font-semibold text-sky-400 hover:text-sky-300 flex items-center space-x-1">
+            <span>Insert Code &rarr;</span>
+          </button>
+        `;
+
+        item.querySelector('.insert-handbook-btn').addEventListener('click', () => {
+          if (appState.activeTab !== 'css') switchEditorTab('css');
+          insertSnippetText(entry.code);
+          referenceDrawer.classList.add('hidden');
+          showToast(`Inserted ${entry.name}`);
+        });
+
+        handbookContentList.appendChild(item);
+      });
+    }
+
+    btnOpenDrawer.addEventListener('click', () => {
+      renderHandbookItems();
+      referenceDrawer.classList.remove('hidden');
+    });
+    btnCloseDrawer.addEventListener('click', () => {
+      referenceDrawer.classList.add('hidden');
+    });
+    handbookSearchInput.addEventListener('input', (e) => {
+      renderHandbookItems(e.target.value);
+    });
+
+    // Utilities
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function formatCssCode(css) {
+      return css
+        .replace(/\s*\{\s*/g, ' {\n  ')
+        .replace(/;\s*/g, ';\n  ')
+        .replace(/\s*\}\s*/g, '\n}\n\n')
+        .replace(/\n\s*\n\s*\n/g, '\n\n')
+        .trim();
+    }
+
+    function showToast(msg) {
+      toastNotificationMsg.textContent = msg;
+      toastNotification.classList.add('show');
+      setTimeout(() => {
+        toastNotification.classList.remove('show');
+      }, 1800);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      initEditor();
+    });
+  </script>
+
+  <!-- ========================================================================= -->
+  <!-- CODE ACADEMY ADD-ON: WELCOME MODAL, SOCIAL DRAWER & FOOTER                -->
+  <!-- ========================================================================= -->
+  <style>
+    #ca-welcome-modal {
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    #ca-welcome-modal.hidden-modal {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    #ca-social-drawer {
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(calc(100% - 44px));
+    }
+    #ca-social-drawer.is-open,
+    #ca-social-drawer:hover {
+      transform: translateX(0);
+    }
+  </style>
+
+  <!-- 1. WELCOME MODAL TAILORED FOR CSS3 STYLIST -->
+  <div id="ca-welcome-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+    <div class="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-sky-500/30 bg-slate-900/95 p-6 md:p-8 shadow-2xl text-slate-100 shadow-sky-950/50">
+      
+      <div class="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-sky-500/20 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-cyan-500/20 blur-3xl"></div>
+
+      <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-tr from-sky-600 to-cyan-400 text-2xl shadow-lg shadow-sky-500/30">
+            🎨
+          </div>
+          <div>
+            <span class="inline-block rounded-full bg-sky-500/10 px-2.5 py-0.5 text-xs font-semibold text-sky-400 border border-sky-500/20 mb-1">
+              CSS3 Stylist Track
+            </span>
+            <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white">
+              Welcome to CSS3 Stylist!
+            </h2>
+          </div>
+        </div>
+        <button onclick="caCloseModal()" class="text-slate-400 hover:text-white transition-colors p-1 text-xl font-bold" aria-label="Close">
+          ✕
+        </button>
+      </div>
+
+      <div class="mt-4 space-y-4 text-sm leading-relaxed text-slate-300 max-h-[60vh] overflow-y-auto pr-2">
+        <p class="text-base text-slate-200 font-medium">
+          100% Free Forever - No sign ups, no credit cards. Learn how to craft responsive layouts, modern Flexbox centering, CSS Grid systems, glowing glassmorphism, and smooth keyframe animations with real-time feedback. Have fun along the way!
+        </p>
+
+        <div class="rounded-xl border border-slate-800 bg-slate-950/50 p-4">
+          <h3 class="font-semibold text-sky-400 flex items-center gap-2 mb-1.5">
+            <span>🎯</span> What will you master here?
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            This module guides <strong>introductory and intermediate learners</strong> through modern CSS rules (<code class="text-sky-300">display: flex</code>, <code class="text-sky-300">grid-template-columns</code>, <code class="text-sky-300">backdrop-filter</code>, <code class="text-sky-300">@keyframes</code>) directly applied to live UI components. You can navigate freely between the HTML5, CSS3, and JavaScript sister apps from the top bar.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-amber-200/90 text-xs">
+          <div class="flex items-center gap-2 font-semibold text-amber-400 mb-1">
+            <span>⚠️</span> Important Disclaimer & Terms of Use
+          </div>
+          <p class="leading-relaxed">
+            While the developer has done their best to provide you with the most accurate, current, and relevant front-end information, instructional materials, and code playgrounds, it is strictly <strong>user beware</strong>. 
+            You are entirely responsible for the code you write, execute, test, and deploy using this application. The developer assumes no liability for loss of data, browser crashes, or external deployment risks.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-800 pt-4">
+        <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
+          <input type="checkbox" id="ca-dont-show-again" class="rounded border-slate-700 bg-slate-800 text-sky-500 focus:ring-0">
+          Don't show this welcome message again
+        </label>
+        <button onclick="caCloseModal()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white shadow-lg shadow-sky-600/30 transition-all hover:scale-[1.02] active:scale-95">
+          Start CSS3 Stylist &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. SOCIAL SHARE DRAWER -->
+  <div id="ca-social-drawer" class="fixed right-0 top-1/3 z-[9990] flex items-stretch shadow-2xl drop-shadow-2xl">
+    <button onclick="caToggleSocialDrawer()" class="flex flex-col items-center justify-center gap-2 bg-gradient-to-b from-sky-600 to-sky-700 hover:from-sky-500 hover:to-sky-600 text-white px-2.5 py-4 rounded-l-xl shadow-lg border-y border-l border-sky-400/30 cursor-pointer">
+      <span class="text-base">📢</span>
+      <span class="text-[11px] font-bold tracking-widest uppercase [writing-mode:vertical-rl] rotate-180">
+        Share App
+      </span>
+    </button>
+
+    <div class="w-64 bg-slate-900 border-y border-l border-slate-700/80 p-4 rounded-bl-xl shadow-2xl flex flex-col gap-3">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+        <span class="text-xs font-bold text-white uppercase tracking-wider">Share Code Academy</span>
+        <span class="text-xs text-slate-400">✨ Tell peers</span>
+      </div>
+      
+      <div class="grid grid-cols-1 gap-2 text-xs">
+        <a id="ca-share-x" href="https://twitter.com/intent/tweet?text=Master%20modern%20CSS3%20with%20Code%20Academy%20Stylist!&url=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+          <span class="font-bold">𝕏</span> Share on X / Twitter
+        </a>
+        <a id="ca-share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+          <span class="font-bold text-sky-400">in</span> Share on LinkedIn
+        </a>
+        <a id="ca-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+          <span class="font-bold text-blue-500">f</span> Share on Facebook
+        </a>
+        <button onclick="caCopyShareUrl(this)" class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-sky-600/30 border border-sky-500/40 hover:bg-sky-600/50 text-sky-300 font-semibold transition-colors mt-1">
+          🔗 <span id="ca-copy-label">Copy App Link</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function caInitWelcomeModal() {
+      try {
+        const dismissed = localStorage.getItem('ca_css_welcome_dismissed');
+        if (dismissed === 'true') {
+          const modal = document.getElementById('ca-welcome-modal');
+          if (modal) modal.classList.add('hidden-modal');
+        }
+      } catch(e) {}
+
+      try {
+        const curr = encodeURIComponent(window.location.href);
+        const xLink = document.getElementById('ca-share-x');
+        const liLink = document.getElementById('ca-share-li');
+        const fbLink = document.getElementById('ca-share-fb');
+        if (xLink) xLink.href += curr;
+        if (liLink) liLink.href += curr;
+        if (fbLink) fbLink.href += curr;
+      } catch(e) {}
+    }
+
+    function caCloseModal() {
+      const modal = document.getElementById('ca-welcome-modal');
+      if (!modal) return;
+      modal.classList.add('hidden-modal');
+      
+      const checkbox = document.getElementById('ca-dont-show-again');
+      if (checkbox && checkbox.checked) {
+        try {
+          localStorage.setItem('ca_css_welcome_dismissed', 'true');
+        } catch(e) {}
+      }
+    }
+
+    function caToggleSocialDrawer() {
+      const drawer = document.getElementById('ca-social-drawer');
+      if (drawer) drawer.classList.toggle('is-open');
+    }
+
+    function caCopyShareUrl(btn) {
+      const currentUrl = window.location.href;
+      const label = document.getElementById('ca-copy-label');
+      
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(currentUrl).then(() => {
+          if (label) label.innerText = 'Copied to Clipboard! ✓';
+          setTimeout(() => { if (label) label.innerText = 'Copy App Link'; }, 2500);
+        }).catch(() => caFallbackCopy(currentUrl, label));
+      } else {
+        caFallbackCopy(currentUrl, label);
+      }
+    }
+
+    function caFallbackCopy(text, label) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        if (label) label.innerText = 'Copied to Clipboard! ✓';
+        setTimeout(() => { if (label) label.innerText = 'Copy App Link'; }, 2500);
+      } catch (err) {
+        if (label) label.innerText = 'Failed to copy';
+      }
+      document.body.removeChild(textArea);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', caInitWelcomeModal);
+    } else {
+      caInitWelcomeModal();
+    }
+  </script>
+
+  <!-- FOOTER -->
+  <footer style="
+    width: 100%;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    background-color: transparent;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  ">
+    <span>
+      Made for productivity and enjoyment &nbsp;|&nbsp; 
+      2026 &nbsp;|&nbsp; 
+      info.biz.developer@gmail.com
+    </span>
+  </footer>
+
+  <!-- ================= START: AFFILIATE / ECOSYSTEM BOTTOM DRAWER ================= -->
+  <style>
+    .aff-toggle-btn {
+      position: fixed;
+      bottom: 0;
+      right: 24px;
+      background: #111827;
+      color: #f3f4f6;
+      border: 1px solid #374151;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.35);
+      z-index: 99998;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.2s;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .aff-toggle-btn:hover {
+      background: #1f2937;
+      color: #38bdf8;
+    }
+    .aff-toggle-arrow {
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+    .aff-toggle-btn:hover .aff-toggle-arrow {
+      transform: translateY(-2px);
+    }
+
+    .aff-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
+      z-index: 99999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s;
+    }
+    .aff-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .aff-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-height: 82vh;
+      background: #0f172a;
+      color: #f8fafc;
+      border-top: 1px solid #1e293b;
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+      z-index: 100000;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      box-sizing: border-box;
+    }
+    .aff-drawer * {
+      box-sizing: border-box;
+    }
+    .aff-drawer.is-open {
+      transform: translateY(0);
+    }
+
+    .aff-handle {
+      width: 38px;
+      height: 4px;
+      background: #334155;
+      border-radius: 999px;
+      margin: 10px auto 2px;
+    }
+
+    .aff-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px 14px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .aff-header h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: -0.01em;
+    }
+    .aff-close-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+    .aff-close-btn:hover {
+      color: #f8fafc;
+    }
+
+    .aff-list {
+      padding: 20px 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .aff-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: border-color 0.2s, transform 0.15s, background 0.2s;
+    }
+    .aff-card:hover {
+      background: #243248;
+      border-color: #0ea5e9;
+      transform: translateY(-2px);
+    }
+    .aff-card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      color: #38bdf8;
+      margin-bottom: 6px;
+    }
+    .aff-card-title svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.7;
+      transition: transform 0.2s;
+    }
+    .aff-card:hover .aff-card-title svg {
+      transform: translate(2px, -2px);
+      opacity: 1;
+    }
+    .aff-card-desc {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.45;
+      color: #cbd5e1;
+    }
+
+    .aff-footer {
+      padding: 12px 24px;
+      border-top: 1px solid #1e293b;
+      font-size: 11px;
+      text-align: center;
+      color: #64748b;
+      background: #0b1120;
+    }
+  </style>
+
+  <!-- Trigger Button -->
+  <button class="aff-toggle-btn" id="affToggleBtn" aria-label="Open Featured Apps">
+    <span class="aff-toggle-arrow">▲</span>
+    <span>Featured Tools</span>
+  </button>
+
+  <!-- Backdrop -->
+  <div class="aff-backdrop" id="affBackdrop"></div>
+
+  <!-- Drawer Container -->
+  <aside class="aff-drawer" id="affDrawer" aria-hidden="true">
+    <div class="aff-handle"></div>
+    <div class="aff-header">
+      <h3>Recommended Tools</h3>
+      <button class="aff-close-btn" id="affCloseBtn" aria-label="Close drawer">✕</button>
+    </div>
+
+    <div class="aff-list">
+      <a href="https://conceptpromptgen.app" target="_blank" rel="noopener noreferrer" class="aff-card">
+        <div class="aff-card-title">
+          <span>ConceptPromptGen</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="aff-card-desc">Rapidly draft, refine, and structure creative concept prompts tailored for high-quality generative AI results.</p>
+      </a>
+
+      <a href="https://webtemplategen.app" target="_blank" rel="noopener noreferrer" class="aff-card">
+        <div class="aff-card-title">
+          <span>WebTemplateGen</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="aff-card-desc">Instantly produce clean, ready-to-deploy web layouts and responsive UI code boilerplate.</p>
+      </a>
+
+      <a href="https://characterpromptgen.app" target="_blank" rel="noopener noreferrer" class="aff-card">
+        <div class="aff-card-title">
+          <span>CharacterPromptGen</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="aff-card-desc">Build detailed character descriptions, distinct visual traits, and consistent stylistic prompts for AI models.</p>
+      </a>
+
+      <a href="https://designproflow.app" target="_blank" rel="noopener noreferrer" class="aff-card">
+        <div class="aff-card-title">
+          <span>DesignProFlow</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="aff-card-desc">Streamline design-to-production workflows with structured UI kits, component palettes, and asset flows.</p>
+      </a>
+    </div>
+
+    <div class="aff-footer">
+      Explore the creator productivity suite
+    </div>
+  </aside>
+
+  <script>
+    (function () {
+      const toggleBtn = document.getElementById('affToggleBtn');
+      const closeBtn = document.getElementById('affCloseBtn');
+      const backdrop = document.getElementById('affBackdrop');
+      const drawer = document.getElementById('affDrawer');
+
+      function openDrawer() {
+        drawer.classList.add('is-open');
+        backdrop.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeDrawer() {
+        drawer.classList.remove('is-open');
+        backdrop.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+      }
+
+      toggleBtn.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      backdrop.addEventListener('click', closeDrawer);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+          closeDrawer();
+        }
+      });
+
+      window.openAffiliateDrawer = openDrawer;
+    })();
+  </script>
+</body>
+</html>
