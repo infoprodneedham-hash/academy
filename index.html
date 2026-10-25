@@ -126,13 +126,53 @@
       transform: translateY(0);
     }
 
-    /* Subtle pulse animation for fun tagline badge */
     @keyframes subtlePulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.85; transform: scale(1.02); }
     }
     .pulse-badge {
       animation: subtlePulse 3s infinite ease-in-out;
+    }
+
+    .contact-dev-btn {
+      display: inline-block;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #ffffff;
+      background-color: #000000;
+      border: 1px solid #000000;
+      border-radius: 9999px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .contact-dev-btn:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 6px 14px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #000000;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .download-btn:hover {
+      background-color: #ffffff;
+      color: #000000;
+    }
+    .download-btn:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
@@ -150,40 +190,10 @@
           <span class="font-bold text-white text-sm sm:text-base tracking-tight leading-none">Code Academy</span>
           <span class="text-xs text-slate-400 font-medium hidden md:inline">Learn Front-End Web Development</span>
           <span class="pulse-badge text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1">
-
-            <!-- Button HTML -->
-<a 
-  href="https://support-lilac-omega.vercel.app/" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  class="contact-dev-btn"
->
-  Contact The Dev
-</a>
-
-<!-- Embedded CSS Styling -->
-<style>
-  .contact-dev-btn {
-    display: inline-block;
-    padding: 6px 14px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: #ffffff;
-    background-color: #000000;
-    border: 1px solid #000000;
-    border-radius: 9999px; /* Fully rounded pill shape */
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-
-  /* Reverse color rollover */
-  .contact-dev-btn:hover {
-    background-color: #ffffff;
-    color: #000000;
-  }
-</style>
+            <a href="https://support-lilac-omega.vercel.app/" target="_blank" rel="noopener noreferrer" class="contact-dev-btn">
+              Contact The Dev
+            </a>
+          </span>
         </div>
       </div>
     </div>
@@ -209,53 +219,24 @@
         <span class="w-2 h-2 rounded-full bg-purple-300"></span>
         <span class="font-bold">Full Suite</span>
       </button>
-      <a href="file.zip" download="file.zip" class="download-btn">
-  Download Zip
-</a>
 
-<style>
-  .download-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    color: #ffffff;
-    background-color: #000000;
-    border: 2px solid #000000;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-
-  /* Inverts to white background with black text on hover */
-  .download-btn:hover {
-    background-color: #ffffff;
-    color: #000000;
-  }
-
-  .download-btn:active {
-    transform: scale(0.98);
-  }
-</style>
+      <a href="file.zip" download="file.zip" class="download-btn ml-1">
+        Download Zip
+      </a>
     </div>
 
     <!-- UTILITY ACTIONS: Challenge, Cheatsheet, Export -->
     <div class="flex items-center space-x-2">
-      <!-- Challenge trigger button -->
       <button id="btnOpenChallenges" class="px-2.5 py-1.5 text-xs font-semibold bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 border border-amber-500/30 rounded-md flex items-center space-x-1 transition shadow-sm">
         <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i>
         <span class="hidden lg:inline">Challenges</span>
       </button>
 
-      <!-- Cheatsheet drawer trigger -->
       <button id="btnOpenDrawer" class="px-2.5 py-1.5 text-xs font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-md flex items-center space-x-1 transition">
         <i data-lucide="book-open" class="w-3.5 h-3.5 text-indigo-400"></i>
         <span class="hidden lg:inline">Handbook</span>
       </button>
 
-      <!-- Quick Export HTML file -->
       <button id="btnExport" title="Export as standalone .html" class="px-2.5 py-1.5 text-xs font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-md flex items-center space-x-1 transition">
         <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
         <span class="hidden sm:inline">Export</span>
@@ -263,7 +244,7 @@
     </div>
   </header>
 
-  <!-- WORKSPACE WRAPPER (Exact remainder height with strict min-h-0) -->
+  <!-- WORKSPACE WRAPPER -->
   <main class="flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden relative">
 
     <!-- LEFT PANEL: Snippet Bar & Multi-Tab Code Editor -->
@@ -271,10 +252,7 @@
       
       <!-- Track Header & Category Pill Filter -->
       <div class="bg-slate-900 border-b border-slate-800 px-3 py-1.5 flex items-center justify-between shrink-0">
-        <div class="flex items-center space-x-2 overflow-x-auto py-0.5" id="categoryTabsContainer">
-          <!-- Populated dynamically based on active track -->
-        </div>
-
+        <div class="flex items-center space-x-2 overflow-x-auto py-0.5" id="categoryTabsContainer"></div>
         <div class="flex items-center space-x-1 shrink-0 ml-2">
           <span id="activeTrackBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase tracking-wider">
             Full Suite
@@ -288,12 +266,10 @@
           <i data-lucide="zap" class="w-3 h-3 text-amber-400"></i>
           <span>Insert:</span>
         </div>
-        <div id="snippetChipsRow" class="flex items-center space-x-1.5 pl-1">
-          <!-- Snippet chips populated here -->
-        </div>
+        <div id="snippetChipsRow" class="flex items-center space-x-1.5 pl-1"></div>
       </div>
 
-      <!-- Code Editor File Switcher Bar (For Unified Track: HTML, CSS, JS tabs) -->
+      <!-- Code Editor File Switcher Bar -->
       <div id="fileTabsBar" class="h-8 bg-slate-900/80 border-b border-slate-800 px-2.5 flex items-center justify-between shrink-0 text-xs">
         <div class="flex items-center space-x-1" id="fileTabsList">
           <button data-file="html" class="file-tab active px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 bg-slate-800 text-orange-400 border border-slate-700">
@@ -339,7 +315,7 @@
           placeholder="Write your front-end code here or tap any snippet above..."></textarea>
       </div>
 
-      <!-- Editor Status Bar (Pinned firmly) -->
+      <!-- Editor Status Bar -->
       <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
         <div class="flex items-center space-x-2 truncate">
           <span class="flex items-center space-x-1 text-emerald-400 font-medium">
@@ -363,7 +339,6 @@
       <!-- Preview Header Controls Bar -->
       <div class="h-10 bg-slate-900 border-b border-slate-800 px-3 flex items-center justify-between shrink-0">
         <div class="flex items-center space-x-2">
-          <!-- Viewport switches -->
           <div class="flex space-x-0.5 items-center bg-slate-950 p-0.5 rounded-md border border-slate-800">
             <button id="viewDesktop" title="Full Desktop View" class="p-1 rounded bg-slate-800 text-white hover:text-white">
               <i data-lucide="monitor" class="w-3.5 h-3.5"></i>
@@ -376,7 +351,6 @@
             </button>
           </div>
 
-          <!-- Canvas background theme toggle (Light preview canvas / Dark canvas) -->
           <button id="btnToggleCanvasTheme" title="Toggle Preview Background Theme" class="p-1 text-slate-400 hover:text-white bg-slate-800 rounded border border-slate-700">
             <i data-lucide="sun-moon" class="w-3.5 h-3.5 text-amber-300"></i>
           </button>
@@ -384,14 +358,12 @@
         </div>
 
         <div class="flex items-center space-x-2">
-          <!-- Console toggle badge -->
           <button id="btnToggleConsole" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded text-xs font-mono flex items-center space-x-1.5 transition">
             <i data-lucide="terminal" class="w-3 h-3 text-emerald-400"></i>
             <span>Console</span>
             <span id="consoleBadgeCount" class="w-4 h-4 rounded-full bg-slate-700 text-[10px] flex items-center justify-center font-bold text-slate-300">0</span>
           </button>
 
-          <!-- Run / Force Refresh button -->
           <button id="btnRunRefresh" class="px-3 py-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-md text-xs font-bold flex items-center space-x-1 shadow transition">
             <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
             <span>Render</span>
@@ -399,12 +371,12 @@
         </div>
       </div>
 
-      <!-- Preview Stage Container (Houses the sandboxed iframe) -->
+      <!-- Preview Stage Container -->
       <div id="previewCanvasArea" class="flex-1 min-h-0 bg-slate-900/60 p-2 sm:p-3 flex items-center justify-center overflow-hidden relative">
         <iframe id="liveRenderFrame" sandbox="allow-scripts allow-modals allow-same-origin" class="frame-desktop bg-white shadow-xl transition-all" title="Output Preview"></iframe>
       </div>
 
-      <!-- COLLAPSIBLE JAVASCRIPT CONSOLE DRAWER (Bottom of Preview Pane) -->
+      <!-- COLLAPSIBLE JAVASCRIPT CONSOLE DRAWER -->
       <div id="consoleDrawer" class="h-36 bg-slate-900 border-t border-slate-800 flex flex-col shrink-0 transition-all">
         <div class="h-7 bg-slate-950 px-3 flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 select-none">
           <div class="flex items-center space-x-2">
@@ -424,7 +396,7 @@
         </div>
       </div>
 
-      <!-- Preview Footer Status Bar (Always Visible at bottom) -->
+      <!-- Preview Footer Status Bar -->
       <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0 z-10">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
@@ -461,9 +433,7 @@
         <button data-challtrack="js" class="chall-filter px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white font-medium">JavaScript</button>
       </div>
 
-      <div id="challengesList" class="p-3 overflow-y-auto space-y-2.5 flex-1 divide-y divide-slate-800/50">
-        <!-- Challenges injected via JS -->
-      </div>
+      <div id="challengesList" class="p-3 overflow-y-auto space-y-2.5 flex-1 divide-y divide-slate-800/50"></div>
     </div>
   </div>
 
@@ -484,9 +454,7 @@
         class="w-full px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-md text-xs text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500">
     </div>
 
-    <div id="handbookContentList" class="flex-1 overflow-y-auto p-3 space-y-2.5">
-      <!-- Populated via JS -->
-    </div>
+    <div id="handbookContentList" class="flex-1 overflow-y-auto p-3 space-y-2.5"></div>
   </aside>
 
   <!-- POPUP NOTIFICATION TOAST -->
@@ -495,11 +463,8 @@
     <span id="toastNotificationMsg">Code snippet inserted</span>
   </div>
 
+  <!-- MASTER DATASETS SCRIPT -->
   <script>
-    // -------------------------------------------------------------
-    // MASTER DATASETS: SNIPPETS, HANDBOOK, AND CHALLENGES
-    // -------------------------------------------------------------
-
     const SNIPPET_DATA = {
       html: {
         categories: [
@@ -586,7 +551,7 @@
         track: 'html',
         level: 'Introductory',
         title: 'HTML5: Build a Developer Bio Card',
-        desc: 'Construct a semantic card with a level 1 heading (&lt;h1&gt;), a short paragraph bio, and an unordered list with 3 technologies.',
+        desc: 'Construct a semantic card with a level 1 heading (<h1>), a short paragraph bio, and an unordered list with 3 technologies.',
         starterHtml: '<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: sans-serif; padding: 20px; }\n    .bio-card { border: 2px dashed #94a3b8; padding: 20px; border-radius: 8px; }\n  </style>\n</head>\n<body>\n  <div class="bio-card">\n    <!-- 1. Add your <h1> name here -->\n    \n    <!-- 2. Add your bio <p> here -->\n    \n    <!-- 3. Add a <ul> with 3 <li> skills -->\n    \n  </div>\n</body>\n</html>',
         solutionHtml: '<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: sans-serif; padding: 20px; }\n    .bio-card { border: 2px solid #3b82f6; padding: 20px; border-radius: 8px; background: #eff6ff; }\n  </style>\n</head>\n<body>\n  <div class="bio-card">\n    <h1>Alex River</h1>\n    <p>Front-end developer passionate about clean UI & interactive experiences.</p>\n    <ul>\n      <li>HTML5 Semantic Architecture</li>\n      <li>CSS3 Flexbox & Grid</li>\n      <li>JavaScript ES6</li>\n    </ul>\n  </div>\n</body>\n</html>'
       },
@@ -728,7 +693,6 @@ body {
   max-width: 480px;
 }
 
-/* Glassmorphism Card */
 .glass-card {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
@@ -770,7 +734,6 @@ body {
   margin-bottom: 24px;
 }
 
-/* Flexbox Buttons */
 .button-group {
   display: flex;
   gap: 12px;
@@ -1039,14 +1002,11 @@ addBtn.addEventListener("click", () => {
     };
   </script>
 
+  <!-- APPLICATION CONTROLLER -->
   <script>
-    // -------------------------------------------------------------
-    // RUNTIME APPLICATION STATE & CONTROLLER
-    // -------------------------------------------------------------
-
     const state = {
-      activeTrack: 'unified', // 'html' | 'css' | 'js' | 'unified'
-      activeFile: 'html',     // 'html' | 'css' | 'js'
+      activeTrack: 'unified',
+      activeFile: 'html',
       activeCategory: 'all',
       editorValues: {
         html: TRACK_STARTERS.unified.html,
@@ -1061,7 +1021,6 @@ addBtn.addEventListener("click", () => {
       logCount: 0
     };
 
-    // DOM Elements
     const codeEditorArea = document.getElementById('codeEditorArea');
     const lineNumbersColumn = document.getElementById('lineNumbersColumn');
     const liveRenderFrame = document.getElementById('liveRenderFrame');
@@ -1086,11 +1045,9 @@ addBtn.addEventListener("click", () => {
 
     let debounceTimer = null;
 
-    // Switch active track
     function setTrack(trackKey) {
       state.activeTrack = trackKey;
 
-      // Update Header Track Buttons
       document.querySelectorAll('.track-tab').forEach(tab => {
         if (tab.dataset.track === trackKey) {
           tab.classList.remove('text-slate-300', 'bg-transparent');
@@ -1102,7 +1059,6 @@ addBtn.addEventListener("click", () => {
         }
       });
 
-      // Update badge label
       const badgeNames = {
         html: 'HTML5 Architect',
         css: 'CSS3 Stylist',
@@ -1111,14 +1067,12 @@ addBtn.addEventListener("click", () => {
       };
       activeTrackBadge.textContent = badgeNames[trackKey] || trackKey;
 
-      // Load starter template for the track
       state.editorValues = {
         html: TRACK_STARTERS[trackKey].html,
         css: TRACK_STARTERS[trackKey].css,
         js: TRACK_STARTERS[trackKey].js
       };
 
-      // Set default focused editor file tab based on track
       if (trackKey === 'html') state.activeFile = 'html';
       else if (trackKey === 'css') state.activeFile = 'css';
       else if (trackKey === 'js') state.activeFile = 'js';
@@ -1134,7 +1088,6 @@ addBtn.addEventListener("click", () => {
     }
 
     function updateFileTabsVisibility() {
-      // In full-stack mode, show tabs for html, css, js. In single-track mode, tailor tabs.
       const buttons = fileTabsList.querySelectorAll('.file-tab');
       buttons.forEach(btn => {
         const file = btn.dataset.file;
@@ -1227,14 +1180,13 @@ addBtn.addEventListener("click", () => {
       triggerDebouncedRender();
     }
 
-    // Live Render Assembly & Injection
+    // Live Render Assembly with Safe Execution Guard
     function renderLiveSandbox() {
       let finalHtml = '';
       const htmlCode = state.editorValues.html || '';
       const cssCode = state.editorValues.css || '';
       const jsCode = state.editorValues.js || '';
 
-      // Console message interceptor script for child iframe
       const consoleInterceptor = `
         <script>
           (function() {
@@ -1268,6 +1220,27 @@ addBtn.addEventListener("click", () => {
         <\/script>
       `;
 
+      // Safe script executor: ensures DOM is ready and captures execution errors
+      const safeScriptRunner = (code) => `
+        <script>
+          (function() {
+            function initSandboxScript() {
+              try {
+                ${code}
+              } catch (err) {
+                console.error(err.message || err);
+              }
+            }
+
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', initSandboxScript);
+            } else {
+              initSandboxScript();
+            }
+          })();
+        <\/script>
+      `;
+
       if (state.activeTrack === 'html') {
         const hasShell = /<!DOCTYPE|<html|<body/i.test(htmlCode);
         if (hasShell) {
@@ -1278,16 +1251,15 @@ addBtn.addEventListener("click", () => {
       } else if (state.activeTrack === 'css') {
         finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}</body></html>`;
       } else if (state.activeTrack === 'js') {
-        finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}<script>${jsCode}<\/script></body></html>`;
+        finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}${safeScriptRunner(jsCode)}</body></html>`;
       } else {
-        // Unified full-stack
         const hasShell = /<!DOCTYPE|<html|<body/i.test(htmlCode);
         if (hasShell) {
           finalHtml = htmlCode
             .replace('</head>', `<style>${cssCode}</style>${consoleInterceptor}</head>`)
-            .replace('</body>', `<script>${jsCode}<\/script></body>`);
+            .replace('</body>', `${safeScriptRunner(jsCode)}</body>`);
         } else {
-          finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}<script>${jsCode}<\/script></body></html>`;
+          finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}${safeScriptRunner(jsCode)}</body></html>`;
         }
       }
 
@@ -1308,10 +1280,9 @@ addBtn.addEventListener("click", () => {
 
     function triggerDebouncedRender() {
       clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(renderLiveSandbox, 150);
+      debounceTimer = setTimeout(renderLiveSandbox, 400);
     }
 
-    // Line numbers generator
     function updateLineNumbers() {
       const count = codeEditorArea.value.split('\n').length;
       let html = '';
@@ -1325,12 +1296,10 @@ addBtn.addEventListener("click", () => {
       charCountLabel.textContent = `${codeEditorArea.value.length} chars`;
     }
 
-    // Scroll sync
     codeEditorArea.addEventListener('scroll', () => {
       lineNumbersColumn.scrollTop = codeEditorArea.scrollTop;
     });
 
-    // Editor typing & indentation
     codeEditorArea.addEventListener('input', () => {
       state.editorValues[state.activeFile] = codeEditorArea.value;
       updateLineNumbers();
@@ -1360,7 +1329,6 @@ addBtn.addEventListener("click", () => {
       }
     });
 
-    // Undo / Redo history
     function recordHistoryState() {
       const val = codeEditorArea.value;
       if (state.historyStack[state.historyIndex] === val) return;
@@ -1400,7 +1368,6 @@ addBtn.addEventListener("click", () => {
     document.getElementById('btnUndo').addEventListener('click', undoEditor);
     document.getElementById('btnRedo').addEventListener('click', redoEditor);
 
-    // Switch file in editor (index.html, style.css, script.js)
     fileTabsList.querySelectorAll('.file-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         state.activeFile = tab.dataset.file;
@@ -1412,7 +1379,6 @@ addBtn.addEventListener("click", () => {
       });
     });
 
-    // Reset current file button
     document.getElementById('btnResetCurrent').addEventListener('click', () => {
       const initial = TRACK_STARTERS[state.activeTrack][state.activeFile];
       codeEditorArea.value = initial;
@@ -1422,7 +1388,6 @@ addBtn.addEventListener("click", () => {
       showToast('Reset current file');
     });
 
-    // Virtual console postMessage receiver
     window.addEventListener('message', (event) => {
       if (event.data && event.data.type === 'CONSOLE_LOG') {
         appendConsoleLog(event.data.level, event.data.text);
@@ -1471,7 +1436,6 @@ addBtn.addEventListener("click", () => {
     btnToggleConsole.addEventListener('click', toggleConsoleDrawer);
     btnMinimizeConsole.addEventListener('click', toggleConsoleDrawer);
 
-    // Viewport devices (Desktop, Tablet, Mobile)
     const viewDesktop = document.getElementById('viewDesktop');
     const viewTablet = document.getElementById('viewTablet');
     const viewMobile = document.getElementById('viewMobile');
@@ -1502,7 +1466,6 @@ addBtn.addEventListener("click", () => {
     viewTablet.addEventListener('click', () => setViewportFrame('tablet'));
     viewMobile.addEventListener('click', () => setViewportFrame('mobile'));
 
-    // Toggle Preview Canvas Light/Dark Background
     document.getElementById('btnToggleCanvasTheme').addEventListener('click', () => {
       state.isLightCanvas = !state.isLightCanvas;
       if (state.isLightCanvas) {
@@ -1516,13 +1479,11 @@ addBtn.addEventListener("click", () => {
       }
     });
 
-    // Run / Re-render button
     document.getElementById('btnRunRefresh').addEventListener('click', () => {
       renderLiveSandbox();
       showToast('Re-rendered sandbox!');
     });
 
-    // Format / Tidy HTML button
     document.getElementById('btnFormatCode').addEventListener('click', () => {
       const code = codeEditorArea.value;
       if (state.activeFile === 'html') {
@@ -1534,7 +1495,6 @@ addBtn.addEventListener("click", () => {
       showToast('Code tidied up');
     });
 
-    // Clipboard Copy
     document.getElementById('btnCopyCode').addEventListener('click', () => {
       const temp = document.createElement('textarea');
       temp.value = codeEditorArea.value;
@@ -1547,7 +1507,6 @@ addBtn.addEventListener("click", () => {
       showToast('Code copied to clipboard');
     });
 
-    // Export complete HTML document
     document.getElementById('btnExport').addEventListener('click', () => {
       let bundle = '';
       if (state.activeTrack === 'html') {
@@ -1585,16 +1544,13 @@ ${state.editorValues.js}
       showToast('Project exported!');
     });
 
-    // Track tab clicks in top navbar
     document.querySelectorAll('.track-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         setTrack(tab.dataset.track);
       });
     });
 
-    // -------------------------------------------------------------
-    // CHALLENGES SYSTEM CONTROLLER
-    // -------------------------------------------------------------
+    // CHALLENGES SYSTEM
     const btnOpenChallenges = document.getElementById('btnOpenChallenges');
     const btnCloseChallengeModal = document.getElementById('btnCloseChallengeModal');
 
@@ -1673,9 +1629,7 @@ ${state.editorValues.js}
       });
     });
 
-    // -------------------------------------------------------------
-    // HANDBOOK & CHEATSHEET CONTROLLER
-    // -------------------------------------------------------------
+    // HANDBOOK & CHEATSHEET
     const btnOpenDrawer = document.getElementById('btnOpenDrawer');
     const btnCloseDrawer = document.getElementById('btnCloseDrawer');
 
@@ -1683,7 +1637,6 @@ ${state.editorValues.js}
       handbookContentList.innerHTML = '';
       const q = query.toLowerCase();
 
-      // Aggregate all snippets across HTML, CSS, JS
       const allEntries = [
         ...SNIPPET_DATA.html.snippets.map(s => ({ ...s, track: 'HTML5' })),
         ...SNIPPET_DATA.css.snippets.map(s => ({ ...s, track: 'CSS3' })),
@@ -1731,7 +1684,7 @@ ${state.editorValues.js}
       renderHandbookItems(e.target.value);
     });
 
-    // Helper functions
+    // Helpers
     function escapeHtml(str) {
       if (!str) return '';
       return String(str)
@@ -1770,7 +1723,6 @@ ${state.editorValues.js}
       }, 1800);
     }
 
-    // App Initialization
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       setTrack('unified');
@@ -1781,7 +1733,6 @@ ${state.editorValues.js}
   <!-- CODE ACADEMY ADD-ON: WELCOME MODAL, SOCIAL DRAWER & AFFILIATE BANNER      -->
   <!-- ========================================================================= -->
   <style>
-    /* Scoped Animations & Reset for Add-on Elements */
     #ca-welcome-modal {
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
@@ -1798,23 +1749,15 @@ ${state.editorValues.js}
     #ca-social-drawer:hover {
       transform: translateX(0);
     }
-    #ca-affiliate-banner {
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    #ca-affiliate-banner.banner-minimized {
-      transform: translateY(calc(100% - 28px));
-    }
   </style>
 
-  <!-- 1. WELCOME, AUDIENCE & DISCLAIMER POP-UP MODAL -->
+  <!-- 1. WELCOME MODAL -->
   <div id="ca-welcome-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
     <div class="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-indigo-500/30 bg-slate-900/95 p-6 md:p-8 shadow-2xl text-slate-100 shadow-indigo-950/50">
       
-      <!-- Decorative Gradient Glow -->
       <div class="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-indigo-500/20 blur-3xl"></div>
       <div class="pointer-events-none absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-cyan-500/20 blur-3xl"></div>
 
-      <!-- Modal Header -->
       <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
         <div class="flex items-center gap-3">
           <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 text-2xl shadow-lg shadow-indigo-500/30">
@@ -1834,7 +1777,6 @@ ${state.editorValues.js}
         </button>
       </div>
 
-      <!-- Modal Body -->
       <div class="mt-4 space-y-4 text-sm leading-relaxed text-slate-300 max-h-[60vh] overflow-y-auto pr-2">
         <p class="text-base text-slate-200 font-medium">
           100% Free Forever - No sign ups, no credit cards. Here you will learn the basic fundamentals of building your own web apps. Have fun along the way!
@@ -1860,7 +1802,6 @@ ${state.editorValues.js}
         </div>
       </div>
 
-      <!-- Modal Footer Actions -->
       <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-800 pt-4">
         <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
           <input type="checkbox" id="ca-dont-show-again" class="rounded border-slate-700 bg-slate-800 text-indigo-500 focus:ring-0">
@@ -1873,9 +1814,8 @@ ${state.editorValues.js}
     </div>
   </div>
 
-  <!-- 2. SOCIAL SHARE SLIDE-OUT DRAWER (Right Edge) -->
+  <!-- 2. SOCIAL SHARE DRAWER -->
   <div id="ca-social-drawer" class="fixed right-0 top-1/3 z-[9990] flex items-stretch shadow-2xl drop-shadow-2xl">
-    <!-- Trigger Handle / Tab -->
     <button onclick="caToggleSocialDrawer()" class="flex flex-col items-center justify-center gap-2 bg-gradient-to-b from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white px-2.5 py-4 rounded-l-xl shadow-lg border-y border-l border-indigo-400/30 cursor-pointer">
       <span class="text-base">📢</span>
       <span class="text-[11px] font-bold tracking-widest uppercase [writing-mode:vertical-rl] rotate-180">
@@ -1883,7 +1823,6 @@ ${state.editorValues.js}
       </span>
     </button>
 
-    <!-- Expanded Drawer Content -->
     <div class="w-64 bg-slate-900 border-y border-l border-slate-700/80 p-4 rounded-bl-xl shadow-2xl flex flex-col gap-3">
       <div class="flex items-center justify-between border-b border-slate-800 pb-2">
         <span class="text-xs font-bold text-white uppercase tracking-wider">Share Code Academy</span>
@@ -1891,19 +1830,15 @@ ${state.editorValues.js}
       </div>
       
       <div class="grid grid-cols-1 gap-2 text-xs">
-        <!-- Twitter / X -->
         <a id="ca-share-x" href="https://twitter.com/intent/tweet?text=Master%20front-end%20web%20development%20with%20Code%20Academy%20Playground!&url=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
           <span class="font-bold">𝕏</span> Share on X / Twitter
         </a>
-        <!-- LinkedIn -->
         <a id="ca-share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
           <span class="font-bold text-sky-400">in</span> Share on LinkedIn
         </a>
-        <!-- Facebook -->
         <a id="ca-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
           <span class="font-bold text-blue-500">f</span> Share on Facebook
         </a>
-        <!-- Copy Link Button -->
         <button onclick="caCopyShareUrl(this)" class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-indigo-600/30 border border-indigo-500/40 hover:bg-indigo-600/50 text-indigo-300 font-semibold transition-colors mt-1">
           🔗 <span id="ca-copy-label">Copy App Link</span>
         </button>
@@ -1911,11 +1846,7 @@ ${state.editorValues.js}
     </div>
   </div>
 
- 
-
-  <!-- SCOPED INTERACTION SCRIPTS -->
   <script>
-    // 1. Modal Logic (with LocalStorage memory)
     function caInitWelcomeModal() {
       try {
         const dismissed = localStorage.getItem('ca_welcome_dismissed');
@@ -1925,7 +1856,6 @@ ${state.editorValues.js}
         }
       } catch(e) {}
 
-      // Update social share URLs with current location
       try {
         const curr = encodeURIComponent(window.location.href);
         const xLink = document.getElementById('ca-share-x');
@@ -1950,7 +1880,6 @@ ${state.editorValues.js}
       }
     }
 
-    // 2. Social Drawer Logic
     function caToggleSocialDrawer() {
       const drawer = document.getElementById('ca-social-drawer');
       if (drawer) drawer.classList.toggle('is-open');
@@ -1988,35 +1917,15 @@ ${state.editorValues.js}
       document.body.removeChild(textArea);
     }
 
-    // 3. Affiliate Banner Slide-Out / Toggle Logic
-    function caToggleAffiliateBanner() {
-      const banner = document.getElementById('ca-affiliate-banner');
-      const icon = document.getElementById('ca-banner-toggle-icon');
-      if (!banner) return;
-      
-      banner.classList.toggle('banner-minimized');
-      if (icon) {
-        icon.innerText = banner.classList.contains('banner-minimized') ? '▲' : '▼';
-      }
-    }
-
-    function caDismissAffiliateBanner() {
-      const banner = document.getElementById('ca-affiliate-banner');
-      if (banner) banner.style.display = 'none';
-    }
-
-    // Initialize on DOM load
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', caInitWelcomeModal);
     } else {
       caInitWelcomeModal();
     }
   </script>
-  <!-- ========================================================================= -->
-  <!-- END CODE ACADEMY ADD-ON                                                   -->
-  <!-- ========================================================================= -->
-<!-- Generic App Footer / Banner -->
-<footer style="
+
+  <!-- FOOTER -->
+  <footer style="
     width: 100%;
     text-align: center;
     padding: 10px 16px;
@@ -2025,291 +1934,276 @@ ${state.editorValues.js}
     background-color: transparent;
     box-sizing: border-box;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-"><span>
+  ">
+    <span>
+      Made for productivity and enjoyment &nbsp;|&nbsp; 
+      2026 &nbsp;|&nbsp; 
+      info.biz.developer@gmail.com
+    </span>
+  </footer>
 
-    Made for productivity and enjoyment &nbsp;|&nbsp; 
-    2026 &nbsp;|&nbsp; 
-        info.biz.developer@gmail.com
-</span>
-</footer>
- <!-- ================= START: AFFILIATE / ECOSYSTEM BOTTOM DRAWER ================= -->
-<style>
-  /* Floating Toggle Tab at Bottom */
-  .aff-toggle-btn {
-    position: fixed;
-    bottom: 0;
-    right: 24px;
-    background: #111827;
-    color: #f3f4f6;
-    border: 1px solid #374151;
-    border-bottom: none;
-    border-radius: 8px 8px 0 0;
-    padding: 10px 18px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    cursor: pointer;
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.35);
-    z-index: 99998;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: background 0.2s, transform 0.2s;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  }
-  .aff-toggle-btn:hover {
-    background: #1f2937;
-    color: #60a5fa;
-  }
-  .aff-toggle-arrow {
-    font-size: 10px;
-    transition: transform 0.2s;
-  }
-  .aff-toggle-btn:hover .aff-toggle-arrow {
-    transform: translateY(-2px);
-  }
-
-  /* Overlay Backdrop */
-  .aff-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(3px);
-    z-index: 99999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s;
-  }
-  .aff-backdrop.is-open {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* Slide-Up Bottom Drawer */
-  .aff-drawer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    max-height: 82vh;
-    background: #0f172a;
-    color: #f8fafc;
-    border-top: 1px solid #1e293b;
-    border-radius: 16px 16px 0 0;
-    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
-    z-index: 100000;
-    transform: translateY(100%);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    display: flex;
-    flex-direction: column;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    box-sizing: border-box;
-  }
-  .aff-drawer * {
-    box-sizing: border-box;
-  }
-  .aff-drawer.is-open {
-    transform: translateY(0);
-  }
-
-  /* Drag / Visual Indicator Bar */
-  .aff-handle {
-    width: 38px;
-    height: 4px;
-    background: #334155;
-    border-radius: 999px;
-    margin: 10px auto 2px;
-  }
-
-  /* Header */
-  .aff-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 24px 14px;
-    border-bottom: 1px solid #1e293b;
-  }
-  .aff-header h3 {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 700;
-    color: #f1f5f9;
-    letter-spacing: -0.01em;
-  }
-  .aff-close-btn {
-    background: transparent;
-    border: none;
-    color: #94a3b8;
-    font-size: 20px;
-    cursor: pointer;
-    line-height: 1;
-    padding: 4px;
-    border-radius: 4px;
-    transition: color 0.15s;
-  }
-  .aff-close-btn:hover {
-    color: #f8fafc;
-  }
-
-  /* Content Cards (Grid layout on medium/large screens) */
-  .aff-list {
-    padding: 20px 24px;
-    overflow-y: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 14px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  .aff-card {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    background: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 10px;
-    padding: 14px 16px;
-    transition: border-color 0.2s, transform 0.15s, background 0.2s;
-  }
-  .aff-card:hover {
-    background: #243248;
-    border-color: #3b82f6;
-    transform: translateY(-2px);
-  }
-  .aff-card-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 14px;
-    font-weight: 600;
-    color: #60a5fa;
-    margin-bottom: 6px;
-  }
-  .aff-card-title svg {
-    width: 14px;
-    height: 14px;
-    opacity: 0.7;
-    transition: transform 0.2s;
-  }
-  .aff-card:hover .aff-card-title svg {
-    transform: translate(2px, -2px);
-    opacity: 1;
-  }
-  .aff-card-desc {
-    margin: 0;
-    font-size: 12px;
-    line-height: 1.45;
-    color: #cbd5e1;
-  }
-
-  /* Footer */
-  .aff-footer {
-    padding: 12px 24px;
-    border-top: 1px solid #1e293b;
-    font-size: 11px;
-    text-align: center;
-    color: #64748b;
-    background: #0b1120;
-  }
-</style>
-
-<!-- Trigger Button -->
-<button class="aff-toggle-btn" id="affToggleBtn" aria-label="Open Featured Apps">
-  <span class="aff-toggle-arrow">▲</span>
-  <span>Featured Tools</span>
-</button>
-
-<!-- Backdrop -->
-<div class="aff-backdrop" id="affBackdrop"></div>
-
-<!-- Drawer Container -->
-<aside class="aff-drawer" id="affDrawer" aria-hidden="true">
-  <div class="aff-handle"></div>
-  <div class="aff-header">
-    <h3>Recommended Tools</h3>
-    <button class="aff-close-btn" id="affCloseBtn" aria-label="Close drawer">✕</button>
-  </div>
-
-  <div class="aff-list">
-    <!-- Concept Prompt Gen -->
-    <a href="https://conceptpromptgen.app" target="_blank" rel="noopener noreferrer" class="aff-card">
-      <div class="aff-card-title">
-        <span>ConceptPromptGen</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-      </div>
-      <p class="aff-card-desc">Rapidly draft, refine, and structure creative concept prompts tailored for high-quality generative AI results.</p>
-    </a>
-
-    <!-- Web Template Gen -->
-    <a href="https://webtemplategen.app" target="_blank" rel="noopener noreferrer" class="aff-card">
-      <div class="aff-card-title">
-        <span>WebTemplateGen</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-      </div>
-      <p class="aff-card-desc">Instantly produce clean, ready-to-deploy web layouts and responsive UI code boilerplate.</p>
-    </a>
-
-    <!-- Character Prompt Gen -->
-    <a href="https://characterpromptgen.app" target="_blank" rel="noopener noreferrer" class="aff-card">
-      <div class="aff-card-title">
-        <span>CharacterPromptGen</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-      </div>
-      <p class="aff-card-desc">Build detailed character descriptions, distinct visual traits, and consistent stylistic prompts for AI models.</p>
-    </a>
-
-    <!-- Design Pro Flow -->
-    <a href="https://designproflow.app" target="_blank" rel="noopener noreferrer" class="aff-card">
-      <div class="aff-card-title">
-        <span>DesignProFlow</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
-      </div>
-      <p class="aff-card-desc">Streamline design-to-production workflows with structured UI kits, component palettes, and asset flows.</p>
-    </a>
-  </div>
-
-  <div class="aff-footer">
-    Explore the creator productivity suite
-  </div>
-</aside>
-
-<script>
-  (function () {
-    const toggleBtn = document.getElementById('affToggleBtn');
-    const closeBtn = document.getElementById('affCloseBtn');
-    const backdrop = document.getElementById('affBackdrop');
-    const drawer = document.getElementById('affDrawer');
-
-    function openDrawer() {
-      drawer.classList.add('is-open');
-      backdrop.classList.add('is-open');
-      drawer.setAttribute('aria-hidden', 'false');
+  <!-- ================= START: AFFILIATE / ECOSYSTEM BOTTOM DRAWER ================= -->
+  <style>
+    .aff-toggle-btn {
+      position: fixed;
+      bottom: 0;
+      right: 24px;
+      background: #111827;
+      color: #f3f4f6;
+      border: 1px solid #374151;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.35);
+      z-index: 99998;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.2s;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .aff-toggle-btn:hover {
+      background: #1f2937;
+      color: #60a5fa;
+    }
+    .aff-toggle-arrow {
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+    .aff-toggle-btn:hover .aff-toggle-arrow {
+      transform: translateY(-2px);
     }
 
-    function closeDrawer() {
-      drawer.classList.remove('is-open');
-      backdrop.classList.remove('is-open');
-      drawer.setAttribute('aria-hidden', 'true');
+    .aff-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
+      z-index: 99999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s;
+    }
+    .aff-backdrop.is-open {
+      opacity: 1;
+      visibility: visible;
     }
 
-    toggleBtn.addEventListener('click', openDrawer);
-    closeBtn.addEventListener('click', closeDrawer);
-    backdrop.addEventListener('click', closeDrawer);
+    .aff-drawer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-height: 82vh;
+      background: #0f172a;
+      color: #f8fafc;
+      border-top: 1px solid #1e293b;
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+      z-index: 100000;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      box-sizing: border-box;
+    }
+    .aff-drawer * {
+      box-sizing: border-box;
+    }
+    .aff-drawer.is-open {
+      transform: translateY(0);
+    }
 
-    // Close on Escape key
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
-        closeDrawer();
+    .aff-handle {
+      width: 38px;
+      height: 4px;
+      background: #334155;
+      border-radius: 999px;
+      margin: 10px auto 2px;
+    }
+
+    .aff-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px 14px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .aff-header h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: -0.01em;
+    }
+    .aff-close-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+    .aff-close-btn:hover {
+      color: #f8fafc;
+    }
+
+    .aff-list {
+      padding: 20px 24px;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .aff-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: border-color 0.2s, transform 0.15s, background 0.2s;
+    }
+    .aff-card:hover {
+      background: #243248;
+      border-color: #3b82f6;
+      transform: translateY(-2px);
+    }
+    .aff-card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      color: #60a5fa;
+      margin-bottom: 6px;
+    }
+    .aff-card-title svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.7;
+      transition: transform 0.2s;
+    }
+    .aff-card:hover .aff-card-title svg {
+      transform: translate(2px, -2px);
+      opacity: 1;
+    }
+    .aff-card-desc {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.45;
+      color: #cbd5e1;
+    }
+
+    .aff-footer {
+      padding: 12px 24px;
+      border-top: 1px solid #1e293b;
+      font-size: 11px;
+      text-align: center;
+      color: #64748b;
+      background: #0b1120;
+    }
+  </style>
+
+  <!-- Trigger Button -->
+  <button class="aff-toggle-btn" id="affToggleBtn" aria-label="Open Featured Apps">
+    <span class="aff-toggle-arrow">▲</span>
+    <span>Featured Tools</span>
+  </button>
+
+  <!-- Backdrop -->
+  <div class="aff-backdrop" id="affBackdrop"></div>
+
+  <!-- Drawer Container -->
+  <aside class="aff-drawer" id="affDrawer" aria-hidden="true">
+    <div class="aff-handle"></div>
+    <div class="aff-header">
+      <h3>Recommended Tools</h3>
+      <button class="aff-close-btn" id="affCloseBtn" aria-label="Close drawer">✕</button>
+    </div>
+
+    <div class="aff-list">
+      <a href="https://conceptpromptgen.app" target="_blank" rel="noopener noreferrer" class="aff-card">
+        <div class="aff-card-title">
+          <span>ConceptPromptGen</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="aff-card-desc">Rapidly draft, refine, and structure creative concept prompts tailored for high-quality generative AI results.</p>
+      </a>
+
+      <a href="https://webtemplategen.app" target="_blank" rel="noopener noreferrer" class="aff-card">
+        <div class="aff-card-title">
+          <span>WebTemplateGen</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="aff-card-desc">Instantly produce clean, ready-to-deploy web layouts and responsive UI code boilerplate.</p>
+      </a>
+
+      <a href="https://characterpromptgen.app" target="_blank" rel="noopener noreferrer" class="aff-card">
+        <div class="aff-card-title">
+          <span>CharacterPromptGen</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="aff-card-desc">Build detailed character descriptions, distinct visual traits, and consistent stylistic prompts for AI models.</p>
+      </a>
+
+      <a href="https://designproflow.app" target="_blank" rel="noopener noreferrer" class="aff-card">
+        <div class="aff-card-title">
+          <span>DesignProFlow</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="aff-card-desc">Streamline design-to-production workflows with structured UI kits, component palettes, and asset flows.</p>
+      </a>
+    </div>
+
+    <div class="aff-footer">
+      Explore the creator productivity suite
+    </div>
+  </aside>
+
+  <script>
+    (function () {
+      const toggleBtn = document.getElementById('affToggleBtn');
+      const closeBtn = document.getElementById('affCloseBtn');
+      const backdrop = document.getElementById('affBackdrop');
+      const drawer = document.getElementById('affDrawer');
+
+      function openDrawer() {
+        drawer.classList.add('is-open');
+        backdrop.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
       }
-    });
 
-    // Global hook for programmatically opening the drawer (e.g., after dismissing a modal)
-    window.openAffiliateDrawer = openDrawer;
-  })();
-</script>
-<!-- ================= END: AFFILIATE / ECOSYSTEM BOTTOM DRAWER ================= -->
-  <!-- Affiliate Slide-Out Tab -->
+      function closeDrawer() {
+        drawer.classList.remove('is-open');
+        backdrop.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+      }
 
+      toggleBtn.addEventListener('click', openDrawer);
+      closeBtn.addEventListener('click', closeDrawer);
+      backdrop.addEventListener('click', closeDrawer);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+          closeDrawer();
+        }
+      });
+
+      window.openAffiliateDrawer = openDrawer;
+    })();
+  </script>
 </body>
 </html>
