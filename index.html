@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <script src="https://cdn.counter.dev/script.js" data-id="da4b8fa3-0676-4ec8-a4ee-4f118e988fb1" data-utcoffset="11"></script>
-  <title>Code Academy: Learn Front-End Web Development</title>
+  <title>HTML5 Architect - Master Semantic Web Markup | Code Academy</title>
   <link rel="canonical" href="https://codeacademy.app" />
 
-  <meta name="description" content="Learn front-end web development with Code Academy. Write, test, and debug HTML, CSS, and JavaScript in an interactive live browser sandbox.">
+  <meta name="description" content="Master semantic HTML5 markup, web accessibility, forms, and document architecture in a live interactive sandbox with instant preview and challenges.">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts -->
@@ -30,7 +30,6 @@
             htmlColor: '#f97316',
             cssColor: '#38bdf8',
             jsColor: '#facc15',
-            fullColor: '#a855f7'
           }
         }
       }
@@ -136,13 +135,13 @@
 
     .contact-dev-btn {
       display: inline-block;
-      padding: 6px 14px;
-      font-size: 13px;
-      font-weight: 500;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 600;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: #ffffff;
       background-color: #000000;
-      border: 1px solid #000000;
+      border: 1px solid #1e293b;
       border-radius: 9999px;
       text-decoration: none;
       cursor: pointer;
@@ -155,13 +154,13 @@
 
     .download-btn {
       display: inline-block;
-      padding: 6px 14px;
+      padding: 6px 12px;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       text-decoration: none;
       color: #ffffff;
-      background-color: #000000;
+      background-color: #0f172a;
       border: 1px solid #334155;
       border-radius: 6px;
       cursor: pointer;
@@ -180,64 +179,60 @@
 <body class="bg-slate-950 text-slate-100 font-sans flex flex-col h-full w-full select-none">
 
   <!-- TOP HEADER & BRANDING (Height 52px) -->
-  <header class="h-13 bg-slate-900/90 backdrop-blur border-b border-slate-800/80 px-3.5 flex items-center justify-between shrink-0 z-40">
+  <header class="h-13 bg-slate-900/95 backdrop-blur border-b border-slate-800/90 px-3 flex items-center justify-between shrink-0 z-40">
     <div class="flex items-center space-x-3">
-      <div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 text-white font-extrabold text-sm tracking-tight">
+      <div class="h-8 w-8 rounded-lg bg-gradient-to-tr from-orange-600 via-amber-500 to-yellow-500 flex items-center justify-center shadow-lg shadow-orange-500/25 text-white font-black text-sm tracking-tight">
         &lt;/&gt;
       </div>
       <div>
         <div class="flex items-center space-x-2">
-          <span class="font-bold text-white text-sm sm:text-base tracking-tight leading-none">Code Academy</span>
-          <span class="text-xs text-slate-400 font-medium hidden md:inline">Learn Front-End Web Development</span>
-          <span class="pulse-badge text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1">
+          <span class="font-extrabold text-white text-sm sm:text-base tracking-tight leading-none">Code Academy</span>
+          <span class="text-xs text-orange-400 font-bold hidden md:inline">HTML5 Architect</span>
+          <span class="pulse-badge text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center">
             <a href="https://support-lilac-omega.vercel.app/" target="_blank" rel="noopener noreferrer" class="contact-dev-btn">
-              Contact The Dev
+              Contact Dev
             </a>
           </span>
         </div>
       </div>
     </div>
 
-    <!-- TRACK SWITCHERS (HTML5 / CSS3 / JS / Full-Stack) -->
-    <div class="flex items-center bg-slate-950/80 p-1 rounded-lg border border-slate-800 space-x-1 shadow-inner">
-      <button data-track="html" class="track-tab px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-300 hover:text-white">
-        <span class="w-2 h-2 rounded-full bg-orange-500"></span>
-        <span class="hidden sm:inline">HTML5</span> Architect
-      </button>
+    <!-- SISTER APPS NAVIGATION (HTML5 Architect Active, links to learnstyles.html and learnjs.html) -->
+    <nav class="flex items-center bg-slate-950/90 p-1 rounded-lg border border-slate-800 space-x-1 shadow-inner" aria-label="Curriculum Tracks">
+      <a href="index.html" class="px-2.5 py-1 rounded-md text-xs font-bold flex items-center space-x-1.5 transition bg-orange-600 text-white shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-orange-200"></span>
+        <span>HTML5 Architect</span>
+      </a>
 
-      <button data-track="css" class="track-tab px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-300 hover:text-white">
+      <a href="learnstyles.html" class="px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-400 hover:text-white hover:bg-slate-800">
         <span class="w-2 h-2 rounded-full bg-sky-400"></span>
         <span class="hidden sm:inline">CSS3</span> Stylist
-      </button>
+      </a>
 
-      <button data-track="js" class="track-tab px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-300 hover:text-white">
+      <a href="learnjs.html" class="px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition text-slate-400 hover:text-white hover:bg-slate-800">
         <span class="w-2 h-2 rounded-full bg-amber-400"></span>
         <span class="hidden sm:inline">JavaScript</span> Interactive
-      </button>
-
-      <button data-track="unified" class="track-tab px-2.5 py-1 rounded-md text-xs font-semibold flex items-center space-x-1.5 transition bg-purple-600 text-white shadow-sm">
-        <span class="w-2 h-2 rounded-full bg-purple-300"></span>
-        <span class="font-bold">Full Suite</span>
-      </button>
-
-      <a href="file.zip" download="file.zip" class="download-btn ml-1">
-        Download Zip
       </a>
-    </div>
+
+      <a href="file.zip" download="file.zip" class="download-btn ml-1 hidden sm:inline-flex items-center space-x-1">
+        <i data-lucide="folder-archive" class="w-3 h-3 text-slate-400"></i>
+        <span>Download Zip</span>
+      </a>
+    </nav>
 
     <!-- UTILITY ACTIONS: Challenge, Cheatsheet, Export -->
     <div class="flex items-center space-x-2">
-      <button id="btnOpenChallenges" class="px-2.5 py-1.5 text-xs font-semibold bg-amber-500/15 text-amber-300 hover:bg-amber-500/25 border border-amber-500/30 rounded-md flex items-center space-x-1 transition shadow-sm">
-        <i data-lucide="trophy" class="w-3.5 h-3.5 text-amber-400"></i>
-        <span class="hidden lg:inline">Challenges</span>
+      <button id="btnOpenChallenges" class="px-2.5 py-1.5 text-xs font-semibold bg-orange-500/15 text-orange-300 hover:bg-orange-500/25 border border-orange-500/30 rounded-md flex items-center space-x-1 transition shadow-sm">
+        <i data-lucide="trophy" class="w-3.5 h-3.5 text-orange-400"></i>
+        <span class="hidden lg:inline">HTML Challenges</span>
       </button>
 
       <button id="btnOpenDrawer" class="px-2.5 py-1.5 text-xs font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-md flex items-center space-x-1 transition">
-        <i data-lucide="book-open" class="w-3.5 h-3.5 text-indigo-400"></i>
-        <span class="hidden lg:inline">Handbook</span>
+        <i data-lucide="book-open" class="w-3.5 h-3.5 text-orange-400"></i>
+        <span class="hidden lg:inline">Tag Handbook</span>
       </button>
 
-      <button id="btnExport" title="Export as standalone .html" class="px-2.5 py-1.5 text-xs font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-md flex items-center space-x-1 transition">
+      <button id="btnExport" title="Export as standalone index.html" class="px-2.5 py-1.5 text-xs font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700 rounded-md flex items-center space-x-1 transition">
         <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
         <span class="hidden sm:inline">Export</span>
       </button>
@@ -247,51 +242,44 @@
   <!-- WORKSPACE WRAPPER -->
   <main class="flex-1 flex flex-col md:flex-row min-h-0 overflow-hidden relative">
 
-    <!-- LEFT PANEL: Snippet Bar & Multi-Tab Code Editor -->
+    <!-- LEFT PANEL: Category Filter, Chips Toolbox & Code Editor -->
     <section class="w-full md:w-1/2 flex flex-col min-h-0 border-r border-slate-800/90 bg-slate-950 overflow-hidden">
       
-      <!-- Track Header & Category Pill Filter -->
+      <!-- Category Pill Filter -->
       <div class="bg-slate-900 border-b border-slate-800 px-3 py-1.5 flex items-center justify-between shrink-0">
-        <div class="flex items-center space-x-2 overflow-x-auto py-0.5" id="categoryTabsContainer"></div>
+        <div class="flex items-center space-x-1.5 overflow-x-auto py-0.5" id="categoryTabsContainer"></div>
         <div class="flex items-center space-x-1 shrink-0 ml-2">
-          <span id="activeTrackBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase tracking-wider">
-            Full Suite
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30 uppercase tracking-wider flex items-center space-x-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse"></span>
+            <span>HTML5 Mode</span>
           </span>
         </div>
       </div>
 
-      <!-- Quick Insertion Toolbox (Chips Horizontal Bar) -->
-      <div class="bg-slate-950 border-b border-slate-800/80 px-2 py-1.5 overflow-x-auto shrink-0 flex items-center">
-        <div class="text-[10px] uppercase font-bold text-slate-500 px-1.5 flex items-center space-x-1 shrink-0">
-          <i data-lucide="zap" class="w-3 h-3 text-amber-400"></i>
-          <span>Insert:</span>
+      <!-- Quick Insertion Toolbox (HTML Elements Chips Bar) -->
+      <div class="bg-slate-950 border-b border-slate-800/80 px-2.5 py-1.5 overflow-x-auto shrink-0 flex items-center">
+        <div class="text-[10px] uppercase font-bold text-slate-500 px-1 flex items-center space-x-1 shrink-0">
+          <i data-lucide="zap" class="w-3 h-3 text-orange-400"></i>
+          <span>Insert Tag:</span>
         </div>
-        <div id="snippetChipsRow" class="flex items-center space-x-1.5 pl-1"></div>
+        <div id="snippetChipsRow" class="flex items-center space-x-1.5 pl-1.5"></div>
       </div>
 
-      <!-- Code Editor File Switcher Bar -->
-      <div id="fileTabsBar" class="h-8 bg-slate-900/80 border-b border-slate-800 px-2.5 flex items-center justify-between shrink-0 text-xs">
-        <div class="flex items-center space-x-1" id="fileTabsList">
-          <button data-file="html" class="file-tab active px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 bg-slate-800 text-orange-400 border border-slate-700">
+      <!-- Code Editor File Bar -->
+      <div class="h-8 bg-slate-900/80 border-b border-slate-800 px-2.5 flex items-center justify-between shrink-0 text-xs">
+        <div class="flex items-center space-x-1">
+          <div class="px-2.5 py-1 rounded text-xs font-semibold flex items-center space-x-1.5 bg-slate-800 text-orange-400 border border-slate-700">
             <span class="w-2 h-2 rounded-full bg-orange-500"></span>
-            <span>index.html</span>
-          </button>
-          <button data-file="css" class="file-tab px-2.5 py-1 rounded text-xs font-medium flex items-center space-x-1.5 text-slate-400 hover:text-slate-200">
-            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
-            <span>style.css</span>
-          </button>
-          <button data-file="js" class="file-tab px-2.5 py-1 rounded text-xs font-medium flex items-center space-x-1.5 text-slate-400 hover:text-slate-200">
-            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-            <span>script.js</span>
-          </button>
+            <span>index.html (Semantic Markup)</span>
+          </div>
         </div>
 
         <div class="flex items-center space-x-1">
-          <button id="btnFormatCode" title="Auto-format / Prettify" class="p-1 hover:text-white rounded hover:bg-slate-800 text-slate-400 flex items-center space-x-1">
-            <i data-lucide="wand-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <button id="btnFormatCode" title="Tidy / Format HTML" class="p-1 hover:text-white rounded hover:bg-slate-800 text-slate-400 flex items-center space-x-1">
+            <i data-lucide="wand-2" class="w-3.5 h-3.5 text-orange-400"></i>
             <span class="text-[11px] hidden sm:inline">Format</span>
           </button>
-          <button id="btnCopyCode" title="Copy Editor Code" class="p-1 hover:text-white rounded hover:bg-slate-800 text-slate-400 flex items-center space-x-1">
+          <button id="btnCopyCode" title="Copy HTML Code" class="p-1 hover:text-white rounded hover:bg-slate-800 text-slate-400 flex items-center space-x-1">
             <i data-lucide="copy" class="w-3.5 h-3.5"></i>
           </button>
           <div class="h-3 w-[1px] bg-slate-800 mx-1"></div>
@@ -304,15 +292,15 @@
         </div>
       </div>
 
-      <!-- Editor Code Area: Line numbers + Textarea -->
+      <!-- Editor Area: Line Numbers + Textarea -->
       <div class="flex-1 min-h-0 flex bg-slate-950 relative overflow-hidden font-mono text-[13px]">
         <div id="lineNumbersColumn" class="w-10 py-2.5 bg-slate-950 text-slate-600 border-r border-slate-800 select-none overflow-hidden shrink-0 flex flex-col" style="counter-reset: line;">
           <div class="line-number-row"></div>
         </div>
 
         <textarea id="codeEditorArea" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"
-          class="flex-1 h-full min-h-0 p-2.5 bg-transparent text-slate-200 resize-none outline-none leading-6 editor-font whitespace-pre overflow-auto focus:ring-0 border-0 selection:bg-indigo-500/30"
-          placeholder="Write your front-end code here or tap any snippet above..."></textarea>
+          class="flex-1 h-full min-h-0 p-2.5 bg-transparent text-slate-200 resize-none outline-none leading-6 editor-font whitespace-pre overflow-auto focus:ring-0 border-0 selection:bg-orange-500/30"
+          placeholder="Write semantic HTML5 tags here or click any tag snippet above..."></textarea>
       </div>
 
       <!-- Editor Status Bar -->
@@ -328,7 +316,7 @@
 
         <div class="flex items-center space-x-2 text-[10px] text-slate-500 font-mono">
           <span>Tab = 2 spaces</span>
-          <button id="btnResetCurrent" class="text-slate-400 hover:text-amber-400 ml-1">Reset</button>
+          <button id="btnResetCurrent" class="text-slate-400 hover:text-orange-400 ml-1">Reset Boilerplate</button>
         </div>
       </div>
     </section>
@@ -354,17 +342,17 @@
           <button id="btnToggleCanvasTheme" title="Toggle Preview Background Theme" class="p-1 text-slate-400 hover:text-white bg-slate-800 rounded border border-slate-700">
             <i data-lucide="sun-moon" class="w-3.5 h-3.5 text-amber-300"></i>
           </button>
-          <span class="text-xs text-slate-400 font-medium">Live Canvas</span>
+          <span class="text-xs text-slate-400 font-medium">Browser Sandbox</span>
         </div>
 
         <div class="flex items-center space-x-2">
           <button id="btnToggleConsole" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded text-xs font-mono flex items-center space-x-1.5 transition">
-            <i data-lucide="terminal" class="w-3 h-3 text-emerald-400"></i>
-            <span>Console</span>
+            <i data-lucide="terminal" class="w-3 h-3 text-orange-400"></i>
+            <span>DOM / Console</span>
             <span id="consoleBadgeCount" class="w-4 h-4 rounded-full bg-slate-700 text-[10px] flex items-center justify-center font-bold text-slate-300">0</span>
           </button>
 
-          <button id="btnRunRefresh" class="px-3 py-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-md text-xs font-bold flex items-center space-x-1 shadow transition">
+          <button id="btnRunRefresh" class="px-3 py-1 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white rounded-md text-xs font-bold flex items-center space-x-1 shadow transition">
             <i data-lucide="play" class="w-3.5 h-3.5 fill-current"></i>
             <span>Render</span>
           </button>
@@ -373,15 +361,15 @@
 
       <!-- Preview Stage Container -->
       <div id="previewCanvasArea" class="flex-1 min-h-0 bg-slate-900/60 p-2 sm:p-3 flex items-center justify-center overflow-hidden relative">
-        <iframe id="liveRenderFrame" sandbox="allow-scripts allow-modals allow-same-origin" class="frame-desktop bg-white shadow-xl transition-all" title="Output Preview"></iframe>
+        <iframe id="liveRenderFrame" sandbox="allow-scripts allow-modals allow-same-origin" class="frame-desktop bg-white shadow-xl transition-all" title="HTML5 Live Output"></iframe>
       </div>
 
-      <!-- COLLAPSIBLE JAVASCRIPT CONSOLE DRAWER -->
-      <div id="consoleDrawer" class="h-36 bg-slate-900 border-t border-slate-800 flex flex-col shrink-0 transition-all">
+      <!-- COLLAPSIBLE DOM / VIRTUAL CONSOLE DRAWER -->
+      <div id="consoleDrawer" class="h-32 bg-slate-900 border-t border-slate-800 flex flex-col shrink-0 transition-all">
         <div class="h-7 bg-slate-950 px-3 flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 select-none">
           <div class="flex items-center space-x-2">
-            <i data-lucide="terminal" class="w-3.5 h-3.5 text-emerald-400"></i>
-            <span class="font-mono font-semibold text-slate-300 text-[11px]">JavaScript Virtual Console</span>
+            <i data-lucide="terminal" class="w-3.5 h-3.5 text-orange-400"></i>
+            <span class="font-mono font-semibold text-slate-300 text-[11px]">HTML5 DOM & Script Diagnostics</span>
           </div>
           <div class="flex items-center space-x-2">
             <button id="btnClearConsole" class="hover:text-red-400 font-mono text-[10px] px-1 py-0.5 rounded hover:bg-slate-800">Clear</button>
@@ -392,7 +380,7 @@
         </div>
 
         <div id="consoleLogsList" class="flex-1 min-h-0 overflow-y-auto p-2 font-mono text-xs space-y-1 bg-slate-950/80">
-          <div class="text-slate-500 text-[11px] italic">Console ready. Use console.log(...) in your JavaScript code.</div>
+          <div class="text-slate-500 text-[11px] italic">DOM Inspector active. Structural status and inline errors will report here.</div>
         </div>
       </div>
 
@@ -400,7 +388,7 @@
       <div class="h-7 bg-slate-900 border-t border-slate-800 px-3 flex items-center justify-between text-[11px] text-slate-400 shrink-0 z-10">
         <div class="flex items-center space-x-2">
           <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
-          <span id="previewStatusLabel">Sandbox ready</span>
+          <span id="previewStatusLabel">Ready</span>
         </div>
         <div class="flex items-center space-x-2 font-mono text-[10px] text-slate-500">
           <span id="viewportDimensionsLabel">Responsive Desktop (100%)</span>
@@ -410,15 +398,17 @@
 
   </main>
 
-  <!-- CHALLENGES MODAL DIALOG -->
-  <div id="challengeModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-3">
+  <!-- CHALLENGES MODAL DIALOG (Focused on HTML5) -->
+  <div id="challengeModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3">
     <div class="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
       <div class="p-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-950">
-        <div class="flex items-center space-x-2">
-          <i data-lucide="trophy" class="w-5 h-5 text-amber-400"></i>
+        <div class="flex items-center space-x-2.5">
+          <div class="p-2 rounded-lg bg-orange-500/20 text-orange-400">
+            <i data-lucide="trophy" class="w-5 h-5"></i>
+          </div>
           <div>
-            <h3 class="font-bold text-white text-sm">Interactive Coding Challenges</h3>
-            <p class="text-[11px] text-slate-400">Choose a challenge to test your introductory and intermediate front-end skills!</p>
+            <h3 class="font-bold text-white text-sm">HTML5 Architecture Challenges</h3>
+            <p class="text-[11px] text-slate-400">Build semantic cards, accessible forms, multi-column tables, and clean layout documents.</p>
           </div>
         </div>
         <button id="btnCloseChallengeModal" class="p-1 text-slate-400 hover:text-white hover:bg-slate-800 rounded">
@@ -427,10 +417,9 @@
       </div>
 
       <div class="p-3 border-b border-slate-800 flex items-center space-x-2 bg-slate-900/60 overflow-x-auto text-xs">
-        <button data-challtrack="all" class="chall-filter active px-2.5 py-1 rounded-md bg-blue-600 text-white font-semibold">All Challenges</button>
-        <button data-challtrack="html" class="chall-filter px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white font-medium">HTML5</button>
-        <button data-challtrack="css" class="chall-filter px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white font-medium">CSS3</button>
-        <button data-challtrack="js" class="chall-filter px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white font-medium">JavaScript</button>
+        <button data-level="all" class="chall-filter active px-2.5 py-1 rounded-md bg-orange-600 text-white font-semibold">All Challenges</button>
+        <button data-level="Introductory" class="chall-filter px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white font-medium">Introductory</button>
+        <button data-level="Intermediate" class="chall-filter px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 hover:text-white font-medium">Intermediate</button>
       </div>
 
       <div id="challengesList" class="p-3 overflow-y-auto space-y-2.5 flex-1 divide-y divide-slate-800/50"></div>
@@ -441,8 +430,8 @@
   <aside id="referenceDrawer" class="hidden fixed inset-y-0 right-0 w-full sm:w-96 bg-slate-900 border-l border-slate-800 shadow-2xl z-50 flex flex-col">
     <div class="p-3 border-b border-slate-800 flex items-center justify-between bg-slate-950">
       <div class="flex items-center space-x-2">
-        <i data-lucide="book-marked" class="w-4 h-4 text-indigo-400"></i>
-        <h2 class="text-xs font-bold text-white uppercase tracking-wider">Front-End Developer Handbook</h2>
+        <i data-lucide="book-marked" class="w-4 h-4 text-orange-400"></i>
+        <h2 class="text-xs font-bold text-white uppercase tracking-wider">HTML5 Semantic Handbook</h2>
       </div>
       <button id="btnCloseDrawer" class="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white">
         <i data-lucide="x" class="w-4 h-4"></i>
@@ -450,160 +439,322 @@
     </div>
 
     <div class="p-2 border-b border-slate-800 bg-slate-900">
-      <input type="text" id="handbookSearchInput" placeholder="Search HTML tags, CSS properties, or JS methods..."
-        class="w-full px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-md text-xs text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500">
+      <input type="text" id="handbookSearchInput" placeholder="Search HTML5 tags, attributes, semantics..."
+        class="w-full px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-md text-xs text-white placeholder-slate-400 focus:outline-none focus:border-orange-500">
     </div>
 
     <div id="handbookContentList" class="flex-1 overflow-y-auto p-3 space-y-2.5"></div>
   </aside>
 
   <!-- POPUP NOTIFICATION TOAST -->
-  <div id="toastNotification" class="fixed bottom-3 right-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs px-3.5 py-2 rounded-lg shadow-2xl flex items-center space-x-2 z-50 pointer-events-none">
+  <div id="toastNotification" class="fixed bottom-3 right-4 bg-gradient-to-r from-orange-600 to-amber-600 text-white text-xs px-3.5 py-2 rounded-lg shadow-2xl flex items-center space-x-2 z-50 pointer-events-none">
     <i data-lucide="check-circle" class="w-4 h-4 text-emerald-300"></i>
-    <span id="toastNotificationMsg">Code snippet inserted</span>
+    <span id="toastNotificationMsg">Element inserted</span>
   </div>
 
-  <!-- MASTER DATASETS SCRIPT -->
+  <!-- MASTER HTML5 DATASETS SCRIPT -->
   <script>
-    const SNIPPET_DATA = {
-      html: {
-        categories: [
-          { id: 'all', label: 'All Tags' },
-          { id: 'structure', label: 'Structure' },
-          { id: 'typography', label: 'Typography' },
-          { id: 'lists', label: 'Lists' },
-          { id: 'media', label: 'Links & Media' },
-          { id: 'forms', label: 'Forms & Tables' }
-        ],
-        snippets: [
-          { name: 'h1', tag: '<h1>', cat: 'typography', desc: 'Main headline for page or section', code: '<h1>Welcome to HTML5</h1>\n' },
-          { name: 'h2', tag: '<h2>', cat: 'typography', desc: 'Secondary section subtitle', code: '<h2>About This Project</h2>\n' },
-          { name: 'p', tag: '<p>', cat: 'typography', desc: 'Paragraph text element', code: '<p>Learning front-end development is exciting and creative!</p>\n' },
-          { name: 'strong', tag: '<strong>', cat: 'typography', desc: 'Bold text with semantic importance', code: '<strong>Important Notice:</strong> ' },
-          { name: 'em', tag: '<em>', cat: 'typography', desc: 'Italicized emphasized text', code: '<em>featured</em> ' },
-          { name: 'header', tag: '<header>', cat: 'structure', desc: 'Introductory container or navigational banner', code: '<header class="header">\n  <h1>My Cool App</h1>\n  <p>Learn front-end step by step</p>\n</header>\n' },
-          { name: 'main', tag: '<main>', cat: 'structure', desc: 'Central body content container', code: '<main>\n  <section>\n    <h2>Getting Started</h2>\n    <p>Write clean semantics!</p>\n  </section>\n</main>\n' },
-          { name: 'section', tag: '<section>', cat: 'structure', desc: 'Thematic grouping of content', code: '<section>\n  <h3>Key Concept</h3>\n  <p>Everything in HTML is a box.</p>\n</section>\n' },
-          { name: 'footer', tag: '<footer>', cat: 'structure', desc: 'Footer area for author, links & copyright', code: '<footer>\n  <p>&copy; 2026 Code Academy &bull; Have fun along the way!</p>\n</footer>\n' },
-          { name: 'div.card', tag: '<div card>', cat: 'structure', desc: 'Flexible container card wrapper', code: '<div class="card">\n  <h3>Card Title</h3>\n  <p>Card body description here.</p>\n</div>\n' },
-          { name: 'ul', tag: '<ul>', cat: 'lists', desc: 'Unordered bullet point list', code: '<ul>\n  <li>HTML5 for Structure</li>\n  <li>CSS3 for Style</li>\n  <li>JavaScript for Interactivity</li>\n</ul>\n' },
-          { name: 'ol', tag: '<ol>', cat: 'lists', desc: 'Ordered numbered sequence list', code: '<ol>\n  <li>Draft HTML markup</li>\n  <li>Add CSS styling</li>\n  <li>Add JavaScript interactivity</li>\n</ol>\n' },
-          { name: 'a', tag: '<a>', cat: 'media', desc: 'Hyperlink to websites or internal anchors', code: '<a href="https://developer.mozilla.org" target="_blank">MDN Web Docs</a>' },
-          { name: 'img', tag: '<img>', cat: 'media', desc: 'Responsive image element', code: '<img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500" alt="Code laptop" style="max-width:100%; border-radius:8px;">\n' },
-          { name: 'button', tag: '<button>', cat: 'forms', desc: 'Clickable action button', code: '<button class="btn">Explore More</button>\n' },
-          { name: 'form', tag: '<form>', cat: 'forms', desc: 'Interactive input form', code: '<form id="contactForm">\n  <label for="username">Username:</label>\n  <input type="text" id="username" placeholder="alex123">\n  <button type="submit">Send</button>\n</form>\n' },
-          { name: 'table', tag: '<table>', cat: 'forms', desc: 'Data grid table structure', code: '<table>\n  <tr><th>Language</th><th>Role</th></tr>\n  <tr><td>HTML5</td><td>Structure</td></tr>\n  <tr><td>CSS3</td><td>Aesthetics</td></tr>\n  <tr><td>JavaScript</td><td>Logic</td></tr>\n</table>\n' }
-        ]
-      },
-
-      css: {
-        categories: [
-          { id: 'all', label: 'All CSS' },
-          { id: 'flexbox', label: 'Flexbox' },
-          { id: 'grid', label: 'CSS Grid' },
-          { id: 'effects', label: 'Gradients & Glow' },
-          { id: 'glass', label: 'Glassmorphism' },
-          { id: 'animation', label: 'Animations' },
-          { id: 'box', label: 'Box Model' }
-        ],
-        snippets: [
-          { name: 'Center with Flex', tag: 'flex: center', cat: 'flexbox', desc: 'Perfect horizontal & vertical centering', code: 'display: flex;\njustify-content: center;\nalign-items: center;\n' },
-          { name: 'Flex Column', tag: 'flex: column', cat: 'flexbox', desc: 'Stack items vertically with a gap', code: 'display: flex;\nflex-direction: column;\ngap: 1rem;\n' },
-          { name: 'Flex Space-Between', tag: 'flex: space-between', cat: 'flexbox', desc: 'Even horizontal space distribution', code: 'display: flex;\njustify-content: space-between;\nalign-items: center;\n' },
-          { name: 'Auto-Fit Grid', tag: 'grid: auto-fit', cat: 'grid', desc: 'Responsive card grid with no media queries', code: 'display: grid;\ngrid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\ngap: 1.5rem;\n' },
-          { name: '3-Column Grid', tag: 'grid: 3-col', cat: 'grid', desc: 'Fixed 3 column balanced grid', code: 'display: grid;\ngrid-template-columns: 1fr 1fr 1fr;\ngap: 1rem;\n' },
-          { name: 'Glass Card', tag: 'glassmorphism', cat: 'glass', desc: 'Frosted glass blur with subtle border', code: 'background: rgba(255, 255, 255, 0.15);\nbackdrop-filter: blur(12px);\n-webkit-backdrop-filter: blur(12px);\nborder: 1px solid rgba(255, 255, 255, 0.25);\nborder-radius: 14px;\nbox-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);\n' },
-          { name: 'Neon Glow', tag: 'box-shadow: glow', cat: 'effects', desc: 'Cyberpunk neon border and drop shadow', code: 'box-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(56, 189, 248, 0.3);\nborder: 1px solid #38bdf8;\n' },
-          { name: 'Vibrant Gradient', tag: 'linear-gradient', cat: 'effects', desc: 'Modern high-contrast gradient background', code: 'background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);\ncolor: #ffffff;\n' },
-          { name: 'Smooth Hover Lift', tag: 'hover: lift', cat: 'box', desc: 'Card float lift transition on mouse hover', code: 'transition: transform 0.2s ease, box-shadow 0.2s ease;\ncursor: pointer;\n/* On hover: transform: translateY(-4px); */\n' },
-          { name: 'Spin Animation', tag: '@keyframes spin', cat: 'animation', desc: 'Infinite 360 degree rotating spinner', code: '@keyframes spin {\n  from { transform: rotate(0deg); }\n  to { transform: rotate(360deg); }\n}\nanimation: spin 2s linear infinite;\n' },
-          { name: 'Pulse Keyframes', tag: '@keyframes pulse', cat: 'animation', desc: 'Subtle breathing pulse animation', code: '@keyframes pulse {\n  0%, 100% { transform: scale(1); opacity: 1; }\n  50% { transform: scale(1.05); opacity: 0.85; }\n}\nanimation: pulse 2.5s ease-in-out infinite;\n' },
-          { name: 'Clean Card Box', tag: 'box model', cat: 'box', desc: 'Standard modern card padding & rounded corners', code: 'padding: 1.5rem;\nborder-radius: 0.75rem;\nbackground-color: #ffffff;\nborder: 1px solid #e2e8f0;\nbox-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);\n' }
-        ]
-      },
-
-      js: {
-        categories: [
-          { id: 'all', label: 'All JS' },
-          { id: 'dom', label: 'DOM Selectors' },
-          { id: 'events', label: 'Events' },
-          { id: 'interactive', label: 'Interactive UI' },
-          { id: 'async', label: 'Async & Fetch' },
-          { id: 'basics', label: 'Variables & Math' }
-        ],
-        snippets: [
-          { name: 'querySelector', tag: 'doc.querySelector', cat: 'dom', desc: 'Grab first matching element by CSS selector', code: 'const button = document.querySelector("#myBtn");\nconsole.log("Selected element:", button);\n' },
-          { name: 'Click Event', tag: 'addEventListener', cat: 'events', desc: 'Attach mouse click listener to element', code: 'document.querySelector("#btn").addEventListener("click", () => {\n  console.log("Button was clicked!");\n});\n' },
-          { name: 'Toggle Class', tag: 'classList.toggle', cat: 'dom', desc: 'Add or remove an active/dark class name', code: 'const card = document.querySelector(".card");\ncard.classList.toggle("active");\nconsole.log("Toggled active class!");\n' },
-          { name: 'Change Text Content', tag: 'textContent =', cat: 'dom', desc: 'Update HTML element text safely', code: 'document.querySelector("#output").textContent = "Updated via JavaScript!";\n' },
-          { name: 'Click Counter', tag: 'counter pattern', cat: 'interactive', desc: 'Functional incremental click counter', code: 'let count = 0;\nconst counterBtn = document.querySelector("#counterBtn");\nconst counterDisplay = document.querySelector("#counterDisplay");\n\ncounterBtn.addEventListener("click", () => {\n  count++;\n  counterDisplay.textContent = count;\n  console.log("Current count:", count);\n});\n' },
-          { name: 'Fetch Simulator', tag: 'fetch simulation', cat: 'async', desc: 'Simulate asynchronous web request with delay', code: 'console.log("Fetching user profile...");\nsetTimeout(() => {\n  const user = { name: "Taylor", role: "Junior Frontend Dev", score: 98 };\n  console.log("Data loaded successfully:", user);\n  document.querySelector("#status").textContent = `Welcome ${user.name} (${user.role})!`;\n}, 1200);\n' },
-          { name: 'Random Color Generator', tag: 'random color', cat: 'basics', desc: 'Generate a random hex color code', code: 'function getRandomColor() {\n  const hex = Math.floor(Math.random() * 16777215).toString(16);\n  return "#" + hex.padStart(6, "0");\n}\nconsole.log("Generated Color:", getRandomColor());\n' },
-          { name: 'Interval Clock', tag: 'setInterval', cat: 'interactive', desc: 'Run code every second like a timer', code: 'setInterval(() => {\n  const now = new Date().toLocaleTimeString();\n  console.log("Tick:", now);\n  const timeEl = document.querySelector("#time");\n  if (timeEl) timeEl.textContent = now;\n}, 1000);\n' }
-        ]
-      }
+    const HTML5_DATA = {
+      categories: [
+        { id: 'all', label: 'All Tags' },
+        { id: 'structure', label: 'Structure' },
+        { id: 'typography', label: 'Typography' },
+        { id: 'lists', label: 'Lists' },
+        { id: 'media', label: 'Media & Links' },
+        { id: 'forms', label: 'Forms & Tables' }
+      ],
+      snippets: [
+        { name: 'header', tag: '<header>', cat: 'structure', desc: 'Introductory container or banner for navigation and branding', code: '<header>\n  <h1>Website Title</h1>\n  <nav>\n    <a href="#about">About</a> &bull;\n    <a href="#services">Services</a>\n  </nav>\n</header>\n' },
+        { name: 'main', tag: '<main>', cat: 'structure', desc: 'Central unique content of the document body', code: '<main>\n  <h2>Primary Article</h2>\n  <p>Main readable content belongs in the main landmark element.</p>\n</main>\n' },
+        { name: 'article', tag: '<article>', cat: 'structure', desc: 'Self-contained syndicated composition like a blog post or news story', code: '<article>\n  <h3>Independent Post</h3>\n  <p>Published on <time datetime="2026-10-25">Oct 25, 2026</time></p>\n  <p>This content is complete and reusable on its own.</p>\n</article>\n' },
+        { name: 'section', tag: '<section>', cat: 'structure', desc: 'Thematic grouping of content, typically with a heading', code: '<section>\n  <h2>Features Section</h2>\n  <p>Group related elements together semantically.</p>\n</section>\n' },
+        { name: 'nav', tag: '<nav>', cat: 'structure', desc: 'Navigation section containing major navigational links', code: '<nav aria-label="Main Navigation">\n  <ul>\n    <li><a href="/">Home</a></li>\n    <li><a href="/docs">Documentation</a></li>\n    <li><a href="/contact">Contact</a></li>\n  </ul>\n</nav>\n' },
+        { name: 'aside', tag: '<aside>', cat: 'structure', desc: 'Tangentially related sidebar content or callout box', code: '<aside>\n  <h4>Quick Tip</h4>\n  <p>HTML5 semantic tags improve SEO and screen reader accessibility.</p>\n</aside>\n' },
+        { name: 'footer', tag: '<footer>', cat: 'structure', desc: 'Footer area containing author, copyright, and secondary links', code: '<footer>\n  <hr>\n  <p>&copy; 2026 Code Academy &bull; Semantic HTML5 Architecture</p>\n</footer>\n' },
+        { name: 'h1', tag: '<h1>', cat: 'typography', desc: 'Top level heading (one primary per page recommended)', code: '<h1>The Art of HTML5 Architecture</h1>\n' },
+        { name: 'h2', tag: '<h2>', cat: 'typography', desc: 'Secondary topic heading', code: '<h2>Section Topic</h2>\n' },
+        { name: 'p', tag: '<p>', cat: 'typography', desc: 'Paragraph block for readable text passages', code: '<p>HTML provides the fundamental skeleton of the World Wide Web.</p>\n' },
+        { name: 'blockquote', tag: '<blockquote>', cat: 'typography', desc: 'Extended quotation cited from an external source', code: '<blockquote cite="https://w3.org">\n  "The power of the Web is in its universality. Access by everyone regardless of disability is an essential aspect."\n</blockquote>\n' },
+        { name: 'code', tag: '<code>', cat: 'typography', desc: 'Inline fragment of computer code', code: '<code>&lt;header&gt;</code> ' },
+        { name: 'ul', tag: '<ul>', cat: 'lists', desc: 'Unordered bullet list of items', code: '<ul>\n  <li>HTML5 for Structure</li>\n  <li>CSS3 for Styling</li>\n  <li>JavaScript for Interactivity</li>\n</ul>\n' },
+        { name: 'ol', tag: '<ol>', cat: 'lists', desc: 'Ordered numerical step-by-step sequence', code: '<ol>\n  <li>Draft semantic markup</li>\n  <li>Apply responsive CSS</li>\n  <li>Enhance with JavaScript DOM logic</li>\n</ol>\n' },
+        { name: 'dl', tag: '<dl>', cat: 'lists', desc: 'Description/Definition list (<dl>, <dt>, <dd>)', code: '<dl>\n  <dt>HTML5</dt>\n  <dd>HyperText Markup Language 5th generation.</dd>\n  <dt>Semantic Web</dt>\n  <dd>Meaningful markup understood by humans and machines.</dd>\n</dl>\n' },
+        { name: 'a', tag: '<a>', cat: 'media', desc: 'Hyperlink to another resource or anchor', code: '<a href="https://developer.mozilla.org" target="_blank" rel="noopener">MDN Web Documentation</a>\n' },
+        { name: 'img', tag: '<img>', cat: 'media', desc: 'Accessible image with alternate description', code: '<img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600" alt="Laptop computer displaying web development code" style="max-width:100%; height:auto; border-radius:8px;">\n' },
+        { name: 'figure', tag: '<figure>', cat: 'media', desc: 'Self-contained image or diagram with caption', code: '<figure>\n  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600" alt="Modern desk with code on monitor" style="max-width:100%; border-radius:8px;">\n  <figcaption style="font-size: 0.85rem; color:#64748b; margin-top:4px;">Figure 1: Front-end developer workstation setup.</figcaption>\n</figure>\n' },
+        { name: 'form', tag: '<form>', cat: 'forms', desc: 'Interactive form container for user input', code: '<form action="#" method="POST">\n  <div>\n    <label for="fullName">Full Name:</label><br>\n    <input type="text" id="fullName" name="fullName" required placeholder="Alex River">\n  </div>\n  <br>\n  <div>\n    <label for="userEmail">Email Address:</label><br>\n    <input type="email" id="userEmail" name="userEmail" required placeholder="alex@example.com">\n  </div>\n  <br>\n  <button type="submit">Submit Form</button>\n</form>\n' },
+        { name: 'select', tag: '<select>', cat: 'forms', desc: 'Dropdown selection menu with options', code: '<label for="trackSelect">Choose Learning Focus:</label><br>\n<select id="trackSelect" name="track">\n  <option value="html">HTML5 Semantic Architect</option>\n  <option value="css">CSS3 Visual Stylist</option>\n  <option value="js">JavaScript Logic</option>\n</select>\n' },
+        { name: 'table', tag: '<table>', cat: 'forms', desc: 'Accessible multi-row data grid with header and cells', code: '<table border="1" cellpadding="8" style="border-collapse: collapse; width:100%; text-align:left;">\n  <thead>\n    <tr style="background-color: #f1f5f9;">\n      <th>Element</th>\n      <th>Semantic Purpose</th>\n      <th>Display Type</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>&lt;header&gt;</td>\n      <td>Navigational or banner container</td>\n      <td>Block</td>\n    </tr>\n    <tr>\n      <td>&lt;article&gt;</td>\n      <td>Standalone syndicatable content</td>\n      <td>Block</td>\n    </tr>\n    <tr>\n      <td>&lt;strong&gt;</td>\n      <td>Urgent importance</td>\n      <td>Inline</td>\n    </tr>\n  </tbody>\n</table>\n' }
+      ]
     };
 
-    // CHALLENGES DIRECTORY
-    const CHALLENGES = [
+    const HTML5_CHALLENGES = [
       {
-        id: 'html-1',
-        track: 'html',
+        id: 'html-bio',
         level: 'Introductory',
-        title: 'HTML5: Build a Developer Bio Card',
-        desc: 'Construct a semantic card with a level 1 heading (<h1>), a short paragraph bio, and an unordered list with 3 technologies.',
-        starterHtml: '<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: sans-serif; padding: 20px; }\n    .bio-card { border: 2px dashed #94a3b8; padding: 20px; border-radius: 8px; }\n  </style>\n</head>\n<body>\n  <div class="bio-card">\n    <!-- 1. Add your <h1> name here -->\n    \n    <!-- 2. Add your bio <p> here -->\n    \n    <!-- 3. Add a <ul> with 3 <li> skills -->\n    \n  </div>\n</body>\n</html>',
-        solutionHtml: '<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: sans-serif; padding: 20px; }\n    .bio-card { border: 2px solid #3b82f6; padding: 20px; border-radius: 8px; background: #eff6ff; }\n  </style>\n</head>\n<body>\n  <div class="bio-card">\n    <h1>Alex River</h1>\n    <p>Front-end developer passionate about clean UI & interactive experiences.</p>\n    <ul>\n      <li>HTML5 Semantic Architecture</li>\n      <li>CSS3 Flexbox & Grid</li>\n      <li>JavaScript ES6</li>\n    </ul>\n  </div>\n</body>\n</html>'
-      },
-      {
-        id: 'css-1',
-        track: 'css',
-        level: 'Introductory',
-        title: 'CSS3: Center a Card with Flexbox',
-        desc: 'Use CSS Flexbox on the body container to center the `.box` div both horizontally and vertically.',
-        starterCss: 'body {\n  height: 100vh;\n  margin: 0;\n  background: #0f172a;\n  /* Add Flexbox centering properties here: */\n}\n\n.box {\n  width: 220px;\n  padding: 24px;\n  background: #3b82f6;\n  color: white;\n  text-align: center;\n  border-radius: 12px;\n  font-family: sans-serif;\n}',
-        starterHtml: '<div class="box">\n  <h3>Flexbox Master</h3>\n  <p>I am centered!</p>\n</div>',
-        solutionCss: 'body {\n  height: 100vh;\n  margin: 0;\n  background: #0f172a;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n.box {\n  width: 220px;\n  padding: 24px;\n  background: #3b82f6;\n  color: white;\n  text-align: center;\n  border-radius: 12px;\n  font-family: sans-serif;\n  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);\n}'
-      },
-      {
-        id: 'css-2',
-        track: 'css',
-        level: 'Intermediate',
-        title: 'CSS3: Glowing Glassmorphism Button',
-        desc: 'Create an engaging glassmorphic button with backdrop-filter blur, border radius, and a neon hover glow effect.',
-        starterCss: 'body {\n  height: 100vh;\n  background: linear-gradient(135deg, #1e1b4b, #31104b);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin: 0;\n}\n\n.glass-btn {\n  /* Add glassmorphic styling and glow here: */\n  color: white;\n  padding: 14px 28px;\n  font-size: 16px;\n  font-weight: 600;\n  cursor: pointer;\n}',
-        starterHtml: '<button class="glass-btn">Launch Academy 🚀</button>',
-        solutionCss: 'body {\n  height: 100vh;\n  background: linear-gradient(135deg, #1e1b4b, #31104b);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin: 0;\n}\n\n.glass-btn {\n  background: rgba(255, 255, 255, 0.1);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n  border: 1px solid rgba(255, 255, 255, 0.3);\n  border-radius: 12px;\n  color: white;\n  padding: 14px 28px;\n  font-size: 16px;\n  font-weight: 600;\n  cursor: pointer;\n  transition: all 0.25s ease;\n  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);\n}\n\n.glass-btn:hover {\n  transform: translateY(-3px) scale(1.03);\n  box-shadow: 0 0 25px rgba(236, 72, 153, 0.7);\n  border-color: #ec4899;\n}'
-      },
-      {
-        id: 'js-1',
-        track: 'js',
-        level: 'Introductory',
-        title: 'JavaScript: Interactive Click Counter',
-        desc: 'Write the click listener logic to increment a number on button press and log the new count in the console.',
-        starterJs: '// 1. Initialize count variable\nlet count = 0;\n\n// 2. Select elements\nconst btn = document.querySelector("#clicker");\nconst display = document.querySelector("#number");\n\n// 3. Attach click event listener\nbtn.addEventListener("click", () => {\n  // Increment and display here!\n  \n});',
-        starterHtml: '<div style="font-family: sans-serif; text-align: center; padding: 40px;">\n  <h1>Click Counter Challenge</h1>\n  <h2 id="number" style="font-size: 48px; color: #f59e0b; margin: 10px 0;">0</h2>\n  <button id="clicker" style="background:#2563eb; color:white; border:none; padding:12px 24px; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer;">Click Me!</button>\n</div>',
-        solutionJs: 'let count = 0;\nconst btn = document.querySelector("#clicker");\nconst display = document.querySelector("#number");\n\nbtn.addEventListener("click", () => {\n  count++;\n  display.textContent = count;\n  console.log("Updated count to:", count);\n});'
-      },
-      {
-        id: 'js-2',
-        track: 'js',
-        level: 'Intermediate',
-        title: 'JavaScript: Theme Mode Switcher',
-        desc: 'Toggle a dark theme class on the body when clicking the toggle button and log the active theme state.',
-        starterJs: 'const toggleBtn = document.querySelector("#themeBtn");\n\ntoggleBtn.addEventListener("click", () => {\n  // Toggle the "dark-theme" class on document.body\n  \n  // Log current theme in console\n});',
-        starterHtml: '<style>\n  body { font-family: sans-serif; transition: background 0.3s, color 0.3s; padding: 40px; text-align: center; background: #ffffff; color: #1e293b; }\n  body.dark-theme { background: #0f172a; color: #f8fafc; }\n  .card { border: 1px solid #cbd5e1; padding: 24px; border-radius: 12px; display: inline-block; }\n  body.dark-theme .card { border-color: #334155; }\n</style>\n\n<div class="card">\n  <h2>Theme Switcher Demo</h2>\n  <p>Test light and dark modes with JavaScript!</p>\n  <button id="themeBtn" style="padding:10px 20px; border-radius:6px; cursor:pointer; font-weight:600;">Switch Theme</button>\n</div>',
-        solutionJs: 'const toggleBtn = document.querySelector("#themeBtn");\n\ntoggleBtn.addEventListener("click", () => {\n  document.body.classList.toggle("dark-theme");\n  const isDark = document.body.classList.contains("dark-theme");\n  console.log("Current theme mode:", isDark ? "Dark" : "Light");\n  toggleBtn.textContent = isDark ? "Switch to Light Mode" : "Switch to Dark Mode";\n});'
-      }
-    ];
-
-    // STARTER WORKSPACES FOR TRACKS
-    const TRACK_STARTERS = {
-      html: {
-        html: `<!DOCTYPE html>
+        title: 'Developer Bio Card',
+        desc: 'Construct a semantic card with a level 1 heading, a concise bio paragraph, and an unordered skills list.',
+        starterHtml: `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Developer Bio</title>
+  <style>
+    body { font-family: sans-serif; padding: 25px; background: #f8fafc; color: #1e293b; }
+    .bio-card { border: 2px dashed #94a3b8; padding: 24px; border-radius: 12px; max-width: 480px; margin: 0 auto; background: white; }
+  </style>
+</head>
+<body>
+
+  <div class="bio-card">
+    <!-- 1. Add your <h1> name here -->
+    
+    <!-- 2. Add your bio <p> here -->
+    
+    <!-- 3. Add an unordered list <ul> with 3 skills <li> -->
+    
+  </div>
+
+</body>
+</html>`,
+        solutionHtml: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Developer Bio</title>
+  <style>
+    body { font-family: sans-serif; padding: 25px; background: #f8fafc; color: #1e293b; }
+    .bio-card { border: 2px solid #ea580c; padding: 24px; border-radius: 12px; max-width: 480px; margin: 0 auto; background: white; box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+    h1 { margin-top: 0; color: #0f172a; }
+    ul { padding-left: 20px; color: #334155; }
+    li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+
+  <div class="bio-card">
+    <h1>Jordan River</h1>
+    <p>Front-end developer focused on accessible semantic HTML5 architecture, performance, and clean responsive web layouts.</p>
+    <ul>
+      <li>HTML5 Semantic Landmarks (<header>, <main>, <nav>)</li>
+      <li>Accessible Forms and Validation</li>
+      <li>Microdata and SEO Best Practices</li>
+    </ul>
+  </div>
+
+</body>
+</html>`
+      },
+      {
+        id: 'html-article',
+        level: 'Introductory',
+        title: 'Semantic Blog Article Post',
+        desc: 'Organize a blog article using semantic landmark elements: <header>, <time>, <p>, <blockquote>, and <footer>.',
+        starterHtml: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog Post</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; line-height: 1.6; max-width: 600px; margin: auto; }
+    article { border: 1px solid #cbd5e1; padding: 20px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+  <article>
+    <!-- Add <header> with <h2> title and publication <time> -->
+
+    <!-- Add body paragraphs <p> and a <blockquote> quote -->
+
+    <!-- Add <footer> with author credits -->
+
+  </article>
+
+</body>
+</html>`,
+        solutionHtml: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog Post</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; line-height: 1.6; max-width: 620px; margin: auto; background:#f8fafc; color:#334155; }
+    article { background: white; border: 1px solid #e2e8f0; padding: 28px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    h2 { color: #0f172a; margin-top: 0; }
+    time { font-size: 0.85rem; color: #ea580c; font-weight: 600; }
+    blockquote { border-left: 4px solid #ea580c; padding-left: 14px; margin: 20px 0; font-style: italic; color: #475569; }
+    footer { margin-top: 24px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+  </style>
+</head>
+<body>
+
+  <article>
+    <header>
+      <h2>Why Semantic HTML5 Still Rules the Web</h2>
+      <p>Published: <time datetime="2026-10-25">October 25, 2026</time> &bull; By Alex Taylor</p>
+    </header>
+
+    <p>Before CSS makes a page dazzling or JavaScript brings interactivity, semantic HTML gives your application meaning and accessibility.</p>
+
+    <blockquote>
+      "Writing good semantic HTML is the single highest leverage skill in front-end development."
+    </blockquote>
+
+    <p>Search bots, screen readers, and mobile browsers all depend upon standard tag structures to parse content accurately.</p>
+
+    <footer>
+      <p>Categorized under: <strong>Web Standards &bull; Architecture</strong></p>
+    </footer>
+  </article>
+
+</body>
+</html>`
+      },
+      {
+        id: 'html-form',
+        level: 'Intermediate',
+        title: 'Accessible Contact Registration Form',
+        desc: 'Build an accessible form with paired <label for=""> attributes, required inputs, email validation, and a <select> dropdown.',
+        starterHtml: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    form { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+  <!-- Construct your accessible registration form here -->
+
+</body>
+</html>`,
+        solutionHtml: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 24px; background: #f1f5f9; color: #0f172a; }
+    form { max-width: 420px; margin: auto; padding: 24px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+    h2 { margin-top: 0; color: #0f172a; font-size: 1.3rem; }
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: #334155; }
+    input, select, textarea { width: 100%; box-sizing: border-box; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem; }
+    input:focus, select:focus, textarea:focus { border-color: #ea580c; outline: none; }
+    button { background: #ea580c; color: white; border: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; }
+    button:hover { background: #c2410c; }
+  </style>
+</head>
+<body>
+
+  <form action="#" method="POST">
+    <h2>Student Registration</h2>
+    
+    <div class="form-group">
+      <label for="studentName">Full Name *</label>
+      <input type="text" id="studentName" name="studentName" placeholder="Sarah Connor" required>
+    </div>
+
+    <div class="form-group">
+      <label for="studentEmail">Email Address *</label>
+      <input type="email" id="studentEmail" name="studentEmail" placeholder="sarah@tech.org" required>
+    </div>
+
+    <div class="form-group">
+      <label for="trackSelect">Selected Track</label>
+      <select id="trackSelect" name="track">
+        <option value="html">HTML5 Semantic Architect</option>
+        <option value="css">CSS3 Visual Stylist</option>
+        <option value="js">JavaScript Interactive</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Learning Goal (Optional)</label>
+      <textarea id="notes" name="notes" rows="3" placeholder="I want to learn how to build web applications..."></textarea>
+    </div>
+
+    <button type="submit">Submit Registration &rarr;</button>
+  </form>
+
+</body>
+</html>`
+      },
+      {
+        id: 'html-table',
+        level: 'Intermediate',
+        title: 'HTML5 Data Comparison Table',
+        desc: 'Author an accessible tabular data grid using <table>, <thead>, <tbody>, <tr>, <th> with scope="col", and <td> elements.',
+        starterHtml: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Table</title>
+</head>
+<body>
+
+  <!-- Add your comparison table here -->
+
+</body>
+</html>`,
+        solutionHtml: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Course Comparison</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 24px; background: #f8fafc; color: #1e293b; }
+    table { width: 100%; max-width: 600px; margin: auto; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.9rem; }
+    thead th { background-color: #ea580c; color: white; font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; }
+    tbody tr:hover { background-color: #fff7ed; }
+    caption { font-size: 1.2rem; font-weight: bold; margin-bottom: 12px; color: #0f172a; caption-side: top; text-align: left; }
+  </style>
+</head>
+<body>
+
+  <table>
+    <caption>Front-End Architecture Modules</caption>
+    <thead>
+      <tr>
+        <th scope="col">Module</th>
+        <th scope="col">Focus Area</th>
+        <th scope="col">Prerequisite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HTML5</strong></td>
+        <td>Semantics, Accessibility, Structure</td>
+        <td>None (Beginner Friendly)</td>
+      </tr>
+      <tr>
+        <td><strong>CSS3</strong></td>
+        <td>Flexbox, Grid, Animations</td>
+        <td>HTML5 Structure</td>
+      </tr>
+      <tr>
+        <td><strong>JavaScript</strong></td>
+        <td>DOM Events, State, Interactivity</td>
+        <td>HTML5 & CSS3 Basics</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>`
+      }
+    ];
+
+    const DEFAULT_HTML_STARTER = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HTML5 Architect Playground</title>
   <style>
     body {
@@ -615,409 +766,126 @@
       margin: 0;
     }
     .container {
-      max-width: 640px;
+      max-width: 680px;
       margin: 0 auto;
       background: #ffffff;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      padding: 32px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px -2px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
     }
-    h1 { color: #0f172a; margin-top: 0; }
-    .highlight { color: #ea580c; font-weight: 600; }
+    header {
+      border-bottom: 2px solid #ffedd5;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #0f172a;
+      margin: 0 0 8px;
+      font-size: 1.8rem;
+    }
+    .badge {
+      display: inline-block;
+      background: #ea580c;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .highlight {
+      color: #ea580c;
+      font-weight: 600;
+      margin: 6px 0 0;
+    }
+    section {
+      margin: 24px 0;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    code {
+      background: #ffedd5;
+      color: #9a3412;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.9em;
+    }
+    .cta-card {
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 24px;
+    }
+    footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 16px;
+      margin-top: 32px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
     <header>
-      <h1>Welcome to HTML5 Architect</h1>
-      <p class="highlight">Step 1: Master semantic tags and document flow!</p>
+      <span class="badge">Semantic HTML5</span>
+      <h1>Master Document Architecture</h1>
+      <p class="highlight">Step 1: Write accessible, meaningful tags without layout hacks.</p>
     </header>
 
     <main>
-      <p>HTML (HyperText Markup Language) gives your website structure, meaning, and accessibility.</p>
+      <p>HTML (HyperText Markup Language) establishes the foundation of every web experience. Using semantic tags makes your code accessible to screen readers, understandable to search crawlers, and intuitive to maintain.</p>
 
-      <h3>Popular HTML5 Tags:</h3>
-      <ul>
-        <li><strong>&lt;header&gt;</strong>: Website banners and titles</li>
-        <li><strong>&lt;article&gt;</strong> &amp; <strong>&lt;section&gt;</strong>: Grouping content</li>
-        <li><strong>&lt;button&gt;</strong>: Call to action triggers</li>
-      </ul>
+      <section>
+        <h3>Core Structural Landmarks:</h3>
+        <ul>
+          <li><code>&lt;header&gt;</code>: Introductory banners, logos, and top headings</li>
+          <li><code>&lt;nav&gt;</code>: Major site navigation link collections</li>
+          <li><code>&lt;main&gt;</code>: Unique primary content of the body</li>
+          <li><code>&lt;article&gt;</code>: Standalone, independent syndicatable entries</li>
+          <li><code>&lt;section&gt;</code>: Thematic groupings with contextual headings</li>
+          <li><code>&lt;footer&gt;</code>: Copyright, author information, and site links</li>
+        </ul>
+      </section>
+
+      <div class="cta-card">
+        <h4>⚡ Quick Exercise:</h4>
+        <p>Use the chips bar above to insert a <code>&lt;form&gt;</code> or a <code>&lt;table&gt;</code> right below this card and check the instant live preview!</p>
+      </div>
     </main>
 
     <footer>
-      <hr style="border:0; border-top:1px solid #e2e8f0; margin: 20px 0;">
-      <p style="font-size: 0.85rem; color: #94a3b8;">&copy; 2026 Code Academy &bull; Have fun along the way!</p>
+      <span>&copy; 2026 Code Academy</span>
+      <span>HTML5 Architect &bull; Have fun along the way!</span>
     </footer>
   </div>
 
 </body>
-</html>`,
-        css: `/* CSS is embedded in HTML for this track */`,
-        js: `// No JS needed for HTML track`
-      },
-
-      css: {
-        html: `<div class="hero-wrapper">
-  <div class="glass-card">
-    <div class="tag">CSS3 Stylist</div>
-    <h1 class="glow-title">Style with Superpowers</h1>
-    <p class="subtitle">Tweak Flexbox, modern CSS Grid, frosted glassmorphism, and smooth animations in real time.</p>
-
-    <div class="button-group">
-      <button class="btn btn-primary">Get Started</button>
-      <button class="btn btn-ghost">Learn More</button>
-    </div>
-  </div>
-</div>`,
-        css: `/* CSS3 Stylist Playground Stylesheet */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: radial-gradient(circle at top right, #1e1b4b, #0f172a 60%);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  color: #f8fafc;
-}
-
-.hero-wrapper {
-  width: 100%;
-  max-width: 480px;
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  text-align: center;
-}
-
-.tag {
-  display: inline-block;
-  background: rgba(56, 189, 248, 0.2);
-  color: #38bdf8;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 4px 12px;
-  border-radius: 99px;
-  margin-bottom: 16px;
-  border: 1px solid rgba(56, 189, 248, 0.4);
-}
-
-.glow-title {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-  background: linear-gradient(135deg, #ffffff 0%, #bae6fd 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.subtitle {
-  color: #94a3b8;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
-
-.button-group {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-}
-
-.btn {
-  padding: 10px 22px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  border: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-}
-
-.btn-primary {
-  background: #38bdf8;
-  color: #0f172a;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-}
-
-.btn-ghost {
-  background: transparent;
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}`,
-        js: `// No JS needed for CSS styling track`
-      },
-
-      js: {
-        html: `<div class="interactive-box">
-  <h2>JavaScript Interactive Lab</h2>
-  <p>Open the virtual console below to see events and logs in action!</p>
-
-  <div class="metrics">
-    <div class="metric-card">
-      <span class="label">Count:</span>
-      <span id="counterNum" class="value">0</span>
-    </div>
-  </div>
-
-  <div class="controls">
-    <button id="incBtn" class="action-btn blue">Add (+1)</button>
-    <button id="decBtn" class="action-btn red">Minus (-1)</button>
-    <button id="colorBtn" class="action-btn purple">Random Color</button>
-  </div>
-
-  <div id="statusMessage" class="status-msg">Click buttons to trigger JavaScript logic!</div>
-</div>`,
-        css: `body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #0f172a;
-  color: #f8fafc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-  padding: 16px;
-  transition: background 0.4s ease;
-}
-.interactive-box {
-  background: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 16px;
-  padding: 28px;
-  width: 100%;
-  max-width: 440px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-h2 { margin-top: 0; font-size: 1.4rem; color: #facc15; }
-p { color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px; }
-.metrics { margin-bottom: 20px; }
-.metric-card {
-  background: #0f172a;
-  padding: 14px;
-  border-radius: 10px;
-  display: inline-block;
-  min-width: 140px;
-  border: 1px solid #334155;
-}
-.label { display: block; font-size: 0.75rem; color: #64748b; text-transform: uppercase; font-weight: 700; }
-.value { font-size: 2.2rem; font-weight: 800; color: #38bdf8; font-family: monospace; }
-.controls { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
-.action-btn {
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: white;
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-.action-btn:hover { transform: translateY(-2px); }
-.blue { background: #2563eb; }
-.red { background: #ef4444; }
-.purple { background: #8b5cf6; }
-.status-msg { font-size: 0.85rem; color: #38bdf8; min-height: 20px; font-style: italic; }`,
-        js: `// Interactive Click and Color Logic
-let counter = 0;
-const counterNum = document.querySelector("#counterNum");
-const incBtn = document.querySelector("#incBtn");
-const decBtn = document.querySelector("#decBtn");
-const colorBtn = document.querySelector("#colorBtn");
-const statusMessage = document.querySelector("#statusMessage");
-
-console.log("Interactive JavaScript Lab Initialized!");
-
-incBtn.addEventListener("click", () => {
-  counter++;
-  counterNum.textContent = counter;
-  statusMessage.textContent = \`Incremented count to \${counter}\`;
-  console.log("Counter increased:", counter);
-});
-
-decBtn.addEventListener("click", () => {
-  counter--;
-  counterNum.textContent = counter;
-  statusMessage.textContent = \`Decremented count to \${counter}\`;
-  console.warn("Counter decreased:", counter);
-});
-
-colorBtn.addEventListener("click", () => {
-  const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, "0");
-  document.body.style.backgroundColor = randomColor;
-  statusMessage.textContent = \`Background changed to \${randomColor}\`;
-  console.log("New Background applied:", randomColor);
-});`
-      },
-
-      unified: {
-        html: `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Full Suite App</title>
-</head>
-<body>
-
-  <div class="app-card">
-    <div class="header">
-      <span class="badge">Unified Suite</span>
-      <h1>Front-End Trio in Action</h1>
-      <p>HTML5 for bones &bull; CSS3 for skin &bull; JS for brains</p>
-    </div>
-
-    <div class="playground-area">
-      <input type="text" id="taskInput" placeholder="Enter a goal for today...">
-      <button id="addBtn">Add Task</button>
-    </div>
-
-    <ul id="taskList">
-      <li>Have fun along the way! <span class="check">✓</span></li>
-    </ul>
-  </div>
-
-</body>
-</html>`,
-        css: `body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: #090d16;
-  color: #f8fafc;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  margin: 0;
-}
-
-.app-card {
-  background: #111827;
-  border: 1px solid #1f2937;
-  border-radius: 16px;
-  padding: 28px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-}
-
-.badge {
-  background: #a855f7;
-  color: white;
-  padding: 3px 10px;
-  border-radius: 99px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-h1 { font-size: 1.3rem; margin: 10px 0 4px; color: #ffffff; }
-p { font-size: 0.85rem; color: #9ca3af; margin-bottom: 20px; }
-
-.playground-area {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-input {
-  flex: 1;
-  background: #1f2937;
-  border: 1px solid #374151;
-  border-radius: 8px;
-  padding: 8px 12px;
-  color: white;
-  font-size: 0.85rem;
-  outline: none;
-}
-input:focus { border-color: #a855f7; }
-
-button {
-  background: #a855f7;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-button:hover { background: #9333ea; }
-
-ul { list-style: none; padding: 0; margin: 0; }
-li {
-  background: #1f2937;
-  border-radius: 8px;
-  padding: 10px 14px;
-  margin-bottom: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.88rem;
-}
-.check { color: #10b981; font-weight: bold; }`,
-        js: `// Interactive Task Adder Logic
-const addBtn = document.querySelector("#addBtn");
-const taskInput = document.querySelector("#taskInput");
-const taskList = document.querySelector("#taskList");
-
-console.log("Full Suite loaded: HTML, CSS, and JS bound together!");
-
-addBtn.addEventListener("click", () => {
-  const text = taskInput.value.trim();
-  if (!text) {
-    console.warn("Please enter a valid task name!");
-    return;
-  }
-
-  const li = document.createElement("li");
-  li.innerHTML = \`\${text} <span class="check">✓</span>\`;
-  taskList.appendChild(li);
-
-  console.log("New item added:", text);
-  taskInput.value = "";
-  taskInput.focus();
-});`
-      }
-    };
+</html>`;
   </script>
 
-  <!-- APPLICATION CONTROLLER -->
+  <!-- APPLICATION CONTROLLER SCRIPT -->
   <script>
-    const state = {
-      activeTrack: 'unified',
-      activeFile: 'html',
+    const appState = {
       activeCategory: 'all',
-      editorValues: {
-        html: TRACK_STARTERS.unified.html,
-        css: TRACK_STARTERS.unified.css,
-        js: TRACK_STARTERS.unified.js
-      },
+      editorValue: DEFAULT_HTML_STARTER,
       historyStack: [],
       historyIndex: -1,
-      maxHistory: 35,
+      maxHistory: 40,
       isLightCanvas: false,
-      isConsoleOpen: true,
+      isConsoleOpen: false,
       logCount: 0
     };
 
@@ -1026,9 +894,6 @@ addBtn.addEventListener("click", () => {
     const liveRenderFrame = document.getElementById('liveRenderFrame');
     const categoryTabsContainer = document.getElementById('categoryTabsContainer');
     const snippetChipsRow = document.getElementById('snippetChipsRow');
-    const fileTabsBar = document.getElementById('fileTabsBar');
-    const fileTabsList = document.getElementById('fileTabsList');
-    const activeTrackBadge = document.getElementById('activeTrackBadge');
     const charCountLabel = document.getElementById('charCountLabel');
     const previewStatusLabel = document.getElementById('previewStatusLabel');
     const viewportDimensionsLabel = document.getElementById('viewportDimensionsLabel');
@@ -1045,94 +910,32 @@ addBtn.addEventListener("click", () => {
 
     let debounceTimer = null;
 
-    function setTrack(trackKey) {
-      state.activeTrack = trackKey;
-
-      document.querySelectorAll('.track-tab').forEach(tab => {
-        if (tab.dataset.track === trackKey) {
-          tab.classList.remove('text-slate-300', 'bg-transparent');
-          tab.classList.add('bg-slate-800', 'text-white', 'shadow');
-          if (trackKey === 'unified') tab.classList.add('bg-purple-600');
-        } else {
-          tab.classList.remove('bg-slate-800', 'bg-purple-600', 'text-white', 'shadow');
-          tab.classList.add('text-slate-300');
-        }
-      });
-
-      const badgeNames = {
-        html: 'HTML5 Architect',
-        css: 'CSS3 Stylist',
-        js: 'JavaScript Interactive',
-        unified: 'Unified Suite'
-      };
-      activeTrackBadge.textContent = badgeNames[trackKey] || trackKey;
-
-      state.editorValues = {
-        html: TRACK_STARTERS[trackKey].html,
-        css: TRACK_STARTERS[trackKey].css,
-        js: TRACK_STARTERS[trackKey].js
-      };
-
-      if (trackKey === 'html') state.activeFile = 'html';
-      else if (trackKey === 'css') state.activeFile = 'css';
-      else if (trackKey === 'js') state.activeFile = 'js';
-      else state.activeFile = 'html';
-
-      state.activeCategory = 'all';
-      updateFileTabsVisibility();
-      renderCategoryFilters();
-      renderSnippetChips('all');
-      loadActiveFileIntoEditor();
-      renderLiveSandbox();
-      showToast(`Switched to ${badgeNames[trackKey]}`);
-    }
-
-    function updateFileTabsVisibility() {
-      const buttons = fileTabsList.querySelectorAll('.file-tab');
-      buttons.forEach(btn => {
-        const file = btn.dataset.file;
-        if (state.activeTrack === 'unified') {
-          btn.classList.remove('hidden');
-        } else {
-          btn.classList.toggle('hidden', file !== state.activeTrack);
-        }
-
-        if (file === state.activeFile) {
-          btn.classList.add('bg-slate-800', 'text-white', 'border', 'border-slate-700');
-          btn.classList.remove('text-slate-400');
-        } else {
-          btn.classList.remove('bg-slate-800', 'text-white', 'border', 'border-slate-700');
-          btn.classList.add('text-slate-400');
-        }
-      });
-    }
-
-    function loadActiveFileIntoEditor() {
-      codeEditorArea.value = state.editorValues[state.activeFile] || '';
+    function initEditor() {
+      codeEditorArea.value = appState.editorValue;
       updateLineNumbers();
       updateCharCount();
       recordHistoryState();
+      renderCategoryFilters();
+      renderSnippetChips('all');
+      renderLiveSandbox();
     }
 
     function renderCategoryFilters() {
       categoryTabsContainer.innerHTML = '';
-      const trackSource = (state.activeTrack === 'unified') ? state.activeFile : state.activeTrack;
-      const data = SNIPPET_DATA[trackSource] || SNIPPET_DATA.html;
-
-      data.categories.forEach(cat => {
+      HTML5_DATA.categories.forEach(cat => {
         const btn = document.createElement('button');
         btn.className = `px-2 py-0.5 rounded text-[11px] font-semibold shrink-0 transition ${
-          cat.id === state.activeCategory ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+          cat.id === appState.activeCategory ? 'bg-orange-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
         }`;
         btn.textContent = cat.label;
         btn.addEventListener('click', () => {
-          state.activeCategory = cat.id;
+          appState.activeCategory = cat.id;
           categoryTabsContainer.querySelectorAll('button').forEach(b => {
-            b.classList.remove('bg-blue-600', 'text-white');
+            b.classList.remove('bg-orange-600', 'text-white');
             b.classList.add('bg-slate-800', 'text-slate-300');
           });
           btn.classList.remove('bg-slate-800', 'text-slate-300');
-          btn.classList.add('bg-blue-600', 'text-white');
+          btn.classList.add('bg-orange-600', 'text-white');
           renderSnippetChips(cat.id);
         });
         categoryTabsContainer.appendChild(btn);
@@ -1141,22 +944,19 @@ addBtn.addEventListener("click", () => {
 
     function renderSnippetChips(catId = 'all') {
       snippetChipsRow.innerHTML = '';
-      const trackSource = (state.activeTrack === 'unified') ? state.activeFile : state.activeTrack;
-      const data = SNIPPET_DATA[trackSource] || SNIPPET_DATA.html;
-
       const list = catId === 'all'
-        ? data.snippets
-        : data.snippets.filter(s => s.cat === catId);
+        ? HTML5_DATA.snippets
+        : HTML5_DATA.snippets.filter(s => s.cat === catId);
 
       list.forEach(item => {
         const chip = document.createElement('button');
-        chip.className = 'chip-btn px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 active:bg-blue-600 text-slate-200 hover:text-white font-mono text-[11px] font-semibold border border-slate-700/80 whitespace-nowrap flex items-center shrink-0 cursor-pointer shadow-sm';
+        chip.className = 'chip-btn px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 active:bg-orange-600 text-slate-200 hover:text-white font-mono text-[11px] font-semibold border border-slate-700/80 whitespace-nowrap flex items-center shrink-0 cursor-pointer shadow-sm';
         chip.innerHTML = `<span>${escapeHtml(item.name || item.tag)}</span>`;
         chip.title = item.desc;
 
         chip.addEventListener('click', () => {
           insertSnippetText(item.code);
-          showToast(`Inserted ${item.name}`);
+          showToast(`Inserted <${item.name}> tag`);
         });
 
         snippetChipsRow.appendChild(chip);
@@ -1173,24 +973,20 @@ addBtn.addEventListener("click", () => {
       codeEditorArea.focus();
       codeEditorArea.setSelectionRange(newPos, newPos);
 
-      state.editorValues[state.activeFile] = codeEditorArea.value;
+      appState.editorValue = codeEditorArea.value;
       updateLineNumbers();
       updateCharCount();
       recordHistoryState();
       triggerDebouncedRender();
     }
 
-    // Live Render Assembly with Safe Execution Guard
     function renderLiveSandbox() {
-      let finalHtml = '';
-      const htmlCode = state.editorValues.html || '';
-      const cssCode = state.editorValues.css || '';
-      const jsCode = state.editorValues.js || '';
-
+      const rawCode = codeEditorArea.value || '';
+      
       const consoleInterceptor = `
         <script>
           (function() {
-            function sendToHost(type, args) {
+            function report(type, args) {
               try {
                 const message = args.map(arg => {
                   if (typeof arg === 'object' && arg !== null) {
@@ -1201,66 +997,31 @@ addBtn.addEventListener("click", () => {
                 window.parent.postMessage({ type: 'CONSOLE_LOG', level: type, text: message }, '*');
               } catch(err) {}
             }
-
             const _log = console.log;
             const _warn = console.warn;
             const _error = console.error;
-            const _info = console.info;
-
-            console.log = function(...args) { sendToHost('log', args); _log.apply(console, args); };
-            console.warn = function(...args) { sendToHost('warn', args); _warn.apply(console, args); };
-            console.error = function(...args) { sendToHost('error', args); _error.apply(console, args); };
-            console.info = function(...args) { sendToHost('info', args); _info.apply(console, args); };
-
+            console.log = function(...args) { report('log', args); _log.apply(console, args); };
+            console.warn = function(...args) { report('warn', args); _warn.apply(console, args); };
+            console.error = function(...args) { report('error', args); _error.apply(console, args); };
             window.onerror = function(msg, url, line) {
-              sendToHost('error', ['Uncaught Error: ' + msg + ' (Line: ' + line + ')']);
+              report('error', ['HTML Script Error: ' + msg + ' (Line ' + line + ')']);
               return false;
             };
           })();
         <\/script>
       `;
 
-      // Safe script executor: ensures DOM is ready and captures execution errors
-      const safeScriptRunner = (code) => `
-        <script>
-          (function() {
-            function initSandboxScript() {
-              try {
-                ${code}
-              } catch (err) {
-                console.error(err.message || err);
-              }
-            }
+      let finalHtml = '';
+      const hasShell = /<!DOCTYPE|<html|<body/i.test(rawCode);
 
-            if (document.readyState === 'loading') {
-              document.addEventListener('DOMContentLoaded', initSandboxScript);
-            } else {
-              initSandboxScript();
-            }
-          })();
-        <\/script>
-      `;
-
-      if (state.activeTrack === 'html') {
-        const hasShell = /<!DOCTYPE|<html|<body/i.test(htmlCode);
-        if (hasShell) {
-          finalHtml = htmlCode.replace('<head>', `<head>${consoleInterceptor}`);
+      if (hasShell) {
+        if (rawCode.includes('<head>')) {
+          finalHtml = rawCode.replace('<head>', `<head>${consoleInterceptor}`);
         } else {
-          finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>body{font-family:sans-serif;padding:20px;margin:0;}</style></head><body>${htmlCode}</body></html>`;
+          finalHtml = `${consoleInterceptor}${rawCode}`;
         }
-      } else if (state.activeTrack === 'css') {
-        finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}</body></html>`;
-      } else if (state.activeTrack === 'js') {
-        finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}${safeScriptRunner(jsCode)}</body></html>`;
       } else {
-        const hasShell = /<!DOCTYPE|<html|<body/i.test(htmlCode);
-        if (hasShell) {
-          finalHtml = htmlCode
-            .replace('</head>', `<style>${cssCode}</style>${consoleInterceptor}</head>`)
-            .replace('</body>', `${safeScriptRunner(jsCode)}</body>`);
-        } else {
-          finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>${cssCode}</style></head><body>${htmlCode}${safeScriptRunner(jsCode)}</body></html>`;
-        }
+        finalHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">${consoleInterceptor}<style>body{font-family:sans-serif;padding:20px;margin:0;color:#1e293b;}</style></head><body>${rawCode}</body></html>`;
       }
 
       try {
@@ -1280,7 +1041,7 @@ addBtn.addEventListener("click", () => {
 
     function triggerDebouncedRender() {
       clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(renderLiveSandbox, 400);
+      debounceTimer = setTimeout(renderLiveSandbox, 350);
     }
 
     function updateLineNumbers() {
@@ -1301,7 +1062,7 @@ addBtn.addEventListener("click", () => {
     });
 
     codeEditorArea.addEventListener('input', () => {
-      state.editorValues[state.activeFile] = codeEditorArea.value;
+      appState.editorValue = codeEditorArea.value;
       updateLineNumbers();
       updateCharCount();
       recordHistoryState();
@@ -1315,7 +1076,7 @@ addBtn.addEventListener("click", () => {
         const end = codeEditorArea.selectionEnd;
         codeEditorArea.value = codeEditorArea.value.substring(0, start) + "  " + codeEditorArea.value.substring(end);
         codeEditorArea.selectionStart = codeEditorArea.selectionEnd = start + 2;
-        state.editorValues[state.activeFile] = codeEditorArea.value;
+        appState.editorValue = codeEditorArea.value;
         updateLineNumbers();
         triggerDebouncedRender();
       }
@@ -1331,21 +1092,21 @@ addBtn.addEventListener("click", () => {
 
     function recordHistoryState() {
       const val = codeEditorArea.value;
-      if (state.historyStack[state.historyIndex] === val) return;
-      state.historyStack = state.historyStack.slice(0, state.historyIndex + 1);
-      state.historyStack.push(val);
-      if (state.historyStack.length > state.maxHistory) {
-        state.historyStack.shift();
+      if (appState.historyStack[appState.historyIndex] === val) return;
+      appState.historyStack = appState.historyStack.slice(0, appState.historyIndex + 1);
+      appState.historyStack.push(val);
+      if (appState.historyStack.length > appState.maxHistory) {
+        appState.historyStack.shift();
       } else {
-        state.historyIndex++;
+        appState.historyIndex++;
       }
     }
 
     function undoEditor() {
-      if (state.historyIndex > 0) {
-        state.historyIndex--;
-        codeEditorArea.value = state.historyStack[state.historyIndex];
-        state.editorValues[state.activeFile] = codeEditorArea.value;
+      if (appState.historyIndex > 0) {
+        appState.historyIndex--;
+        codeEditorArea.value = appState.historyStack[appState.historyIndex];
+        appState.editorValue = codeEditorArea.value;
         updateLineNumbers();
         updateCharCount();
         triggerDebouncedRender();
@@ -1354,10 +1115,10 @@ addBtn.addEventListener("click", () => {
     }
 
     function redoEditor() {
-      if (state.historyIndex < state.historyStack.length - 1) {
-        state.historyIndex++;
-        codeEditorArea.value = state.historyStack[state.historyIndex];
-        state.editorValues[state.activeFile] = codeEditorArea.value;
+      if (appState.historyIndex < appState.historyStack.length - 1) {
+        appState.historyIndex++;
+        codeEditorArea.value = appState.historyStack[appState.historyIndex];
+        appState.editorValue = codeEditorArea.value;
         updateLineNumbers();
         updateCharCount();
         triggerDebouncedRender();
@@ -1368,26 +1129,17 @@ addBtn.addEventListener("click", () => {
     document.getElementById('btnUndo').addEventListener('click', undoEditor);
     document.getElementById('btnRedo').addEventListener('click', redoEditor);
 
-    fileTabsList.querySelectorAll('.file-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        state.activeFile = tab.dataset.file;
-        state.activeCategory = 'all';
-        updateFileTabsVisibility();
-        renderCategoryFilters();
-        renderSnippetChips('all');
-        loadActiveFileIntoEditor();
-      });
-    });
-
     document.getElementById('btnResetCurrent').addEventListener('click', () => {
-      const initial = TRACK_STARTERS[state.activeTrack][state.activeFile];
-      codeEditorArea.value = initial;
-      state.editorValues[state.activeFile] = initial;
-      loadActiveFileIntoEditor();
+      codeEditorArea.value = DEFAULT_HTML_STARTER;
+      appState.editorValue = DEFAULT_HTML_STARTER;
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
       triggerDebouncedRender();
-      showToast('Reset current file');
+      showToast('Boilerplate reset');
     });
 
+    // Console message capturing
     window.addEventListener('message', (event) => {
       if (event.data && event.data.type === 'CONSOLE_LOG') {
         appendConsoleLog(event.data.level, event.data.text);
@@ -1395,13 +1147,13 @@ addBtn.addEventListener("click", () => {
     });
 
     function appendConsoleLog(level, text) {
-      state.logCount++;
-      consoleBadgeCount.textContent = state.logCount;
+      appState.logCount++;
+      consoleBadgeCount.textContent = appState.logCount;
 
       const row = document.createElement('div');
       row.className = 'py-0.5 flex items-start space-x-1.5 text-[11px] leading-relaxed';
 
-      let icon = '>';
+      let icon = '›';
       let textStyle = 'text-slate-300';
 
       if (level === 'warn') {
@@ -1412,7 +1164,7 @@ addBtn.addEventListener("click", () => {
         textStyle = 'text-rose-400 bg-rose-950/25 px-1 rounded font-semibold';
       } else {
         icon = '›';
-        textStyle = 'text-emerald-300';
+        textStyle = 'text-orange-300';
       }
 
       row.innerHTML = `<span class="text-slate-500 font-bold select-none">${icon}</span> <span class="${textStyle} break-all">${escapeHtml(text)}</span>`;
@@ -1422,7 +1174,7 @@ addBtn.addEventListener("click", () => {
 
     document.getElementById('btnClearConsole').addEventListener('click', () => {
       consoleLogsList.innerHTML = '<div class="text-slate-500 text-[11px] italic">Console cleared.</div>';
-      state.logCount = 0;
+      appState.logCount = 0;
       consoleBadgeCount.textContent = '0';
     });
 
@@ -1430,12 +1182,14 @@ addBtn.addEventListener("click", () => {
     const btnMinimizeConsole = document.getElementById('btnMinimizeConsole');
 
     function toggleConsoleDrawer() {
-      state.isConsoleOpen = !state.isConsoleOpen;
-      consoleDrawer.classList.toggle('hidden', !state.isConsoleOpen);
+      appState.isConsoleOpen = !appState.isConsoleOpen;
+      consoleDrawer.classList.toggle('hidden', !appState.isConsoleOpen);
     }
     btnToggleConsole.addEventListener('click', toggleConsoleDrawer);
     btnMinimizeConsole.addEventListener('click', toggleConsoleDrawer);
+    consoleDrawer.classList.add('hidden'); // default closed for extra editor space
 
+    // Viewport Simulation Frames
     const viewDesktop = document.getElementById('viewDesktop');
     const viewTablet = document.getElementById('viewTablet');
     const viewMobile = document.getElementById('viewMobile');
@@ -1467,8 +1221,8 @@ addBtn.addEventListener("click", () => {
     viewMobile.addEventListener('click', () => setViewportFrame('mobile'));
 
     document.getElementById('btnToggleCanvasTheme').addEventListener('click', () => {
-      state.isLightCanvas = !state.isLightCanvas;
-      if (state.isLightCanvas) {
+      appState.isLightCanvas = !appState.isLightCanvas;
+      if (appState.isLightCanvas) {
         liveRenderFrame.classList.remove('bg-white');
         liveRenderFrame.classList.add('bg-slate-900');
         showToast('Canvas theme: Dark');
@@ -1481,18 +1235,16 @@ addBtn.addEventListener("click", () => {
 
     document.getElementById('btnRunRefresh').addEventListener('click', () => {
       renderLiveSandbox();
-      showToast('Re-rendered sandbox!');
+      showToast('Re-rendered HTML!');
     });
 
     document.getElementById('btnFormatCode').addEventListener('click', () => {
       const code = codeEditorArea.value;
-      if (state.activeFile === 'html') {
-        codeEditorArea.value = formatMarkup(code);
-      }
-      state.editorValues[state.activeFile] = codeEditorArea.value;
+      codeEditorArea.value = formatMarkup(code);
+      appState.editorValue = codeEditorArea.value;
       updateLineNumbers();
       triggerDebouncedRender();
-      showToast('Code tidied up');
+      showToast('HTML indented & formatted');
     });
 
     document.getElementById('btnCopyCode').addEventListener('click', () => {
@@ -1504,59 +1256,32 @@ addBtn.addEventListener("click", () => {
       temp.select();
       document.execCommand('copy');
       document.body.removeChild(temp);
-      showToast('Code copied to clipboard');
+      showToast('HTML copied to clipboard');
     });
 
     document.getElementById('btnExport').addEventListener('click', () => {
-      let bundle = '';
-      if (state.activeTrack === 'html') {
-        bundle = state.editorValues.html;
-      } else {
-        bundle = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exported from Code Academy</title>
-  <style>
-${state.editorValues.css}
-  </style>
-</head>
-<body>
-${state.editorValues.html}
-
-  <script>
-${state.editorValues.js}
-  <\/script>
-</body>
-</html>`;
-      }
-
+      const bundle = codeEditorArea.value;
       const blob = new Blob([bundle], { type: 'text/html;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `code-academy-${state.activeTrack}.html`;
+      a.download = `index.html`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      showToast('Project exported!');
-    });
-
-    document.querySelectorAll('.track-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        setTrack(tab.dataset.track);
-      });
+      showToast('Downloaded index.html!');
     });
 
     // CHALLENGES SYSTEM
     const btnOpenChallenges = document.getElementById('btnOpenChallenges');
     const btnCloseChallengeModal = document.getElementById('btnCloseChallengeModal');
 
-    function renderChallengesList(filter = 'all') {
+    function renderChallengesList(filterLevel = 'all') {
       challengesList.innerHTML = '';
-      const list = filter === 'all' ? CHALLENGES : CHALLENGES.filter(c => c.track === filter);
+      const list = filterLevel === 'all'
+        ? HTML5_CHALLENGES
+        : HTML5_CHALLENGES.filter(c => c.level === filterLevel);
 
       list.forEach(c => {
         const item = document.createElement('div');
@@ -1566,12 +1291,12 @@ ${state.editorValues.js}
             <div>
               <div class="flex items-center space-x-2">
                 <span class="text-xs font-bold text-white">${c.title}</span>
-                <span class="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">${c.level}</span>
+                <span class="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-orange-500/20 text-orange-300 border border-orange-500/30">${c.level}</span>
               </div>
               <p class="text-xs text-slate-400 mt-1">${c.desc}</p>
             </div>
             <div class="flex items-center space-x-1.5 shrink-0 ml-3">
-              <button class="btn-load-chall text-xs font-semibold px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-500 text-white transition">Start</button>
+              <button class="btn-load-chall text-xs font-semibold px-2.5 py-1 rounded bg-orange-600 hover:bg-orange-500 text-white transition">Start</button>
               <button class="btn-sol-chall text-xs font-semibold px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition">Solution</button>
             </div>
           </div>
@@ -1592,21 +1317,13 @@ ${state.editorValues.js}
     }
 
     function loadChallenge(chall, loadSolution) {
-      setTrack(chall.track);
-
-      if (chall.track === 'html') {
-        state.editorValues.html = loadSolution ? chall.solutionHtml : chall.starterHtml;
-      } else if (chall.track === 'css') {
-        state.editorValues.html = chall.starterHtml || '';
-        state.editorValues.css = loadSolution ? chall.solutionCss : chall.starterCss;
-      } else if (chall.track === 'js') {
-        state.editorValues.html = chall.starterHtml || '';
-        state.editorValues.js = loadSolution ? chall.solutionJs : chall.starterJs;
-      }
-
-      loadActiveFileIntoEditor();
+      codeEditorArea.value = loadSolution ? chall.solutionHtml : chall.starterHtml;
+      appState.editorValue = codeEditorArea.value;
+      updateLineNumbers();
+      updateCharCount();
+      recordHistoryState();
       renderLiveSandbox();
-      showToast(loadSolution ? `Loaded solution for ${chall.title}` : `Started ${chall.title}`);
+      showToast(loadSolution ? `Loaded solution for ${chall.title}` : `Started: ${chall.title}`);
     }
 
     btnOpenChallenges.addEventListener('click', () => {
@@ -1620,12 +1337,12 @@ ${state.editorValues.js}
     document.querySelectorAll('.chall-filter').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.chall-filter').forEach(b => {
-          b.classList.remove('bg-blue-600', 'text-white');
+          b.classList.remove('bg-orange-600', 'text-white');
           b.classList.add('bg-slate-800', 'text-slate-300');
         });
         btn.classList.remove('bg-slate-800', 'text-slate-300');
-        btn.classList.add('bg-blue-600', 'text-white');
-        renderChallengesList(btn.dataset.challtrack);
+        btn.classList.add('bg-orange-600', 'text-white');
+        renderChallengesList(btn.dataset.level);
       });
     });
 
@@ -1637,13 +1354,7 @@ ${state.editorValues.js}
       handbookContentList.innerHTML = '';
       const q = query.toLowerCase();
 
-      const allEntries = [
-        ...SNIPPET_DATA.html.snippets.map(s => ({ ...s, track: 'HTML5' })),
-        ...SNIPPET_DATA.css.snippets.map(s => ({ ...s, track: 'CSS3' })),
-        ...SNIPPET_DATA.js.snippets.map(s => ({ ...s, track: 'JavaScript' }))
-      ];
-
-      const filtered = allEntries.filter(e =>
+      const filtered = HTML5_DATA.snippets.filter(e =>
         e.name.toLowerCase().includes(q) ||
         e.desc.toLowerCase().includes(q) ||
         e.cat.toLowerCase().includes(q)
@@ -1654,19 +1365,19 @@ ${state.editorValues.js}
         item.className = 'bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5 text-xs';
         item.innerHTML = `
           <div class="flex items-center justify-between mb-1">
-            <span class="font-bold text-white font-mono">${escapeHtml(entry.tag || entry.name)}</span>
-            <span class="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-slate-700 text-slate-300">${entry.track}</span>
+            <span class="font-bold text-orange-400 font-mono">${escapeHtml(entry.tag || entry.name)}</span>
+            <span class="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-slate-700 text-slate-300">${entry.cat}</span>
           </div>
           <p class="text-slate-300 text-[11px] mb-2 leading-tight">${entry.desc}</p>
-          <button class="insert-handbook-btn text-[11px] font-semibold text-blue-400 hover:text-blue-300 flex items-center space-x-1">
-            <span>Insert Code &rarr;</span>
+          <button class="insert-handbook-btn text-[11px] font-semibold text-orange-400 hover:text-orange-300 flex items-center space-x-1">
+            <span>Insert Tag &rarr;</span>
           </button>
         `;
 
         item.querySelector('.insert-handbook-btn').addEventListener('click', () => {
           insertSnippetText(entry.code);
           referenceDrawer.classList.add('hidden');
-          showToast(`Inserted ${entry.name}`);
+          showToast(`Inserted <${entry.name}>`);
         });
 
         handbookContentList.appendChild(item);
@@ -1684,7 +1395,7 @@ ${state.editorValues.js}
       renderHandbookItems(e.target.value);
     });
 
-    // Helpers
+    // Utilities
     function escapeHtml(str) {
       if (!str) return '';
       return String(str)
@@ -1705,9 +1416,10 @@ ${state.editorValues.js}
         if (token.startsWith('</')) {
           indent = Math.max(0, indent - 1);
           formatted += tab.repeat(indent) + token.trim() + '\n';
-        } else if (token.startsWith('<') && !token.endsWith('/>') && !token.startsWith('<!')) {
+        } else if (token.startsWith('<') && !token.endsWith('/>') && !token.startsWith('<!') && !token.startsWith('<?')) {
           formatted += tab.repeat(indent) + token.trim() + '\n';
-          indent++;
+          const isVoid = /<(img|input|br|hr|meta|link|col|base)/i.test(token);
+          if (!isVoid) indent++;
         } else {
           formatted += tab.repeat(indent) + token.trim() + '\n';
         }
@@ -1725,12 +1437,12 @@ ${state.editorValues.js}
 
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      setTrack('unified');
+      initEditor();
     });
   </script>
 
   <!-- ========================================================================= -->
-  <!-- CODE ACADEMY ADD-ON: WELCOME MODAL, SOCIAL DRAWER & AFFILIATE BANNER      -->
+  <!-- CODE ACADEMY ADD-ON: WELCOME MODAL, SOCIAL DRAWER & FOOTER                -->
   <!-- ========================================================================= -->
   <style>
     #ca-welcome-modal {
@@ -1751,24 +1463,24 @@ ${state.editorValues.js}
     }
   </style>
 
-  <!-- 1. WELCOME MODAL -->
+  <!-- 1. WELCOME MODAL TAILORED FOR HTML5 ARCHITECT -->
   <div id="ca-welcome-modal" class="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-    <div class="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-indigo-500/30 bg-slate-900/95 p-6 md:p-8 shadow-2xl text-slate-100 shadow-indigo-950/50">
+    <div class="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-orange-500/30 bg-slate-900/95 p-6 md:p-8 shadow-2xl text-slate-100 shadow-orange-950/50">
       
-      <div class="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-indigo-500/20 blur-3xl"></div>
-      <div class="pointer-events-none absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-cyan-500/20 blur-3xl"></div>
+      <div class="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-orange-500/20 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-amber-500/20 blur-3xl"></div>
 
       <div class="flex items-start justify-between gap-4 border-b border-slate-800 pb-4">
         <div class="flex items-center gap-3">
-          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 text-2xl shadow-lg shadow-indigo-500/30">
-            🚀
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-tr from-orange-600 to-amber-500 text-2xl shadow-lg shadow-orange-500/30">
+            🏛️
           </div>
           <div>
-            <span class="inline-block rounded-full bg-indigo-500/10 px-2.5 py-0.5 text-xs font-semibold text-indigo-400 border border-indigo-500/20 mb-1">
-              Learn Front-End Web Development
+            <span class="inline-block rounded-full bg-orange-500/10 px-2.5 py-0.5 text-xs font-semibold text-orange-400 border border-orange-500/20 mb-1">
+              HTML5 Architect Track
             </span>
             <h2 class="text-xl md:text-2xl font-bold tracking-tight text-white">
-              Hi and welcome to Code Academy!
+              Welcome to HTML5 Architect!
             </h2>
           </div>
         </div>
@@ -1779,15 +1491,15 @@ ${state.editorValues.js}
 
       <div class="mt-4 space-y-4 text-sm leading-relaxed text-slate-300 max-h-[60vh] overflow-y-auto pr-2">
         <p class="text-base text-slate-200 font-medium">
-          100% Free Forever - No sign ups, no credit cards. Here you will learn the basic fundamentals of building your own web apps. Have fun along the way!
+          100% Free Forever - No sign ups, no credit cards. Learn how to architect semantic, accessible web pages that look great and communicate clearly with browsers. Have fun along the way!
         </p>
 
         <div class="rounded-xl border border-slate-800 bg-slate-950/50 p-4">
-          <h3 class="font-semibold text-cyan-400 flex items-center gap-2 mb-1.5">
-            <span>🎯</span> Who is this for?
+          <h3 class="font-semibold text-orange-400 flex items-center gap-2 mb-1.5">
+            <span>🎯</span> What will you master here?
           </h3>
-          <p class="text-xs text-slate-300">
-            This platform is tailored primarily for <strong>introductory to intermediate learners</strong> eager to master HTML5 structure, modern CSS3 styling & responsive layouts, and interactive JavaScript without dealing with tedious local setup environments. Use Download Zip button to save the app html locally and work offline.
+          <p class="text-xs text-slate-300 leading-relaxed">
+            This module guides <strong>introductory and intermediate learners</strong> through core HTML5 structural landmarks (<code class="text-orange-300">&lt;header&gt;</code>, <code class="text-orange-300">&lt;main&gt;</code>, <code class="text-orange-300">&lt;article&gt;</code>, <code class="text-orange-300">&lt;nav&gt;</code>), form validation, and accessible tables without setting up any command-line tools. You can navigate between the sister apps at any time using the top bar.
           </p>
         </div>
 
@@ -1804,11 +1516,11 @@ ${state.editorValues.js}
 
       <div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-800 pt-4">
         <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
-          <input type="checkbox" id="ca-dont-show-again" class="rounded border-slate-700 bg-slate-800 text-indigo-500 focus:ring-0">
+          <input type="checkbox" id="ca-dont-show-again" class="rounded border-slate-700 bg-slate-800 text-orange-500 focus:ring-0">
           Don't show this welcome message again
         </label>
-        <button onclick="caCloseModal()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-indigo-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white shadow-lg shadow-indigo-600/30 transition-all hover:scale-[1.02] active:scale-95">
-          Got it, Let's Code! →
+        <button onclick="caCloseModal()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-orange-600 to-amber-500 hover:from-orange-500 hover:to-amber-400 text-white shadow-lg shadow-orange-600/30 transition-all hover:scale-[1.02] active:scale-95">
+          Start HTML5 Architect &rarr;
         </button>
       </div>
     </div>
@@ -1816,7 +1528,7 @@ ${state.editorValues.js}
 
   <!-- 2. SOCIAL SHARE DRAWER -->
   <div id="ca-social-drawer" class="fixed right-0 top-1/3 z-[9990] flex items-stretch shadow-2xl drop-shadow-2xl">
-    <button onclick="caToggleSocialDrawer()" class="flex flex-col items-center justify-center gap-2 bg-gradient-to-b from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white px-2.5 py-4 rounded-l-xl shadow-lg border-y border-l border-indigo-400/30 cursor-pointer">
+    <button onclick="caToggleSocialDrawer()" class="flex flex-col items-center justify-center gap-2 bg-gradient-to-b from-orange-600 to-orange-700 hover:from-orange-500 hover:to-orange-600 text-white px-2.5 py-4 rounded-l-xl shadow-lg border-y border-l border-orange-400/30 cursor-pointer">
       <span class="text-base">📢</span>
       <span class="text-[11px] font-bold tracking-widest uppercase [writing-mode:vertical-rl] rotate-180">
         Share App
@@ -1830,7 +1542,7 @@ ${state.editorValues.js}
       </div>
       
       <div class="grid grid-cols-1 gap-2 text-xs">
-        <a id="ca-share-x" href="https://twitter.com/intent/tweet?text=Master%20front-end%20web%20development%20with%20Code%20Academy%20Playground!&url=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
+        <a id="ca-share-x" href="https://twitter.com/intent/tweet?text=Master%20semantic%20HTML5%20with%20Code%20Academy%20Architect!&url=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
           <span class="font-bold">𝕏</span> Share on X / Twitter
         </a>
         <a id="ca-share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
@@ -1839,7 +1551,7 @@ ${state.editorValues.js}
         <a id="ca-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors">
           <span class="font-bold text-blue-500">f</span> Share on Facebook
         </a>
-        <button onclick="caCopyShareUrl(this)" class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-indigo-600/30 border border-indigo-500/40 hover:bg-indigo-600/50 text-indigo-300 font-semibold transition-colors mt-1">
+        <button onclick="caCopyShareUrl(this)" class="flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-orange-600/30 border border-orange-500/40 hover:bg-orange-600/50 text-orange-300 font-semibold transition-colors mt-1">
           🔗 <span id="ca-copy-label">Copy App Link</span>
         </button>
       </div>
@@ -1849,7 +1561,7 @@ ${state.editorValues.js}
   <script>
     function caInitWelcomeModal() {
       try {
-        const dismissed = localStorage.getItem('ca_welcome_dismissed');
+        const dismissed = localStorage.getItem('ca_welcome_dismissed_html');
         if (dismissed === 'true') {
           const modal = document.getElementById('ca-welcome-modal');
           if (modal) modal.classList.add('hidden-modal');
@@ -1875,7 +1587,7 @@ ${state.editorValues.js}
       const checkbox = document.getElementById('ca-dont-show-again');
       if (checkbox && checkbox.checked) {
         try {
-          localStorage.setItem('ca_welcome_dismissed', 'true');
+          localStorage.setItem('ca_welcome_dismissed_html', 'true');
         } catch(e) {}
       }
     }
@@ -1928,7 +1640,7 @@ ${state.editorValues.js}
   <footer style="
     width: 100%;
     text-align: center;
-    padding: 10px 16px;
+    padding: 8px 16px;
     font-size: 0.85rem;
     color: #9ca3af;
     background-color: transparent;
@@ -1953,7 +1665,7 @@ ${state.editorValues.js}
       border: 1px solid #374151;
       border-bottom: none;
       border-radius: 8px 8px 0 0;
-      padding: 10px 18px;
+      padding: 9px 16px;
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 0.03em;
@@ -1968,7 +1680,7 @@ ${state.editorValues.js}
     }
     .aff-toggle-btn:hover {
       background: #1f2937;
-      color: #60a5fa;
+      color: #fb923c;
     }
     .aff-toggle-arrow {
       font-size: 10px;
@@ -2078,7 +1790,7 @@ ${state.editorValues.js}
     }
     .aff-card:hover {
       background: #243248;
-      border-color: #3b82f6;
+      border-color: #ea580c;
       transform: translateY(-2px);
     }
     .aff-card-title {
@@ -2087,7 +1799,7 @@ ${state.editorValues.js}
       justify-content: space-between;
       font-size: 14px;
       font-weight: 600;
-      color: #60a5fa;
+      color: #fb923c;
       margin-bottom: 6px;
     }
     .aff-card-title svg {
